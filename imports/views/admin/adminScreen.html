@@ -1,0 +1,30 @@
+<template name="adminScreen">
+  <div class="col-md-12">
+
+    {{#if isAdmin}}
+        <p> {{#if pluralLoggedIn}}
+                There are currently <strong>{{numLoggedIn}} players</strong> that are logged in.
+            {{else}}
+                There is currently <strong>1 player</strong> that is logged in.
+            {{/if}}
+        </p>
+      
+      <p> {{#if pluralInLobby}}
+                There are currently <strong>{{numInLobby}} players</strong> in the waiting room.
+          {{else}}
+                There is currently <strong>1 player</strong> in the waiting room.
+          {{/if}}
+      </p>
+
+      <p> To start the experiment press the button below. </p>
+    
+      <button class="btn btn-primary startExperiment">Start experiment</button>
+
+      <button class="btn btn-primary getPaymentCSV">Get PaymentCSV</button>
+
+      <button class="btn btn-primary putAllUserHome">Put All Users Home</button>
+
+      <button class="btn btn-danger" id="saveLogs">Save Experiment Log</button>
+    {{/if}}
+  </div>
+</template>
