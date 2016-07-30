@@ -1,4 +1,6 @@
 import {Admin} from '../../api/users.js'
+import { Template } from 'meteor/templating';
+
 
 Template.adminScreen.helpers({
     

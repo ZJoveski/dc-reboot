@@ -5,4 +5,4 @@ export const var Admin = {
         if(adminUser) return true;
         else return false;
     }
-}
+};
