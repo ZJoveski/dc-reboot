@@ -4,7 +4,7 @@ import { Session } from './session.js';
 import { Payouts } from './payouts.js';
 import { Logger } from './logging.js';
 
-export default var Parameters = {
+export var Parameters = {
     communication: false,
     globalCommunication: false,
     structuredCommunication: false,

@@ -6,7 +6,7 @@ import { PayoutInfo } from './collections.game_collections.js';
 import { Session } from './session.js';
 import { Logger } from './logging.js';
 
-export default var Payouts = {
+export var Payouts = {
     sessionPayouts: {},     //id ==> payout
     potentialPayouts: {},   //id ==> payout
     basePayout: 0.2,

@@ -4,7 +4,7 @@ import { Participants } from './participants.js';
 import { Utilities } from './util.js';
 import { ColorMagic } from './colors_mapping.js';
 
-export default var Logger = {
+export var Logger = {
     // EXPS1
     recordExperimentStart: function() {
         insertExperimentLogEntry("EXPS1", "A new experiment has started.");

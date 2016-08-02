@@ -1,7 +1,7 @@
 import { Time } from './time.js';
 import { Logger } from './logging.js';
 
-export default var Progress = {
+export var Progress = {
     experimentInProgress: false,
     sessionInProgress: false,       // alias for sessionRunning
     preSessionInProgress: false,

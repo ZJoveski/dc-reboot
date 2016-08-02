@@ -7,7 +7,7 @@ import { Logger } from './logging.js';
 
 
 // includes Communcation Management
-export default var Session = {
+export var Session = {
     sessionNumber: 0,   // current Session
     batchNumber: 0,
     batchSize: 1,   // current batch size,

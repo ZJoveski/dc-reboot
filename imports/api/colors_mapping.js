@@ -1,7 +1,7 @@
 import { Participants } from './participants.js';
 import { Logger } from './logging.js';
 
-export default var ColorMagic = {
+export var ColorMagic = {
     colors: ['red', 'green'],
     color_number: {},
     colorAnonymization: true,

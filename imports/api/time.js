@@ -1,6 +1,6 @@
 import { Logger } from './logging.js';
 
-export default var Time = {
+export var Time = {
     experimentStarted: false,
     experimentStartTime: -1,
     currentSessionStartTime: -1,

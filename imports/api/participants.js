@@ -2,7 +2,7 @@
 import { Session } from './session.js';
 import { Logger } from './logging.js';
 
-export default var Participants = {
+export var Participants = {
     /* Objects and arrays used to establish and make use of the correspondence between actual nodes,
     names of nodes visible to the clients, and user IDs of clients. */
 

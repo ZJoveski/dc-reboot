@@ -8,7 +8,7 @@ import { Neighborhoods } from './neighborhoods.js';
 import { ColorMagic } from './colors_mapping.js';
 import { Logger } from './logging.js';
 
-export default const var startGames = function(isProperGames, numberOfGames, numberOfBatches) {
+export const var startGames = function(isProperGames, numberOfGames, numberOfBatches) {
     proper = isProperGames;
     games = numberOfGames;
     batches = numberOfBatches;
