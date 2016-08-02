@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 
-export const var Utilities = {
+export const Utilities = {
     today: function() {
         return moment().format('MM-DD-YYYY');
     }, 
