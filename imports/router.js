@@ -18,5 +18,8 @@ Router.route('/', {
             this.render("login");
         }
     },
+    waitOn: function() {
+        return true;
+    }
 });
 
