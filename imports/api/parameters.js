@@ -37,6 +37,8 @@ export var Parameters = {
     practiceBatches: 0, //temp value
     properBatches: 0, //temp value
 
+    testMode: false,        //whether or not to skip description
+
     readTreatments: function() {
         practiceAdjacencyMatrices = readIntoPreGeneratedAdjMat("treatments/test_data/AMP_test.txt");
         practiceParameterValues = readIntoPreGeneratedNetConfig("treatments/test_data/NCP_test.txt");

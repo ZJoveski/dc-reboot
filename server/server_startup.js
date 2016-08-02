@@ -5,6 +5,7 @@ import { Meteor } from 'meteor/meteor';
 
 import { Participants } from '../imports/api/participants.js';
 import { Time } from '../imports/api/time.js';
+import { Parameters } from '../imports/api/parameters.js';
 
 import { LobbyStatus } from '../imports/api/collections/external_collections.js';
 
@@ -83,7 +84,7 @@ var addUserAccounts = function(arrOfUsers, password) {
     };
 
     Accounts.onCreateUser(function(options, user) {
-        if (testMode) {
+        if (Parameters.testMode) {
             user.location = "/lobby";
         } else {
             user.location = "/";
