@@ -76,44 +76,44 @@ Meteor.startup(function () {
 });
 
 var addUserAccounts = function(arrOfUsers, password) {
-        function checkType(variable, type, message) {
-                if(typeof(variable) !== type) {
-                    throw message;
-                }
-            };
-
-        Accounts.onCreateUser(function(options, user) {
-            if (testMode) {
-                user.location = "/lobby";
-            } else {
-                user.location = "/";
-            }
-            return user;
-        })
-
-        for(var idx in arrOfUsers) {
-            var user = arrOfUsers[idx];
-            // var assigId = arrOfAssignmentId[idx];
-            if( Meteor.users.find({username: user}).count() === 0 ) {
-                checkType(user, "string", "ERROR: (Adding User) User should be a string");
-                // Meteor.users.insert({username: user, password: user, assignmentId: assigId});
-                Accounts.createUser({
-                    username: user,
-                    password: password
-                })
-            } else {
-                // Meteor.users.update({username: user}, {fields: {password: 1}});
-                console.log("User " + user + " has already been added");
-            }
-        };
-
-        var hasAdminUser = Meteor.users.find({username: "admin"}).count() === 1;
-        if (!hasAdminUser) {
-            Accounts.createUser({
-                username: "admin",
-                password: "admin",
-            });
-            // admin user will be directed to adminScreen
-            Meteor.users.update({username: "admin"}, {$set: {'location': '/adminScreen'}});
+    function checkType(variable, type, message) {
+        if(typeof(variable) !== type) {
+            throw message;
         }
-    },
+    };
+
+    Accounts.onCreateUser(function(options, user) {
+        if (testMode) {
+            user.location = "/lobby";
+        } else {
+            user.location = "/";
+        }
+        return user;
+    });
+
+    for(var idx in arrOfUsers) {
+        var user = arrOfUsers[idx];
+        // var assigId = arrOfAssignmentId[idx];
+        if( Meteor.users.find({username: user}).count() === 0 ) {
+            checkType(user, "string", "ERROR: (Adding User) User should be a string");
+            // Meteor.users.insert({username: user, password: user, assignmentId: assigId});
+            Accounts.createUser({
+                username: user,
+                password: password
+            })
+        } else {
+            // Meteor.users.update({username: user}, {fields: {password: 1}});
+            console.log("User " + user + " has already been added");
+        }
+    }
+
+    var hasAdminUser = Meteor.users.find({username: "admin"}).count() === 1;
+    if (!hasAdminUser) {
+        Accounts.createUser({
+            username: "admin",
+            password: "admin",
+        });
+        // admin user will be directed to adminScreen
+        Meteor.users.update({username: "admin"}, {$set: {'location': '/adminScreen'}});
+    }
+}
