@@ -1,5 +1,7 @@
 import { Template } from 'meteor/templating';
 
+import './outline.html';
+
 Template.outline.events({
     'click .goToDescription': function() {
         var userId = Meteor.userId();

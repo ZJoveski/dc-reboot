@@ -1,5 +1,7 @@
 import { Template } from 'meteor/templating';
 
+import './login.html';
+
 Template.login_Buttons.events({
     'submit #login-form': function(e, t) {
 
