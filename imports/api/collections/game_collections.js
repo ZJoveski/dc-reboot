@@ -4,13 +4,13 @@ import { Mongo } from 'meteor/mongo';
 
 // Stores information about current colors of network nodes. It consists of documents of 
 // the format { name: someName, color: someColor }
-export const colors = new Mongo.Collection('colorsCollection');
+//export const colors = new Mongo.Collection('colorsCollection');
 
 // Stores information about neighborhoods of nodes corresponding to registered users 
 // (these are the "relevant" neighborhoods). The corresponding documents are of the format
 // { userId: someUserId, namesOfNeighbors: arrayOfNamesOfNeighbors, neighAdjMatrix: 
 // adjacencyMatrixOfCorrespondingNeighborhood}, neighborhoodColors: colors of self and neighbors }
-export const NeighborhoodsCollection = new Mongo.Collection('neighborhoodsCollection');
+export const NeighborhoodsCollection = new Mongo.Collection('neighborhoodsCollection'); //corresponds to colorsInfo
 
 export const sessionInfo = new Mongo.Collection('sessionInfo');
 
@@ -22,9 +22,9 @@ export const experimentLog = new Mongo.Collection('experimentLog');
 
 export const payoutInfo = new Mongo.Collection('payoutInfo');
 
-export const colorsInfo = new Mongo.Collection('colorsInfo');
+//export const colorsInfo = new Mongo.Collection('colorsInfo');
 
-export const messages = new Mongo.Collection('messages');
+export const Messages = new Mongo.Collection('messages');
 
 //export const parameters = new Mongo.Collection('parameters');
 

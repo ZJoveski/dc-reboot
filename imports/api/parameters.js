@@ -1,7 +1,7 @@
 // import Assets?
 import { Participants } from './participants.js';
 import { Session } from './session.js';
-imoprt { Payouts } from './payouts.js';
+import { Payouts } from './payouts.js';
 
 export default var Parameters = {
     communication: false,
@@ -22,6 +22,13 @@ export default var Parameters = {
     minoritySize: 0,
 
     individualCommunicationParameters: {},
+    structuredCommunicationCharactersNumberMultiplier: 3,       // A value of 3 indicates that a structured message costs as much as a 
+                                                                // three-character unstructured message.
+    communicationCostMultipliers:   {               // Relevant only when costBasedCommunication = true.
+                                        low: 0.01,
+                                        medium: 0.05,
+                                        high: 0.1
+                                    },
 
     practiceGames: 0, // temp value,
     properGames: 0, // temp value

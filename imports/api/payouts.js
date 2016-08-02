@@ -1,6 +1,9 @@
 import { Parameters } from './parameters.js';
 import { Participants } from './participants.js';
 import { ColorMagic } from './colors_mapping.js';
+import { Utilities } from './util.js';
+import { PayoutInfo } from './collections.game_collections.js';
+import { Session } from './session.js';
 
 export default var Payouts = {
     sessionPayouts: {},
@@ -11,8 +14,8 @@ export default var Payouts = {
     adversaryPayoutAssignment: 'noConsensusOnly',
 
     resetTotalPayouts: function(participants) {
-        for(var i=0; i<participants.length; i++){
-            payoutInfo.insert({
+        for(var i = 0; i < participants.length; i++){
+            PayoutInfo.insert({
                 id: participants[i],
                 totalPayout: 0
             }); 
@@ -57,6 +60,51 @@ export default var Payouts = {
         
         // TODO
         /* Log entry. */ recordPotentialSessionPayouts();
+    },
+
+    applyIncentiveSessionPayouts: function(outcome) {
+        if(outcome) {
+            for(var i = 0; i < Participants.participants.length; i++){
+                var actualPayout = Math.max(0, this.potentialSessionPayouts[Participants.participants[i]][Session.outcomeColor]);
+                
+                if(Parameters.costBasedCommunication) {
+                    var minPotentialPayout = Math.min(this.potentialPayouts[Participants.participants[i]][ColorMagic.colors[0]], 
+                                                      this.potentialPayouts[Participants.participants[i]][ColorMagic.colors[1]]);
+                    
+                    // The cost of communication is relative to the participant's minimum potential payout.
+                    var sessionCommunicationCost = minPotentialPayout * Session.communicationUsageLevels[Participants.participants[i]];
+                    
+                    // Participants always receive nonzero payout.
+                    actualPayout = Math.max(0, actualPayout - sessionCommunicationCost);
+                }
+                
+                actualPayout = Utilities.precise_round_to_number(actualPayout, 2); 
+                                    
+                this.sessionPayouts[Particiapnts.participants[i]] = actualPayout;
+                PayoutInfo.update({id: Participants.participants[i]}, {$inc: {totalPayout: actualPayout}});
+            }
+        }
+        else {
+            for(var i = 0; i < Participants.participants.length; i++){
+                var actualPayout = 0;
+                if (Session.adversaryMode()) {
+                    var isAdversary = Participants.adversaries[i];
+                   
+                    if (isAdversary) {
+                        actualPayout = precise_round_to_number(this.adversaryBasePayout, 2)
+                        this.sessionPayouts[Participants.participants[i]] = actualPayout;
+                        PayoutInfo.update({id: Participants.participants[i]}, {$inc: {totalPayout: actualPayout}});
+                    } else {
+                        this.sessionPayouts[Participants.participants[i]] = actualPayout;
+                    }
+                } else {
+                    this.sessionPayouts[Participants.participants[i]] = actualPayout;
+                }
+            }
+        }
+        
+        // TODO
+        /* Log entry. */ recordSessionPayouts();
     },
 };
 

@@ -7,16 +7,23 @@ import { Parameters } from './parameters.js';
 import { Neighborhoods } from './neighborhoods.js';
 import { ColorMagic } from './colors_mapping.js';
 
-export default const var startGames = function(proper, games, batches) {
+export default const var startGames = function(isProperGames, numberOfGames, numberOfBatches) {
+    proper = isProperGames;
+    games = numberOfGames;
+    batches = numberOfBatches;
+
+    // previousGamesCleanup?
+
     // Wait until all TurkServer collections data has been loaded.
     Meteor.setTimeout(function() {
             runGames();
     }, 2000);
 }
 
-var sessionTimeout, preSessionCountdown, timerIntervalS, preSessionTimeout, postSessionTimeout;
+var sessionTimeout, preSessionCountdown, sessionCountdown, preSessionTimeout, postSessionTimeout;
+var proper, games, batches;
 
-var runGames = function(proper, games, batches) {
+var runGames = function() {
     // TODO: initialize PersistentInfo?
 
     clearPastPilotExperimentsData();
@@ -45,10 +52,10 @@ var runGames = function(proper, games, batches) {
     /* L */ Progress.setProgress('experiment', true);
 
     // run pre game
-    runPreGame(proper, games, batches);
+    runPreGame();
 }
 
-var runPreGame = function(proper, games, batches) {
+var runPreGame = function() {
     // If this is not the last game, ...
     if (Session.sessionNumber < games) {
         Progress.setProgress('preSession', true);
@@ -59,7 +66,7 @@ var runPreGame = function(proper, games, batches) {
             clearInterval(preSessionCountdown);
             Progress.setProgress('preSession', false);
 
-            // Start next game. TODO
+            // Start next game.
             runGame();  
         }, Time.preSessionLength * Time.timeUpdateRate);
     } else { // If this is the last game, end the sequence of games.
@@ -81,11 +88,19 @@ var runPreGame = function(proper, games, batches) {
     
 }
 
-var runGame = function(proper) {
+var runGame = function() {
+    initializeGame();
 
+    /* L */ Progress.setProgress('session', true);
+
+    // Timer that counts seconds during the session
+    sessionCountdown = setInterval(Meteor.bindEnvironment(Time.updateTimeInfo('current time')), Time.timeUpdateRate);
+
+    // Terminates the session once the full length of the session is up
+    sessionTimeout = setTimeout(Meteor.bindEnvironment(function(){ terminateGame(false); }), Time.sessionLength * Time.timeUpdateRate); 
 }
 
-var initializeGame = function(proper) {
+var initializeGame = function() {
     Session.checkResetBatch(proper);
 
     // TODO
@@ -128,11 +143,41 @@ var initializeGame = function(proper) {
     if (Parameters.communication) {
         // We need to make sure that users cannot send messages beyound the corresponding total (character) count!
         Session.initializeCommunicationUsageLevels();
+        Session.initializeCommunicationLimits();
         
     }
 
+    /* L */ Session.initializeColorCounts();
+
+    Session.clearMessages();
+
+    Session.initializeColorChangeInfo();
+
+
     Session.sessionNumber++;
     Session.currentBatchGame++;
+
+    // TODO
+    /* Log entry. */ recordSessionInitializationCompletion(currentSession);
+}
+
+var terminateGame = function(outcome) {
+    Session.freeToUpdateColors = false;
+    /* L */ Progress.setProgress('session', false);
+
+    clearTimeout(sessionTimeout);
+    clearInterval(sessionCountdown);
+
+    /* L */ Session.setOutcome(outcome);
+
+    /* L */ Payouts.applyIncentiveSessionPayouts(outcome);
+
+    Progress.setProgress('postSession', true);
+
+    postSessionTimeout = setTimeout(Meteor.bindEnvironment(function() {
+            Progress.setProgress('postSession', false);
+            runPreGame();
+    }), Time.postSessionLength * Time.timeUpdateRate);
 }
 
 var clearPastPilotExperimentsData = function() {

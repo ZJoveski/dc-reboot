@@ -2,7 +2,7 @@ import { Time } from './time.js';
 
 export default var Progress = {
     experimentInProgress: false,
-    sessionInProgress: false,
+    sessionInProgress: false,       // alias for sessionRunning
     preSessionInProgress: false,
     postSessionInProgress: false,
 

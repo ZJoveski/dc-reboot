@@ -1,4 +1,5 @@
 export default var Time = {
+    experimentStarted: false,
     experimentStartTime: -1,
     currentSessionStartTime: -1,
     lastSessionEndTime: -1,
@@ -7,6 +8,8 @@ export default var Time = {
     preSessionLength: 5,
     postSessionLength: 5,
     timeUpdateRate: 1000,
+
+    waitForTurnTime: 10,    // Specifies the number of milliseconds after which a suspended update-color request will reattempt processing.
 
     updateTimeInfo: function(context) {
         var time = new Date().getTime();
