@@ -2,6 +2,7 @@
 import { Participants } from './participants.js';
 import { Session } from './session.js';
 import { Payouts } from './payouts.js';
+import { Logger } from './logging.js';
 
 export default var Parameters = {
     communication: false,
@@ -29,6 +30,7 @@ export default var Parameters = {
                                         medium: 0.05,
                                         high: 0.1
                                     },
+    communicationScopes: {},
 
     practiceGames: 0, // temp value,
     properGames: 0, // temp value
@@ -140,8 +142,7 @@ export default var Parameters = {
                 this.structuredCommunication = true;
         }
         
-        //TODO
-        /* Log entry. */ recordSessionCommunicationParameters();
+        /* Log entry. */ Logger.recordSessionCommunicationParameters(this.communication, this.globalCommunication, this.structuredCommunication);
     },
 
     setIndividualCommunicationParameters: function() {
@@ -156,6 +157,9 @@ export default var Parameters = {
             this.individualCommunicationParameters[id].communicationLengthBound = this.communicationLengthBound;
             this.individualCommunicationParameters[id].messageLengthBound = this.messageLengthBound;
         }
+        assignUniformCommunicationScopes();
+
+        /* Log entry. */ Logger.recordIndividualCommunicationScopes(this.communicationScopes);
     },
 
     setSessionIncentivesConflictParameters: function(isProperGames, currentSession) {
@@ -183,7 +187,7 @@ export default var Parameters = {
         //randomizeHomophilicPreferences();
 
         // TODO
-        /* Log entry. */ recordSessionIncentivesConflictParameters();
+        /* Log entry. */ Logger.recordSessionIncentivesConflictParameters(this.incentivesConflictLevel, this.homophilicPreferences);
     },
 
     setBatchParameters: function(isProperGames, batchIndex) {
@@ -223,6 +227,27 @@ var batchConfigs = [];
 var practiceAdjacencyMatrices = [];
 var practiceParameterValues = [];
 var practiceBatchConfigs = [];
+
+var assignUniformCommunicationScopes = function() {
+    var uniform_communication_scope = '';
+    if (Parameters.communication) {
+        if (Parameters.globalCommunication)
+            uniform_communication_scope = 'global';
+        else
+            uniform_communication_scope = 'local';
+    } else {
+        uniform_communication_scope = 'none';
+    }
+    
+    var n = Participants.participants.length;
+    Parameters.communicationScopes = {};
+    
+    for (var i = 0; i < n; i++) {
+        var id = Participants.participants[i];
+        
+        Parameters.communicationScopes[id] = uniform_communication_scope;
+    }
+}
 
 var readAdjMatrix = function(fileName) {
     var text = Assets.getText(fileName);

@@ -6,6 +6,7 @@ import { Session } from './session.js';
 import { Parameters } from './parameters.js';
 import { Neighborhoods } from './neighborhoods.js';
 import { ColorMagic } from './colors_mapping.js';
+import { Logger } from './logging.js';
 
 export default const var startGames = function(isProperGames, numberOfGames, numberOfBatches) {
     proper = isProperGames;
@@ -30,8 +31,7 @@ var runGames = function() {
 
     // TODO: update PersistentInfo? nah
 
-    // TODO: write
-    /* Log entry. */ recordExperimentInitializationStart();
+    /* Log entry. */ Logger.recordExperimentInitializationStart();
 
     initializeParameters();
 
@@ -47,8 +47,7 @@ var runGames = function() {
     // initializeProgressInfo(); =======> already done by default in progress.js
     //initializeSessionInfo(); =========> already done by default in session.js
 
-    // TODO
-    /* Log entry. */ recordExperimentInitializationCompletion();
+    /* Log entry. */ Logger.recordExperimentInitializationCompletion();
     /* L */ Progress.setProgress('experiment', true);
 
     // run pre game
@@ -70,8 +69,7 @@ var runPreGame = function() {
             runGame();  
         }, Time.preSessionLength * Time.timeUpdateRate);
     } else { // If this is the last game, end the sequence of games.
-        //TODO
-        /* Log entry. */ recordExperimentPayouts();
+        /* Log entry. */ Logger.recordExperimentPayouts();
 
         /* L */ Progress.setProgress('experiment', false);
 
@@ -103,12 +101,10 @@ var runGame = function() {
 var initializeGame = function() {
     Session.checkResetBatch(proper);
 
-    // TODO
-    /* Log entry. */ recordSessionInitializationStart(Session.sessionNumber);
+    /* Log entry. */ Logger.recordSessionInitializationStart(Session.sessionNumber);
 
     Session.adjMatrix = Parameters.getNextAdjMatrix(proper, Session.sessionNumber);
-    // TODO
-    /* Log entry. */ recordNetworkAdjacencyMatrix(adjMatrix);
+\    /* Log entry. */ Logger.recordNetworkAdjacencyMatrix(adjMatrix);
 
     Participants.participantsThreshold = Session.adjMatrix.length;
     console.log("Game participants:\t" + Participants.participantsThreshold);
@@ -124,8 +120,7 @@ var initializeGame = function() {
 
     /* L */ Neighborhoods.assignNeighborhoodsToClients();
 
-    // TODO
-    /* Log entry. */ recordAdversaries();
+    /* Log entry. */ Logger.recordAdversaries();
 
     /* L */ assignColorsToNodes();
 
@@ -157,8 +152,7 @@ var initializeGame = function() {
     Session.sessionNumber++;
     Session.currentBatchGame++;
 
-    // TODO
-    /* Log entry. */ recordSessionInitializationCompletion(currentSession);
+    /* Log entry. */ Logger.recordSessionInitializationCompletion(currentSession);
 }
 
 var terminateGame = function(outcome) {

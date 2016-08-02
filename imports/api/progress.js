@@ -1,4 +1,5 @@
 import { Time } from './time.js';
+import { Logger } from './logging.js';
 
 export default var Progress = {
     experimentInProgress: false,
@@ -10,11 +11,9 @@ export default var Progress = {
         if (type == 'experiment') {
             this.experimentInProgress = progress;
             if (progress) {
-                // TODO
-                /* Log entry. */ recordExperimentStart();
+                /* Log entry. */ Logger.recordExperimentStart();
             } else {
-                // TODO
-                /* Log entry. */ recordExperimentCompletion();
+                /* Log entry. */ Logger.recordExperimentCompletion();
             }
         } else if (type == 'session') {
             this.sessionInProgress = progress;

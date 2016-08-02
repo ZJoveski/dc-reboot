@@ -1,4 +1,5 @@
 import { Participants } from './participants.js';
+import { Logger } from './logging.js';
 
 export default var ColorMagic = {
     colors: ['red', 'green'],
@@ -22,8 +23,7 @@ export default var ColorMagic = {
             this.color_number[this.colors[i]] = i; 
         }
 
-        // TODO
-        /* Log entry. */ recordAnonymizationInfo();
+        /* Log entry. */ Logger.recordAnonymizationInfo();
     },
 
     anonymizeColor: function(name, color) {

@@ -25,7 +25,6 @@ Meteor.startup(function () {
             LobbyStatus.upsert({userId: fields.userId}, {userId: fields.userId, online: true, ready: false, submitted: false});   
         }
         
-        // TODO
         return recordUserLoggingIn(fields.userId, fields.connectionId, fields.ipAddr, fields.userAgent, fields.loginTime);
     });
     
@@ -35,7 +34,6 @@ Meteor.startup(function () {
             LobbyStatus.update({userId: fields.userId}, {$set: {online: false}});
         } 
         
-        // TODO
         return recordUserLoggingOut(fields.userId, fields.connectionId, fields.lastActivity, fields.logoutTime);
     });
 

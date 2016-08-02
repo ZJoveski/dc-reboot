@@ -12,15 +12,15 @@ import { Mongo } from 'meteor/mongo';
 // adjacencyMatrixOfCorrespondingNeighborhood}, neighborhoodColors: colors of self and neighbors }
 export const NeighborhoodsCollection = new Mongo.Collection('neighborhoodsCollection'); //corresponds to colorsInfo
 
-export const sessionInfo = new Mongo.Collection('sessionInfo');
+//export const sessionInfo = new Mongo.Collection('sessionInfo');
 
 //export const timeInfo = new Mongo.Collection('timeInfo');
 
 //export const progressInfo = new Mongo.Collection('progressInfo');
 
-export const experimentLog = new Mongo.Collection('experimentLog');
+export const ExperimentLog = new Mongo.Collection('experimentLog');
 
-export const payoutInfo = new Mongo.Collection('payoutInfo');
+export const PayoutInfo = new Mongo.Collection('payoutInfo');
 
 //export const colorsInfo = new Mongo.Collection('colorsInfo');
 
@@ -32,14 +32,14 @@ export const Messages = new Mongo.Collection('messages');
 
 //export const communicationParameters = new Mongo.Collection('communicationParameters');
 
-export const communicationLimits = new Mongo.Collection('communicationLimits');
+//export const communicationLimits = new Mongo.Collection('communicationLimits');
 
 //export const potentialPayoutsInfo = new Mongo.Collection('potentialPayoutsInfo');
 
-export const adversariesCollection = new Mongo.Collection('adversariesCollection');
+//export const adversariesCollection = new Mongo.Collection('adversariesCollection');
 
-export const outcomeColorsCollection = new Mongo.Collection('outcomeColorsCollection');
+//export const outcomeColorsCollection = new Mongo.Collection('outcomeColorsCollection');
 
 // Stores current experiment number. Only used on the server. 
 //TODO: replace this
-export const persistentInfo = new Mongo.Collection('persistentInfo');
+//export const persistentInfo = new Mongo.Collection('persistentInfo');

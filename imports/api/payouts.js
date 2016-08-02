@@ -4,10 +4,11 @@ import { ColorMagic } from './colors_mapping.js';
 import { Utilities } from './util.js';
 import { PayoutInfo } from './collections.game_collections.js';
 import { Session } from './session.js';
+import { Logger } from './logging.js';
 
 export default var Payouts = {
-    sessionPayouts: {},
-    potentialPayouts: {},
+    sessionPayouts: {},     //id ==> payout
+    potentialPayouts: {},   //id ==> payout
     basePayout: 0.2,
     adversaryBasePayout: 0.4,
     regularPayoutAssignment: 'balanced',
@@ -58,14 +59,13 @@ export default var Payouts = {
         
         //initializePotentialPayoutsInfo(); make sure to anonymize colors before sending data to client
         
-        // TODO
-        /* Log entry. */ recordPotentialSessionPayouts();
+        /* Log entry. */ Logger.recordPotentialSessionPayouts(this.potentialPayouts);
     },
 
     applyIncentiveSessionPayouts: function(outcome) {
         if(outcome) {
             for(var i = 0; i < Participants.participants.length; i++){
-                var actualPayout = Math.max(0, this.potentialSessionPayouts[Participants.participants[i]][Session.outcomeColor]);
+                var actualPayout = Math.max(0, this.potentialPayouts[Participants.participants[i]][Session.outcomeColor]);
                 
                 if(Parameters.costBasedCommunication) {
                     var minPotentialPayout = Math.min(this.potentialPayouts[Participants.participants[i]][ColorMagic.colors[0]], 
@@ -103,8 +103,7 @@ export default var Payouts = {
             }
         }
         
-        // TODO
-        /* Log entry. */ recordSessionPayouts();
+        /* Log entry. */ Logger.recordSessionPayouts(this.sessionPayouts);
     },
 };
 
@@ -112,7 +111,7 @@ var assignDefaultModePayouts = function(players) {
     var payoutMultiplier = Parameters.getPayoutMultiplier();
     
     var numberOfParticipants = players.length;
-    Payouts.potentialSessionPayouts = {};
+    Payouts.potentialPayouts = {};
 
     var unassigned = players.slice();
 
@@ -123,7 +122,7 @@ var assignDefaultModePayouts = function(players) {
         var choice = Math.floor(Math.random() * unassigned.length);
         var id = unassigned[choice];
         
-        Payouts.potentialSessionPayouts[id] = individualPayout;
+        Payouts.potentialPayouts[id] = individualPayout;
         unassigned.splice(choice, 1);
     }
 
@@ -132,7 +131,7 @@ var assignDefaultModePayouts = function(players) {
         var individualPayout = assignPayout(2 - payoutMultiplier, false);
         
         var id = unassigned[i];
-        Payouts.potentialSessionPayouts[id] = individualPayout;
+        Payouts.potentialPayouts[id] = individualPayout;
         //console.log("regular Payout: " + potentialSessionPayouts[id] + " id: " + id);
     }
 }
@@ -158,8 +157,8 @@ var assignNoConsensusAdversaryPayouts = function(adversaries) {
     for (var i = 0; i < adversaries.length; i++) {
         var id = adversaries[i];
         var individualPayout = assignPayout(0, true);
-        Payouts.potentialSessionPayouts[id] = individualPayout;
-        console.log("adversary Payout: " + Payouts.potentialSessionPayouts[id] + " id: " + id);
+        Payouts.potentialPayouts[id] = individualPayout;
+        console.log("adversary Payout: " + Payouts.potentialPayouts[id] + " id: " + id);
     }
 }
 

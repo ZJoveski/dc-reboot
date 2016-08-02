@@ -39,6 +39,14 @@ Meteor.methods({
         }
     },
 
+    insertSubmissionCode: function(workerId, code) {
+        SubmissionCode.insert({worker: workerId, submissionCode: code})
+    },
+
+    ERROR: function(msg) {
+        throw msg;
+    },
+
     submitComments: function(comments) {
         // Save nonempty comments
         if(comments !== "") {

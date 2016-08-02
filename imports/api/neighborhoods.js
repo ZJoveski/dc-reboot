@@ -23,7 +23,7 @@ export default const var Neighborhoods = {
 
         initializeAdminNeighborhood();
         
-        /* Log entry. */ recordParticipantsToNamesCorrespondence();
+        /* Log entry. */ Logger.recordParticipantsToNamesCorrespondence();
     },
 
     initializeNeighborhoodColors: function() {

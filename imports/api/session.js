@@ -3,6 +3,7 @@ import { Participants } from './participants.js';
 import { Neighborhoods } from './neighborhoods.js';
 import { ColorMagic } from './colors_mapping.js';
 import { Messages } from './collections/game_collections.js';
+import { Logger } from './logging.js';
 
 
 // includes Communcation Management
@@ -42,6 +43,8 @@ export default var Session = {
             if (this.batchMode == 'adversarial') {
                 Parameters.setAdversarialParameters(isProperGames, batchIndex);
             }
+
+            /* Log entry. */ Logger.recordBatchStart(this.batchNumber);
         }
     },
 
@@ -55,8 +58,7 @@ export default var Session = {
 
         Neighborhoods.initializeNeighborhoodColors();
 
-        // TODO
-        /* Log entry. */ recordInitialAssignmentOfColors();
+        /* Log entry. */ Logger.recordInitialAssignmentOfColors(this.colors);
     },
 
     initializeCommunicationUsageLevels: function() {
@@ -96,7 +98,7 @@ export default var Session = {
             var color = ColorMagic.colors[i];
             var count = 0;
 
-            for (name in this.colors) {
+            for (var name in this.colors) {
                 if (this.colors.hasOwnProperty(name)) {
                     var nodeColor = this.colors[name];
                     if (nodeColor == color) {
@@ -108,8 +110,7 @@ export default var Session = {
             this.counts[color] = count;
         }
 
-        // TODO 
-        /* Log entry. */ recordSessionColorCounts();
+        /* Log entry. */ Logger.recordSessionColorCounts(this.counts);
     },
 
     // Initialize the information related to enumerating and processing requests for color changes.
@@ -122,8 +123,7 @@ export default var Session = {
     setOutcome: function(outcome) {
         this.outcome = outcome;
 
-        // TODO
-        /* Log entry. */ recordSessionOutcome(outcome);
+        /* Log entry. */ Logger.recordSessionOutcome(outcome);
     }
 
     clearMessages: function() {

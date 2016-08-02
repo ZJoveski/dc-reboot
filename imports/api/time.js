@@ -1,3 +1,5 @@
+import { Logger } from './logging.js';
+
 export default var Time = {
     experimentStarted: false,
     experimentStartTime: -1,
@@ -21,14 +23,12 @@ export default var Time = {
             this.currentTime = time;
             this.lastSessionEndTime = time;
 
-            // TODO
-            /* Log entry. */ recordSessionCompletion(currentSession);
+            /* Log entry. */ Logger.recordSessionCompletion(currentSession);
         } else if (context == 'session start') {
             this.currentTime = time;
             this.currentSessionStartTime = time;
 
-            // TODO
-            /* Log entry. */ recordSessionStart(currentSession);
+            /* Log entry. */ Logger.recordSessionStart(currentSession);
         } else if (context == 'current time') {
             this.currentTime = time;
         }

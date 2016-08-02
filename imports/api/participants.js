@@ -1,5 +1,6 @@
 // import { TurkServer } from 'meteor/mizzao'; ?
 import { Session } from './session.js';
+import { Logger } from './logging.js';
 
 export default var Participants = {
     /* Objects and arrays used to establish and make use of the correspondence between actual nodes,
@@ -42,8 +43,7 @@ export default var Participants = {
            this.participantsQueue.push(user._id); 
         });
 
-        // TODO: actually write this
-        /* Log entry. */ recordExperimentParticipants(this.participantsQueue);
+        /* Log entry. */ Logger.recordExperimentParticipants(this.participantsQueue);
     },
 
     initializeGameParticipants: function(newBatch) {
@@ -67,8 +67,7 @@ export default var Participants = {
         
         initializeParticipationRate(0);
 
-        // TODO
-        /* Log entry. */ recordSessionParticipants(this.participants);
+        /* Log entry. */ Logger.recordSessionParticipants(this.participants);
     },
 
     initializeMissedGames: function() {
@@ -95,6 +94,8 @@ export default var Participants = {
                 nodesRemaining--;               
             }
         }
+
+        /* Log entry. */ Logger.recordNodesToNamesCorrespondence();
     },
 
     assignIdsToNames: function() {

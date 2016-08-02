@@ -1,6 +1,6 @@
 import { Mongo } from 'meteor/mongo';
 
-export const PilotExperiment = new Mongo.Collection('pilotExperiment');
+//export const PilotExperiment = new Mongo.Collection('pilotExperiment');
 
 export const LobbyStatus = new Mongo.Collection('lobbyStatus');
 
