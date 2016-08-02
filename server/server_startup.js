@@ -9,6 +9,8 @@ import { Parameters } from '../imports/api/parameters.js';
 
 import { LobbyStatus } from '../imports/api/collections/external_collections.js';
 
+import '../imports/router.js';
+
 Meteor.startup(function () {
     UserStatus.events.on("connectionLogin", function(fields) {
         var returning = Participants.onTime.hasOwnProperty(fields.userId);
