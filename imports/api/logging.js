@@ -1,5 +1,5 @@
 import { ExperimentLog } from './collections/game_collections.js';
-import { PayoutInfo } from './collections/game_collection.js';
+import { PayoutInfo } from './collections/game_collections.js';
 import { Participants } from './participants.js';
 import { Utilities } from './util.js';
 import { ColorMagic } from './colors_mapping.js';

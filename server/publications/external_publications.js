@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 
-import { LobbyStatus } from '../../api/collections/external_collections';
-import { Comments } from '../../api/collections/external_collections';
-import { SubmissionCode } from '../../api/collections/external_collections';
+import { LobbyStatus } from '../../imports/api/collections/external_collections';
+import { Comments } from '../../imports/api/collections/external_collections';
+import { SubmissionCode } from '../../imports/api/collections/external_collections';
 
 Meteor.publish('lobbyStatus', function() { 
     return LobbyStatus.find({}); 

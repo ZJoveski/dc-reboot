@@ -2,7 +2,7 @@ import { Parameters } from './parameters.js';
 import { Participants } from './participants.js';
 import { ColorMagic } from './colors_mapping.js';
 import { Utilities } from './util.js';
-import { PayoutInfo } from './collections.game_collections.js';
+import { PayoutInfo } from './collections/game_collections.js';
 import { Session } from './session.js';
 import { Logger } from './logging.js';
 
