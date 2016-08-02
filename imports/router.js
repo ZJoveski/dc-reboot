@@ -18,5 +18,13 @@ Router.route('/', {
             this.render("login");
         }
     },
+    waitOn: function() {
+        var currentUser = Meteor.userId();
+        if (currentUser) {
+            return Meteor.subscribe('userData');
+        } else {
+            return true;
+        }
+    }
 });
 
