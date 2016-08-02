@@ -10,6 +10,7 @@ Router.route('/', {
     onBeforeAction: function() {
         var currentUser = Meteor.userId();
         if(currentUser) {
+            console.log(currentUser);
             console.log(Meteor.users.findOne(currentUser).location);
             Router.go(Meteor.users.findOne(currentUser).location);
             this.next();
