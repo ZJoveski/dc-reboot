@@ -6,6 +6,8 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import '../imports/router.js';
 import '../imports/ui/login.js';
 import '../imports/ui/loading.html';
+import '../imports/api/meteormethods/main.js';
+import '../imports/api/meteormethods/navigation.js';
 
 // Template.hello.onCreated(function helloOnCreated() {
 //   // counter starts at 0
