@@ -20,10 +20,11 @@ Router.route('/', {
 
         var currentUser = Meteor.userId();
         if (currentUser) {
+            var router = this;
             Meteor.call('getUserLocation', function(error, result) {
                 console.log('result: ' + result);
                 Router.go(result);
-                this.next();
+                router.next();
             })
         } else {
             this.render("login");
