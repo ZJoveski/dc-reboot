@@ -2,7 +2,7 @@ import { NeighborhoodsCollection } from './collections/game_collections.js';
 import { Participants } from './participants.js';
 import { Session } from './session.js';
 
-export const var Neighborhoods = {
+export var Neighborhoods = {
     clearNeighborhoods: function() {
         NeighborhoodsCollection.remove({});
     },
