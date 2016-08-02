@@ -100,12 +100,12 @@ export var Logger = {
     },
 
     // ITZS1
-    recordSessionInitializationStart = function(sessionNumber) {
+    recordSessionInitializationStart: function(sessionNumber) {
         insertExperimentLogEntry("ITZS1", "" + sessionNumber)
     },
 
     // ITZT2
-    recordSessionInitializationCompletion = function(sessionNumber) {
+    recordSessionInitializationCompletion: function(sessionNumber) {
         insertExperimentLogEntry("ITZT2", "" + sessionNumber)
     },
 

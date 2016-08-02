@@ -124,7 +124,7 @@ export var Session = {
         this.outcome = outcome;
 
         /* Log entry. */ Logger.recordSessionOutcome(outcome);
-    }
+    },
 
     clearMessages: function() {
         Messages.remove({});
