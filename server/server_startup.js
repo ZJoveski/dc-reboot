@@ -1,6 +1,6 @@
 
 import { Meteor } from 'meteor/meteor';
-import { Accounts } from 'meteor/accounts-base';
+//import { Accounts } from 'meteor/accounts-base';
 // remember meteor add mizzao:user-status
 
 import { Participants } from '../imports/api/participants.js';
