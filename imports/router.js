@@ -19,7 +19,7 @@ Router.route('/', {
         }
     },
     waitOn: function() {
-        return true;
+        return this.ready();
     }
 });
 
