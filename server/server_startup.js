@@ -6,6 +6,7 @@ import { Meteor } from 'meteor/meteor';
 import { Participants } from '../imports/api/participants.js';
 import { Time } from '../imports/api/time.js';
 import { Parameters } from '../imports/api/parameters.js';
+import { Logger } from '../imports/api/logging.js';
 
 import { LobbyStatus } from '../imports/api/collections/external_collections.js';
 
@@ -28,7 +29,7 @@ Meteor.startup(function () {
             LobbyStatus.upsert({userId: fields.userId}, {userId: fields.userId, online: true, ready: false, submitted: false});   
         }
         
-        return recordUserLoggingIn(fields.userId, fields.connectionId, fields.ipAddr, fields.userAgent, fields.loginTime);
+        return Logger.recordUserLoggingIn(fields.userId, fields.connectionId, fields.ipAddr, fields.userAgent, fields.loginTime);
     });
     
     UserStatus.events.on("connectionLogout", function(fields) {
@@ -37,7 +38,7 @@ Meteor.startup(function () {
             LobbyStatus.update({userId: fields.userId}, {$set: {online: false}});
         } 
         
-        return recordUserLoggingOut(fields.userId, fields.connectionId, fields.lastActivity, fields.logoutTime);
+        return Logger.recordUserLoggingOut(fields.userId, fields.connectionId, fields.lastActivity, fields.logoutTime);
     });
 
     // ============Accounts Startup==============
