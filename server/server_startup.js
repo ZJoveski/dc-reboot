@@ -11,6 +11,8 @@ import { Logger } from '../imports/api/logging.js';
 import { LobbyStatus } from '../imports/api/collections/external_collections.js';
 
 import '../imports/router.js';
+import '../imports/api/meteormethods/main.js';
+import '../imports/api/meteormethods/navigation.js';
 
 Meteor.startup(function () {
     UserStatus.events.on("connectionLogin", function(fields) {
