@@ -20,3 +20,5 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 mizzao:user-status
 accounts-password
 accounts-ui
+sacha:spin
+iron:router
