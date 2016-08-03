@@ -53,5 +53,12 @@ Router.route('/description5', {
 Router.route('/lobby', {
     name: 'lobby',
     template: 'lobby',
+
+    waitOn: function() {
+        var currentUser = Meteor.userId();
+        if (currentUser) {
+            return Meteor.subscribe('lobbyStatus');
+        }
+    }
 });
 

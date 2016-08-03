@@ -1,0 +1,32 @@
+<template name="lobby">
+  <div class="col-md-12">
+
+    {{#if notReady}}
+        Lobby is loading...
+        {{>loadingWheel}}
+    {{else}}
+        <p> {{#if plural}}
+                There are currently <strong>{{numWaiting}} players</strong> in the waiting room.
+            {{else}}
+                There is currently <strong>1 player</strong> in the waiting room.
+            {{/if}}
+            The maximum number of experiment participants is {{numPlayers}}. The experiment will begin at 1:05 PM CT.</p>
+
+    <p> The first 5 games will be just for practice and you will not receive any additional payment, even though nonzero bonus payments may be shown in the upper left corner. </p>
+
+    <p> IMPORTANT: No more than 20 users can play a game simultaneously. Thus, if more than 20 people show up on time, we will rotate participation so that you will not have to pause for more than one batch at a time. Since this experiment consists of 1-game batches, this means that you will not need to wait for more than 70 seconds (but sometimes even less) until the next game in which you will have the chance to play. You will still receive the base payment of $0.15, even for games that you are not participating in. </p>
+
+    <p> IMPORTANT: Please do not work on other tasks while participating in the experiment. Being able to quickly respond to color changes and messages of other participants greatly increases the chances for reaching a consensus, and with that, a higher bonus reward. In case a participant does not make at least one color choice in more than 1 game, they will be kicked out of the experiment, as such a behavior prevents the reaching of a consensus regardless of what the other players do. </p> 
+
+<!--
+    <p> IMPORTANT: In some rare cases your game screen might freeze. You can tell that this has happened if the time progress bar in the lower left corner stops updating or if it takes too long for the next game to start (> 15 seconds). If your game screen freezes, please reload the page in your web browser. </p>
+-->
+      
+    <p> For optimal visual experience, please have your browser in full screen mode while playing the games. </p>
+
+    <p>If you experience any technical difficulties or bugs, please email <a href="mailto:zlatko.joveski@vanderbilt.edu">zlatko.joveski@vanderbilt.edu</a>.</p>
+
+    {{/if}}
+      
+  </div>
+</template>
