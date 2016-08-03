@@ -1,0 +1,3 @@
+Barabasi-Albert none global unstructured
+Erdos-Renyi-dense none global unstructured
+Erdos-Renyi-sparse none global unstructured

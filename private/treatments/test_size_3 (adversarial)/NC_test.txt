@@ -1,0 +1,6 @@
+Barabasi-Albert none global unstructured
+Erdos-Renyi-dense high local unstructured
+Erdos-Renyi-dense none global unstructured
+Erdos-Renyi-sparse high global unstructured
+Barabasi-Albert none local unstructured
+Erdos-Renyi-sparse high local unstructured

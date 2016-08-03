@@ -1,0 +1,5 @@
+Barabasi-Albert none local unstructured
+Erdos-Renyi-dense none local unstructured
+Barabasi-Albert none global unstructured
+Erdos-Renyi-dense none local unstructured
+Barabasi-Albert none local unstructured

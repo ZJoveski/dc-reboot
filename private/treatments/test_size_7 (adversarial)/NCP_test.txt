@@ -1,0 +1,3 @@
+CliqueChain-0.2 high minmajGN unstructured 0
+CliqueChain-1.0 high minmajGL unstructured 0
+CliqueChain-0.4 high minmajGL unstructured 0

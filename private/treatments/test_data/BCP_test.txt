@@ -1,0 +1,2 @@
+2 adversarial random 0 balanced noConsensusOnly
+1 adversarial random 1 balanced noConsensusOnly

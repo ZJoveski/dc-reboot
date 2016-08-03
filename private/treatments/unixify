@@ -1,0 +1,4 @@
+#!/bin/bash
+# Converts all files in current directory from dos to unix format
+
+find . -type f -exec dos2unix {} \;
