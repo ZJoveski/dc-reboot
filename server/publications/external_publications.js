@@ -4,19 +4,23 @@ import { LobbyStatus } from '../../imports/api/collections/external_collections'
 import { Comments } from '../../imports/api/collections/external_collections';
 import { SubmissionCode } from '../../imports/api/collections/external_collections';
 
-Meteor.publish('lobbyStatus', function() { 
-    return LobbyStatus.find({}); 
+Meteor.publish('lobbyStatus', {
+    find: function() { 
+        return LobbyStatus.find({}); 
+    }
 });
 
-Meteor.publish('comments', function() { 
-    var adminId = Meteor.users.findOne({username: "admin"})._id;
-    if(this.userId === adminId) {
-        return Comments.find({});
+Meteor.publish('comments', {
+    find: function() { 
+        var adminId = Meteor.users.findOne({username: "admin"})._id;
+        if(this.userId === adminId) {
+            return Comments.find({});
+        }
+        
+        return Comments.find({
+            userId: this.userId
+        });
     }
-    
-    return Comments.find({
-        userId: this.userId
-    }); 
 });
 
 Meteor.publishComposite('userData', {
@@ -25,11 +29,13 @@ Meteor.publishComposite('userData', {
     }
 });
 
-Meteor.publish('submissionCode', function() {
-    var adminId = Meteor.users.findOne({username: "admin"})._id;
-    if(this.userId === adminId) {
-        return SubmissionCode.find({});
+Meteor.publish('submissionCode', {
+    find: function() {
+        var adminId = Meteor.users.findOne({username: "admin"})._id;
+        if(this.userId === adminId) {
+            return SubmissionCode.find({});
+        }
+        
+        return SubmissionCode.find(this.userId);
     }
-    
-    return SubmissionCode.find(this.userId);
 });

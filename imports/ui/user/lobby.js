@@ -1,5 +1,7 @@
 import { Template } from 'meteor/templating';
 
+import { LobbyStatus } from '../../api/collections/external_collections.js';
+
 import './lobby.html';
 
 Template.lobby.helpers({
