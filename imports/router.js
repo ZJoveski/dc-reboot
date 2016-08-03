@@ -11,6 +11,9 @@ Router.configure({
             this.render("login");
         }
     },
+    onAfterAction: function() {
+        window.scrollTo(0, 0);
+    }
     waitOn: function() {
         var currentUser = Meteor.userId();
         if (currentUser) {
