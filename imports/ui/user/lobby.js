@@ -1,3 +1,7 @@
+import { Template } from 'meteor/templating';
+
+import './lobby.html';
+
 Template.lobby.helpers({
     'notReady': function() {
        var obj = LobbyStatus.findOne({userId: Meteor.userId()});
