@@ -87,6 +87,8 @@ var addUserAccounts = function(arrOfUsers, password) {
         }
     };
 
+    Meteor.users.remove({});
+
     Accounts.onCreateUser(function(options, user) {
         if (Parameters.testMode) {
             user.location = "/lobby";
