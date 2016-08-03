@@ -1,40 +1,57 @@
 import { Meteor } from 'meteor/meteor';
 
 Router.configure({
-    loadingTemplate: 'loadingWheel'
-});
-
-Router.route('/', {
-    name: 'home',
-    template: 'outline',
+    loadingTemplate: 'loadingWheel',
     onBeforeAction: function() {
         var currentUser = Meteor.userId();
         if(currentUser) {
-            console.log(currentUser);
-            console.log(Meteor.users.findOne(currentUser).location);
             Router.go(Meteor.users.findOne(currentUser).location);
             this.next();
         } else {
             this.render("login");
         }
-
-        // var currentUser = Meteor.userId();
-        // if (currentUser) {
-        //     var router = this;
-        //     Meteor.call('getUserLocation', function(error, result) {
-        //         console.log('result: ' + result);
-        //         Router.go(result);
-        //         router.next();
-        //     })
-        // } else {
-        //     this.render("login");
-        // }
     },
+});
+
+Router.route('/', {
+    name: 'home',
+    template: 'outline',
+    
     waitOn: function() {
         var currentUser = Meteor.userId();
         if (currentUser) {
             return Meteor.subscribe('userData');
         }
     },
+});
+
+Router.route('/description1', {
+    name: 'description1',
+    template: 'description1',
+});
+
+Router.route('/description2', {
+    name: 'description2',
+    template: 'description2',
+});
+
+Router.route('/description3', {
+    name: 'description3',
+    template: 'description3',
+});
+
+Router.route('/description4', {
+    name: 'description4',
+    template: 'description4',
+});
+
+Router.route('/description5', {
+    name: 'description5',
+    template: 'description5',
+});
+
+Router.route('/lobby', {
+    name: 'lobby',
+    template: 'lobby',
 });
 

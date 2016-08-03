@@ -1,0 +1,206 @@
+<template name="description1">
+    <div class="col-md-12">
+        <h3>The Decentralized Coordination Game</h3>
+        
+        <p> In this experiment you will be playing a sequence of multiplayer coordination games. In each game, you will be randomly assigned to a node of a network - this will be the central node appearing on your screen, labeled <b>Me</b>. You will also be assigned a name (shown in the left upper part of the screen). In addition, you will see a few other nodes on the screen - these are the nodes of your neighbors in the network. A link between two nodes indicates that the corresponding players are neighbors. Neighbors will see each other's nodes on their screens and non-neighbors will not. For example, in Figure 1, you and Gus are neighbors and Gus can see your node, labeled Sam, on his screen.But Gus cannot see Sue's node as Sue is not a neighbor of Gus.</p>
+
+        <p>Initially, all network nodes will be white. Throughout the game you will be choosing the color of your node, either red or green, using the two buttons in the lower central part of the screen. In some games you will also be able to communicate with other players. Your objective will depend on which team you are assigned to in a particular game. </p>
+
+        <div>
+        <figure style="display:inline-table; text-align:center; border:none; padding:5px;">
+            <img src="/images/description/adversary/figure1.png" alt="Game Screen" style="width:550px; height:300px;">
+            <figcaption style="display:block;">
+                <b>Figure 1.</b> A view of the game screen. The assigned name for this game is <i>Sam</i>. They have been assigned to team <i>Consensus</i>.
+            </figcaption>
+        </figure> 
+        </div>
+
+        <h4><i>Consensus</i> and <i>No-Consensus Teams</i></h4>
+
+        <p>In each game you may be assigned to one of two teams: <b>Consensus</b> or <b>No-Consensus</b>. The team that you are assigned to in a particular game is shown in the left part of the screen just below your assigned name. However, the team assignments of other players will not be given to you, though you may be able to figure them out by observing other players' behavior or through communication. Note that in some games there may be no players assigned to the <i>No-Consensus</i> team, but this will not be disclosed at the start of the game.</p>
+
+        <p>If the Consensus team reaches a <i>consensus</i> on a color, i.e. a state where <i>all nodes of the Consensus team</i> in the entire network (not just those in your neighborhood) have the same color, they win and the <i>No-Consensus</i> team loses. Thus, the objective of the players on the Consensus team is to coordinate among themselves and reach a consensus before the game clock expires. <i><b>Notice that consensus requires that only the Consensus team members have the same color</b></i>.</p>
+
+        <p>If the game clock expires without the Consensus team members reaching a consensus on a color, they lose and the No-Consensus team wins. If you are a member of the No-Consensus team, your objective is to disrupt the coordination efforts of the Consensus team and stop them from reaching a consensus. Note that having a different color from other players will not be enough: only members of the Consensus team need to agree on a color for that team to win.</p>
+
+        <p>The actions available to players of both teams in completing their respective objectives are changing one's color and, in some games, sending messages to other players.</p>
+
+        <p>If you have finished reading page 1 and are ready to go to page 2, please click the "Next" button.</p>
+        
+        <button class="btn btn-primary nextPage">Next</button>
+    
+    </div>
+</template>
+
+<template name="description2">
+    <div class="col-md-12">
+        <h3>The Decentralized Coordination Game</h3>
+
+        <h4>Game Termination, Outcomes &amp; Bonus Payments</h4>
+
+        <p>The allotted time for each game is 60 seconds, and you will be able to change the color of your node at any point during the game continuously. A game will terminate as soon as the <i>Consensus</i> team reaches a consensus on a color (that is, as soon as all Consensus team members choose the same color). Bars showing the remaining time and game progress (how close to reaching a consensus the Consensus team is) are located in the lower left corner of the game screen.</p>
+
+        <div>
+        <figure style="display:inline-table; text-align:center; border:none; padding:5px;">
+            <img src="/images/description/adversary/figure2.png" alt="Adversary Screen" style="width:550px; height:300px;">
+            <figcaption style="display:block;">
+                <b>Figure 2.</b> Gus is a member of team <i>No-Consensus</i>. He receives positive bonus ($0.20) only if team <i>Consensus</i> does not reach consensus.
+            </figcaption>
+        </figure> 
+        </div>
+        
+        <p>Games can have one of three outcomes: <b>no consensus</b>, <b>red consensus</b>, and <b>green consensus</b>. The potential bonus payments for each outcome are shown in the lower left part of the screen. In Figure 2, for example, Gus will receive a bonus payment only if no consensus is reached. In general, the Consensus team members will receive positive bonus for a consensus outcome and no bonus when consensus is not reached. On the other hand, the No-Consensus team members will receive a positive bonus if the Consensus team does not reach a consensus and a smaller bonus or no bonus at all if the Consensus team reaches a consensus. Your total bonus acquired will be shown in the upper left corner. After the end of each game, the bonus payment you receive for that particular game will be shown next to it, until the next game begins.</p>
+
+        <p>Note that your potential bonus payments may vary from game to game. In addition, within the same game potential bonuses may be different for different players, even if those players have the same roles. For example, in a given game the potential bonuses of Player 1 may be $0.30 for red, $0.10 for green, and $0.00 for no consensus, while those of Player 2 may be $0.10 for red, $0.30 for green, and $0.00 for no consensus. In such a case Players 1 and 2 have conflicting incentives for their color choice.</p>
+
+        <p>Also note that even when all nodes shown on your screen have the same color, it is possible that the Consensus team has not yet reached a consensus. There might be nodes of other Consensus team members in the network that are not shown on your screen, but are colored differently. The game progress bar located in the lower left corner of the screen is a better indicator of how close the Consensus team is to reaching a consensus.</p>
+
+        <p>If you have finished reading page 2 and are ready to go to page 3, please click the "Next" button.</p>
+        
+        <button class="btn btn-primary previousPage">Back</button>
+        <button class="btn btn-primary nextPage">Next</button>
+    
+    </div>
+</template>
+
+<template name="description3">
+    <div class="col-md-12">
+        <h3>The Decentralized Coordination Game</h3>
+
+        <h4>Communication</h4>
+
+        <p>In some of the games you will also have the opportunity to communicate with other players through a
+        chat interface appearing on the right side of the screen. Note that there might be games in which you
+        can only see messages sent by other players, but not be able to send any messages yourself.</p>
+
+        <h5>Unconstrained vs. Constrained Communication</h5>
+
+        <p>In the games with <b>unconstrained</b> communication, you will be able to send arbitrary messages to other
+        players, as long as their length does not exceed the allowed characters limit per message. The number
+        of remaining characters in a message will be shown just above the chat input box. There will also be a limit on the total length of unstructured messages throughout a single game. For the current set of experiment sessions, you willbe able to send unconstrained messages of up to 10 characters and your total communication throughout a single game may not exceed 50 characters. Thus, you will be able to send up to five 10-character messages, or a greater number of shorter messages whose total length does not exceed 50 characters.</p>
+
+        <p>In the games with <b>constrained</b> communication, you will be able to send pre-defined messages to other players, informing them of the status of your neighborhood. These messages will be of the format "RED: x/GREEN: y" and they will indicate that x of your neighbors have chosen red and y of them have chosen green.There will be a limit on the number of constrained messages you may send throughout a single game.The number of remaining constrained messages will be shown just next to the 'Report Neighborhood Color Counts' button.</p>
+
+        <p>You will know that you are in a game with <b>unconstrained</b> communication allowed, by the existence of amessage input box. In games with <b>constrained</b> communication you will only see a button allowing you to send a constrained message.</p>
+
+        <div>
+        <figure style="display:inline-table; text-align:center; border:none; padding:5px;">
+            <img src="/images/description/adversary/figure3.png" alt="Global Communication Screen" style="width:550px; height:300px;">
+            <figcaption style="display:block;">
+                <b>Figure 3.</b> Game in which communication is allowed. Liz can send constrained messages globally (not just to her neighbors).
+            </figcaption>
+        </figure> 
+        </div>
+
+        <h5>Local vs. Global Communication</h5>
+
+        <p>Communication may be of two different scopes, <b>local</b> and <b>global</b>. In games with <b>local</b> communication,your messages can only be seen by your neighbors. On the other hand, in games with <b>global</b> communication, your messages can be seen by all players, even those that are not your neighbors. The scope of communication will be indicated in the right upper part of the screen, just above the chat box.</p>
+
+        <h5>Cost of Communication</h5>
+
+        <p>In some of the games in which communication is allowed, communication will be <b>cost-based</b>. By this
+        we mean that each message you send reduces your potential bonus payments by a small fraction. Note
+        that, if an outcome with positive bonus payment for you is not reached, you are not charged for any messages that you have sent during that particular game (i.e. your bonus payment, regardless of the outcome of each game and the level of your communication with other users, will never be negative).
+        Information related to the costs of messaging will be indicated in the right upper part of the screen, just above the chat box.</p>
+        
+        <p>If you have finished reading page 3 and are ready to go to page 4, please click the "Next" button.</p>
+        
+        <button class="btn btn-primary previousPage">Back</button>
+        <button class="btn btn-primary nextPage">Next</button>
+    
+    </div>
+</template>
+
+<template name="description4">
+    <div class="col-md-12">
+        <h3>The Decentralized Coordination Game</h3>
+
+        <h4>Different Players May See Colors Differently</h4>
+
+        <p>While our experiment application preserves consistent internal encoding of the colors, the way colors are shown on your screen may differ from how colors are shown on another player's screen. Figures 4 and 5, which show screens of two players with neighboring nodes in a given game, illustrate this. Lee and Ivy are neighbors and they have selected the same color. However, Lee sees his and Ivy's nodes as <b style="color:green;">green</b>, while Ivy sees their nodes as <b style="color:red;">red</b>. We call this feature <i>anonymization of colors</i>.</p>
+
+        <div>
+        <figure style="display:inline-table; text-align:center; border:none; padding:5px;">
+            <img src="/images/description/adversary/figure4.png" alt="Green Screen" style="width:275px; height:150px;">
+            <figcaption style="display:block;">
+                <b>Figure 4.</b> Lee's game screen.
+            </figcaption>
+        </figure>
+        <figure style="display:inline-table; text-align:center; border:none; padding:5px;">
+            <img src="/images/description/adversary/figure5.png" alt="Red Screen" style="width:275px; height:150px;">
+            <figcaption style="display:block;">
+                <b>Figure 5.</b> Ivy's game screen.
+            </figcaption>
+        </figure> 
+        </div>
+
+        <p>This feature of the experiment application has several implications. Suppose that consensus was reached in the previous game and on your screen the consensus color was shown as <b style="color:red;">red</b>. If everyone chooses <b style="color:red;">red</b> in the next game would this immediately lead to another consensus? The answer is NO. For example, if in the game shown in Figures 4 and 5, if Lee chooses <b style="color:red;">red</b>, then he and Ivy will have different colors which will not lead to a consensus.</p>
+
+        <p>What if in the next game everyone chooses the last game's consensus color as they saw it on their screen? Would this lead to an immediate consensus? The answer is again NO. How you see colors on your screen might also differ from game to game. For example, suppose that consensus was reached in the game shown in Figures 4 and 5 and that on Lee's screen the consensus color was shown as <b style="color:green;">green</b>, while on Ivy's screen it was shown as <b style="color:red;">red</b>. In the next game it is possible that Lee and Ivy see node colors in the same way. But then if they choose the last game's consensus color as they saw it, Lee will end up choosing <b style="color:green;">green</b> and Ivy <b style="color:red;">red</b>, which will not lead to a consensus.</p>
+
+        <p>The reason behind the <i>anonymization of colors</i> feature of the experiment application is to prevent players from reaching a trivial consensus every time just by using the consensus color from the previous game. Instead, to reach a consensus players need to coordinate and communicate within each single game.</p>
+
+        <h5>Effects on Communication</h5>
+
+        <p>Because you may see colors differently from how other players see them, the messages that refer to colors need to be converted appropriately for every recipient. Our experiment application is able to convert three types of messages.</p>
+
+        <p>1. If you refer to a color using the corresponding full English word our application will automatically convert your message depending on how you and the message recipients see color on your screen. For example, in the game shown in Figures 4 and 5 Lee first sent out the message 'GREEN'. Since Ivy sees Lee's green color as red, in her chat box Lee's first message is shown as 'RED'.</p>
+
+        <p>2. Our application also supports a shorthand notation for referring to colors using two-character codes.</p>
+
+        <table border="1">
+            <tr>
+                <td><b>Color</b></td>
+                <td><b style="color:red;">RED</b></td>
+                <td><b style="color:green;">GREEN</b></td>
+            </tr>
+            <tr>
+                <td><b>Code</b></td>
+                <td><b>\r</b></td>
+                <td><b>\g</b></td>
+            </tr>
+        </table>
+        <br>
+
+        <p>For example, if Lee sends the message "Ivy \g" on his screen this message will be converted to "Ivy GREEN", while on Ivy's screen this message will be shown as "Ivy RED", since Lee and Ivy see colors differently.</p>
+
+        <p>3. Constrained messages are automatically converted.</p>
+
+        <p>Our application, however, DOES NOT support the conversion of abbreviated color messages like "gr", "grn", or "r". For example, suppose Lee (Figure 4) sends the message "gre" attempting to convince other players like Ian or Ava to choose that color. This message will not be converted and will be misleading for players like Ivy (Figure 5) who see colors differently, i.e. Ivy may think that Lee is asking her to change her color, which is not the case.</p>
+
+        <p>To avoid confusion and ensure that unconstrained messages do not negatively affect the chances for reaching a consensus, whenever you wish to refer to a color you should use full color words or, better yet, the two-character color codes '\r' and '\g'.</p>
+
+                
+        <p>If you have finished reading page 4 and are ready to go to page 5, please click the "Next" button.</p>
+        
+        <button class="btn btn-primary previousPage">Back</button>
+        <button class="btn btn-primary nextPage">Next</button>
+    
+    </div>
+</template>
+
+<template name="description5">
+    <div class="col-md-12">
+        <h3>The Experiment</h3>
+
+        <h4>Experimental Setup</h4>
+
+        <p>A full experiment session will usually consist of 3-5 practice games and 50-65 regular games and incentives and communication parameters will vary across games. For each regular game you will receive a base payment of $0.15. In addition, for each game in which you reach an objective, you will earn a bonus between $0.10 and $0.40.</p>
+
+        <p>Games will be grouped in batches of one or more games. The current batch and game numbers will be shown on the left part of the game screen. Throughout all games of a particular batch, your assigned name and team will remain the same. But, when the new batch of games starts, you may be assigned a different name and/or team.</p>
+
+        <p>Every game will be played by exactly 20 Consensus team players and some number of No-Consensus players. The size of the No-Consensus team may vary from batch to batch, usually in the range 0-5. We will usually have up to 30 experiment participants to make sure that individual worker's technical issues (connection loss) or inactivity do not prevent us from running the full experiment session. If there are more workers online than the number of required participants for each batch, we will rotate participation, so that everyone gets the chance to play. The rotation will be performed at the start of each batch of games. You will never have to pause for more than one batch of games in a row, but bear in mind that batches may differ in the number of games. You will still receive the base payment of $0.15, even for games that you are not participating in.</p>
+
+        <p>IMPORTANT: Please do not work on other tasks while participating in the experiment. Being able to quickly respond to color changes and messages of other participants greatly increases the chances for reaching one of the objectives, and with that, a higher bonus reward. In case a participant does not make at least one color choice in more than 1 game in which they were assigned to the <i>Consensus</i> team, they will be kicked out of the experiment, as such a behavior prevents the reaching of a consensus regardless of what the other Consensus team members do.</p>
+
+        <h5>Experiment Session on Thursday, July 7</h5>
+
+        <p>This experiment session will consist of 5 practice games and 18 regular games organized in batches of size 1 (18 batches in total). You will receive a base payout of $0.15 per game which will be included in the HIT base reward of $2.70 (54 x $0.15). Depending on the particular game incentives and your performance you can earn a bonus payment of up to $0.40. (Note that in some games the maximum bonus payment you can earn could be as low as $0.20.)</p>
+            
+        <p>If you have finished reading page 5 and are ready to go to the lobby, please click the "Go To Lobby" button.</p>
+        
+        <button class="btn btn-primary previousPage">Back</button>
+        <button class="btn btn-primary goToLobby">Go To Lobby</button>
+    
+    </div>
+</template>
