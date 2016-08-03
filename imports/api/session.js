@@ -59,7 +59,7 @@ export var Session = {
             sessionNumber: 0,
             batchNumber: 0
         }});
-    }
+    },
 
     // Assign default initial color to nodes.
     assignColorsToNodes: function() {
