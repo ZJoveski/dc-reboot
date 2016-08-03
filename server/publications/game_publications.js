@@ -1,8 +1,13 @@
 import { Meteor } from 'meteor/meteor';
 
-import { NeighborhoodsCollection } from '../../imports/api/collections/game_collections.js';
+import { NeighborhoodsInfo } from '../../imports/api/collections/game_collections.js';
 import { PayoutInfo } from '../../imports/api/collections/game_collections.js';
 import { Messages } from '../../imports/api/collections/game_collections.js';
+import { ParametersInfo } from '../../imports/api/collections/game_collections.js';
+import { ParticipantsInfo } from '../../imports/api/collections/game_collections.js';
+import { ProgressInfo } from '../../imports/api/collections/game_collections.js';
+import { SessionInfo } from '../../imports/api/collections/game_collections.js';
+import { TimeInfo } from '../../imports/api/collections/game_collections.js';
 
 import { Participants } from '../../imports/api/participants.js';
 import { Parameters } from '../../imports/api/parameters.js';
@@ -11,7 +16,7 @@ import { Parameters } from '../../imports/api/parameters.js';
 // collection that corresponds to the current user (client) (made possible by using 
 // userId: this.userId as our search criterion.)
 Meteor.publish('neighborhoodsSubscription', function () {
-    return NeighborhoodsCollection.find({
+    return NeighborhoodsInfo.find({
         userId: this.userId
     });
 });

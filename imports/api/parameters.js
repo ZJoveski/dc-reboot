@@ -3,8 +3,11 @@ import { Participants } from './participants.js';
 import { Session } from './session.js';
 import { Payouts } from './payouts.js';
 import { Logger } from './logging.js';
+import { ParametersInfo } from './collections/game_collections.js';
 
 export var Parameters = {
+    ParametersInfo: ParametersInfo,
+
     communication: false,
     globalCommunication: false,
     structuredCommunication: false,
@@ -63,9 +66,9 @@ export var Parameters = {
 
         // Determine the number of batches
         if (practiceBatchConfigs.length > 0) {
-            practiceBatches = practiceBatchConfigs.length;
+            this.practiceBatches = practiceBatchConfigs.length;
         } else {
-            practiceBatches = Math.floor(this.practiceGames / Session.batchSize);
+            this.practiceBatches = Math.floor(this.practiceGames / Session.batchSize);
         }
 
         if (batchConfigs.length > 0) {
@@ -77,6 +80,10 @@ export var Parameters = {
         // For testing purposes only
         console.log("Practice games:\t" + practiceGames);
         console.log("Proper games:\t" + properGames); 
+    },
+
+    initializeCollection: function() {
+
     },
 
     getNextAdjMatrix: function(isProperGames, currentSession) {
@@ -200,6 +207,10 @@ export var Parameters = {
             Session.batchSize = parseIng(batchConfigs[batchIndex][0]);
             Session.batchMode = batchConfigs[batchIndex][1];
         }
+
+        Session.SessionInfo.upsert({id: 'global'}, {$set: {
+            batchSize: Session.batchSize
+        }});
     },
 
     setAdversarialParameters: function(isProperGames, batchIndex) {
@@ -215,6 +226,10 @@ export var Parameters = {
             Payouts.regularPayoutAssignment = batchConfigs[batchIndex][4];
             Payouts.adversaryPayoutAssignment = batchConfigs[batchIndex][5];
         }
+
+        Session.SessionInfo.upsert({id: 'global'}, {$set: {
+            numberOfAdversaries: Session.numberOfAdversaries
+        }});
     },
 
     getPayoutMultiplier: function() {

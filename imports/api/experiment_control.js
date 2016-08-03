@@ -25,27 +25,19 @@ var sessionTimeout, preSessionCountdown, sessionCountdown, preSessionTimeout, po
 var proper, games, batches;
 
 var runGames = function() {
-    // TODO: initialize PersistentInfo?
-
     clearPastPilotExperimentsData();
-
-    // TODO: update PersistentInfo? nah
 
     /* Log entry. */ Logger.recordExperimentInitializationStart();
 
-    initializeParameters();
-
     /* L */ Participants.initializeFullListOfParticipants();
+
+    initializeCollections();
 
     Participants.initializeMissedGames();
 
-    Payouts.resetTotalPayouts(Participants.participants);
+    Payouts.resetTotalPayouts(Participants.participantsQueue);
 
-    // initializeTimeInfo(); =======> already done by default in time.js
     Time.updateTimeInfo('start experiment');
-
-    // initializeProgressInfo(); =======> already done by default in progress.js
-    //initializeSessionInfo(); =========> already done by default in session.js
 
     /* Log entry. */ Logger.recordExperimentInitializationCompletion();
     /* L */ Progress.setProgress('experiment', true);
@@ -104,7 +96,7 @@ var initializeGame = function() {
     /* Log entry. */ Logger.recordSessionInitializationStart(Session.sessionNumber);
 
     Session.adjMatrix = Parameters.getNextAdjMatrix(proper, Session.sessionNumber);
-\    /* Log entry. */ Logger.recordNetworkAdjacencyMatrix(adjMatrix);
+    /* Log entry. */ Logger.recordNetworkAdjacencyMatrix(adjMatrix);
 
     Participants.participantsThreshold = Session.adjMatrix.length;
     console.log("Game participants:\t" + Participants.participantsThreshold);
@@ -192,4 +184,9 @@ var movePlayersToSurvey = function() {
         {$set: {'location': '/survey'}},
         {multi: true}
     );
+}
+
+var initializeCollections = function() {
+    Progress.initializeProgress();
+    Session.initializeSessionInfo();
 }

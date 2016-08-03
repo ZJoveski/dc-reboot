@@ -1,14 +1,16 @@
-import { NeighborhoodsCollection } from './collections/game_collections.js';
+import { NeighborhoodsInfo } from './collections/game_collections.js';
 import { Participants } from './participants.js';
 import { Session } from './session.js';
 
 export var Neighborhoods = {
+    NeighborhoodsInfo: NeighborhoodsInfo,
+
     clearNeighborhoods: function() {
-        NeighborhoodsCollection.remove({});
+        NeighborhoodsInfo.remove({});
     },
 
     clearNeighborhood: function(id) {
-        NeighborhoodsCollection.remove({userId: id});
+        NeighborhoodsInfo.remove({userId: id});
     },
 
     assignNeighborhoodsToClients: function() {
@@ -37,13 +39,13 @@ export var Neighborhoods = {
                 neighborhoodColors[namesOfNeighbors[j]] = Session.defaultNodeColor;
             }
 
-            NeighborhoodsCollection.update({userId: userId}, {$set: {neighborhoodColors: neighborhoodColors}});          
+            NeighborhoodsInfo.upsert({userId: userId}, {$set: {neighborhoodColors: neighborhoodColors}});          
         }
     } 
 };
 
 insertNeighborhood = function(id, namesOfNeighbors, neighAdjMatrix) {        
-    NeighborhoodsCollection.insert({
+    NeighborhoodsInfo.insert({
         userId: id,
         namesOfNeighbors: namesOfNeighbors,
         neighAdjMatrix: neighAdjMatrix

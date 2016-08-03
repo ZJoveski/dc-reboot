@@ -33,11 +33,6 @@ export const Utilities = {
         return TurkServer.batch()._id;
     }, 
 
-    // currentRound: function() {
-    //     var round = Rounds.findOne({}, {sort: {index: -1}});
-    //     return round && round.index;
-    // }, 
-
     sleep: Meteor.wrapAsync(function(time, cb) {
         return Meteor.setTimeout((function() {
             return cb(void 0);

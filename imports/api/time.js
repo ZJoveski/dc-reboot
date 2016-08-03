@@ -1,6 +1,9 @@
 import { Logger } from './logging.js';
+import { TimeInfo } from './collections/game_collections.js';
 
 export var Time = {
+    TimeInfo: TimeInfo,
+
     experimentStarted: false,
     experimentStartTime: -1,
     currentSessionStartTime: -1,
@@ -32,5 +35,5 @@ export var Time = {
         } else if (context == 'current time') {
             this.currentTime = time;
         }
-    }
+    },
 }

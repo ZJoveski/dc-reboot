@@ -1,8 +1,11 @@
 // import { TurkServer } from 'meteor/mizzao'; ?
 import { Session } from './session.js';
 import { Logger } from './logging.js';
+import { ParticipantsInfo } from './collections/game_collections.js';
 
 export var Participants = {
+    ParticipantsInfo: ParticipantsInfo,
+
     /* Objects and arrays used to establish and make use of the correspondence between actual nodes,
     names of nodes visible to the clients, and user IDs of clients. */
 
@@ -66,6 +69,8 @@ export var Participants = {
         }
         
         initializeParticipationRate(0);
+
+        Session.numberOfNodes = this.participants.length;
 
         /* Log entry. */ Logger.recordSessionParticipants(this.participants);
     },

@@ -7,6 +7,8 @@ import { Session } from './session.js';
 import { Logger } from './logging.js';
 
 export var Payouts = {
+    PayoutInfo: PayoutInfo,
+
     sessionPayouts: {},     //id ==> payout
     potentialPayouts: {},   //id ==> payout
     basePayout: 0.2,

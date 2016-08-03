@@ -1,15 +1,35 @@
 import { Time } from './time.js';
 import { Logger } from './logging.js';
+import { ProgressInfo } from './collections/game_collections.js';
 
 export var Progress = {
+    ProgressInfo: ProgressInfo,
+
     experimentInProgress: false,
     sessionInProgress: false,       // alias for sessionRunning
     preSessionInProgress: false,
     postSessionInProgress: false,
 
+    clearProgress: function() {
+        ProgressInfo.remove({});
+    },
+
+    intializeProgress: function() {
+        ProgressInfo.upsert({
+            experimentInProgress: this.experimentInProgress,
+            sessionInProgress: this.sessionInProgress,
+            preSessionInProgress: this.preSessionInProgress,
+            postSessionInProgress: this.postSessionInProgress
+        });
+    },
+
     setProgress: function(type, progress) {
         if (type == 'experiment') {
             this.experimentInProgress = progress;
+            ProgressInfo.update({}, { $set: {
+                experimentInProgress: progress
+            }
+            });
             if (progress) {
                 /* Log entry. */ Logger.recordExperimentStart();
             } else {
@@ -17,6 +37,10 @@ export var Progress = {
             }
         } else if (type == 'session') {
             this.sessionInProgress = progress;
+            ProgressInfo.update({}, { $set: {
+                sessionInProgress: progress
+            }
+            });
             if (progress) {
                 /* L */ Time.updateTimeInfo('session start');
             } else {
@@ -24,8 +48,16 @@ export var Progress = {
             }
         } else if (type == 'preSession') {
             this.preSessionInProgress = progress;
+            ProgressInfo.update({}, { $set: {
+                preSessionInProgress: progress
+            }
+            });
         } else if (type == 'postSession') {
             this.postSessionInProgress = progress;
+            ProgressInfo.update({}, { $set: {
+                postSessionInProgress: progress
+            }
+            });
         }
     }
 }

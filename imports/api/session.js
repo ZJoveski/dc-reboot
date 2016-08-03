@@ -4,10 +4,13 @@ import { Neighborhoods } from './neighborhoods.js';
 import { ColorMagic } from './colors_mapping.js';
 import { Messages } from './collections/game_collections.js';
 import { Logger } from './logging.js';
+import { SessionInfo } from './collections/game_collections.js';
 
 
 // includes Communcation Management
 export var Session = {
+    SessionInfo: SessionInfo,
+
     sessionNumber: 0,   // current Session
     batchNumber: 0,
     batchSize: 1,   // current batch size,
@@ -47,6 +50,16 @@ export var Session = {
             /* Log entry. */ Logger.recordBatchStart(this.batchNumber);
         }
     },
+
+    initializeSessionInfo: function() {
+        this.sessionNumber = 0;
+        this.batchNumber = 0;
+
+        SessionInfo.upsert({id: 'global'}, { $set: {
+            sessionNumber: 0,
+            batchNumber: 0
+        }});
+    }
 
     // Assign default initial color to nodes.
     assignColorsToNodes: function() {
