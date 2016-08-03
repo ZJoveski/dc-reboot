@@ -38,6 +38,21 @@ Meteor.publishComposite('userData', {
     }
 });
 
+Meteor.publishComposite("allUsers", {
+    find: function () {
+        if(this.userId) {    
+            var adminId = Meteor.users.findOne({username: "admin"})._id;
+                              
+            if(this.userId === adminId)
+                return Meteor.users.find({});
+            
+            return Meteor.users.find({_id: this.userId});
+        } else {
+            this.ready();
+        }
+    }
+});
+
 Meteor.publishComposite('submissionCode', {
     find: function() {
         var adminId = Meteor.users.findOne({username: "admin"})._id;

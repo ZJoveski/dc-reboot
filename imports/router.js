@@ -38,6 +38,12 @@ Router.route('/adminScreen', {
             this.render("login");
         }
     },
+    waitOn: function() {
+        var currentUser = Meteor.userId();
+        if (currentUser) {
+            return Meteor.subscribe('allUsers');
+        }
+    }
 });
 
 Router.route('/description1', {
