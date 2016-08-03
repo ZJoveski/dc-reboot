@@ -9,11 +9,15 @@ import { Parameters } from '../imports/api/parameters.js';
 import { Logger } from '../imports/api/logging.js';
 
 import { LobbyStatus } from '../imports/api/collections/external_collections.js';
+import { PilotExperiment } from '../imports/api/collections/external_collections.js';
+import { Comments } from '../imports/api/collections/external_collections.js';
+import { SubmissionCode } from '../imports/api/collections/external_collections.js';
 
 import '../imports/router.js';
 import '../imports/api/meteormethods/main.js';
 
 Meteor.startup(function () {
+    clearData();
     UserStatus.events.on("connectionLogin", function(fields) {
         var returning = Participants.onTime.hasOwnProperty(fields.userId);
         
@@ -124,3 +128,10 @@ var addUserAccounts = function(arrOfUsers, password) {
         Meteor.users.update({username: "admin"}, {$set: {'location': '/adminScreen'}});
     }
 }
+
+var clearData = function() {
+    PilotExperiment.remove({});
+    LobbyStatus.remove({});
+    Comments.remove({});
+    SubmissionCode.remove({});
+};
