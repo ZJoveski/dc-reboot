@@ -11,18 +11,17 @@ Router.configure({
             this.render("login");
         }
     },
-});
-
-Router.route('/', {
-    name: 'home',
-    template: 'outline',
-    
     waitOn: function() {
         var currentUser = Meteor.userId();
         if (currentUser) {
             return Meteor.subscribe('userData');
         }
     },
+});
+
+Router.route('/', {
+    name: 'home',
+    template: 'outline',
 });
 
 Router.route('/description1', {
