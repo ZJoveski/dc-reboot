@@ -22,3 +22,4 @@ accounts-password
 accounts-ui
 sacha:spin
 iron:router
+twbs:bootstrap
