@@ -2,7 +2,7 @@
 import { Session } from './session.js';
 import { Logger } from './logging.js';
 import { ParticipantsInfo } from './collections/game_collections.js';
-import { PilotExperiment } from './collecitons/external_collection.js';
+import { PilotExperiment } from './collections/external_collections.js';
 
 export var Participants = {
     ParticipantsInfo: ParticipantsInfo,
