@@ -15,13 +15,13 @@ import { Parameters } from '../../imports/api/parameters.js';
 // This piece of code makes available only the neighborhood document from the neighborhoods 
 // collection that corresponds to the current user (client) (made possible by using 
 // userId: this.userId as our search criterion.)
-Meteor.publish('neighborhoods', function () {
+Meteor.publishComposite('neighborhoods', function () {
     return NeighborhoodsInfo.find({
         userId: this.userId
     });
 });
 
-Meteor.publish("allUsers", function () {
+Meteor.publishComposite("allUsers", function () {
     if(this.userId) {    
         var adminId = Meteor.users.findOne({username: "admin"})._id;
                           
@@ -34,12 +34,12 @@ Meteor.publish("allUsers", function () {
     }
 });
 
-Meteor.publish('payoutInfo', function () {
+Meteor.publishComposite('payoutInfo', function () {
     return PayoutInfo.find({ id: this.userId });
 });
 
 // Only the admin user will be subscribed to this publication.
-Meteor.publish('adminPayoutInfoSubscription', function() {
+Meteor.publishComposite('adminPayoutInfoSubscription', function() {
     if(this.userId) {    
         var adminId = Meteor.users.findOne({username: "admin"})._id;
                           
@@ -50,7 +50,7 @@ Meteor.publish('adminPayoutInfoSubscription', function() {
     return [];
 });
 
-Meteor.publish('messages', function(clientName) {
+Meteor.publishComposite('messages', function(clientName) {
     var id = this.userId;
     if((Participants.id_name[id] !== undefined) && (clientName == Participants.id_name[id])) {
         if(Parameters.communication) {
@@ -60,7 +60,7 @@ Meteor.publish('messages', function(clientName) {
 });
 
 // Only the TurkServer admin user will be subscribed to this publication.
-Meteor.publish('adminMessages', function() {
+Meteor.publishComposite('adminMessages', function() {
     if(this.userId) {    
         var adminId = Meteor.users.findOne({username: "admin"})._id;
                           

@@ -4,13 +4,13 @@ import { LobbyStatus } from '../../imports/api/collections/external_collections'
 import { Comments } from '../../imports/api/collections/external_collections';
 import { SubmissionCode } from '../../imports/api/collections/external_collections';
 
-Meteor.publish('lobbyStatus', {
+Meteor.publishComposite('lobbyStatus', {
     find: function() { 
         return LobbyStatus.find({}); 
     }
 });
 
-Meteor.publish('comments', {
+Meteor.publishComposite('comments', {
     find: function() { 
         var adminId = Meteor.users.findOne({username: "admin"})._id;
         if(this.userId === adminId) {
@@ -29,7 +29,7 @@ Meteor.publishComposite('userData', {
     }
 });
 
-Meteor.publish('submissionCode', {
+Meteor.publishComposite('submissionCode', {
     find: function() {
         var adminId = Meteor.users.findOne({username: "admin"})._id;
         if(this.userId === adminId) {
