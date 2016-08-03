@@ -1,4 +1,6 @@
-export const var Admin = {
+import { Meteor } from 'meteor/meteor';
+
+export const Admin = {
     isAdmin: function() {
         var adminUser = Meteor.users.findOne({username: "admin"});
     
