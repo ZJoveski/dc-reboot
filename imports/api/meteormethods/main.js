@@ -41,7 +41,7 @@ Meteor.methods({
 
     updateLocation: function(location) {
         var id = Meteor.userId();
-        Meteor.users.update({_id: userId}, {$set: {'location': location}});
+        Meteor.users.update({_id: id}, {$set: {'location': location}});
     },
 
     insertSubmissionCode: function(workerId, code) {
