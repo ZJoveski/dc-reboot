@@ -19,8 +19,10 @@ Meteor.publish('comments', function() {
     }); 
 });
 
-Meteor.publish('userData', function() {
-    return Meteor.users.find(this.userId);
+Meteor.publishComposite('userData', {
+    find: function() {
+        return Meteor.users.find(this.userId);
+    }
 });
 
 Meteor.publish('submissionCode', function() {
