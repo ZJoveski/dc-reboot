@@ -19,11 +19,14 @@ import '../imports/api/meteormethods/main.js';
 Meteor.startup(function () {
     clearData();
     UserStatus.events.on("connectionLogin", function(fields) {
-        var returning = Participants.onTime.hasOwnProperty(fields.userId);
+        var returning = PilotExperiment.findOne({userId: fields.userId});
         
         if (!returning) {   // If this is the first time the user logs in
-            Participants.onTime[fields.userId] = !Time.experimentStarted;
-            Participants.missedTooManyGames[fields.userId] = false;
+            var onTime = !Time.experimentStarted;
+            PilotExperiment.upsert({userId: fields.userId}, {$set: {
+                onTime: onTime, 
+                missedTooManyGames: false
+            }});
         }
 
         var lobbyStatus = LobbyStatus.findOne({userId: fields.userId});

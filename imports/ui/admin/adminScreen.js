@@ -1,5 +1,7 @@
-import {Admin} from '../../api/users.js'
+import { Admin } from '../../api/users.js'
 import { Template } from 'meteor/templating';
+
+import './adminScreen.html';
 
 
 Template.adminScreen.helpers({

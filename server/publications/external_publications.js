@@ -1,8 +1,17 @@
 import { Meteor } from 'meteor/meteor';
 
+import { PilotExperiment } from '../../imports/api/collections/external_collections';
 import { LobbyStatus } from '../../imports/api/collections/external_collections';
 import { Comments } from '../../imports/api/collections/external_collections';
 import { SubmissionCode } from '../../imports/api/collections/external_collections';
+
+Meteor.publishComposite('pilotExperiment', {
+    find: function() { 
+        return PilotExperiment.find({
+            userId: this.userId
+        }); 
+    }
+});
 
 Meteor.publishComposite('lobbyStatus', {
     find: function() { 

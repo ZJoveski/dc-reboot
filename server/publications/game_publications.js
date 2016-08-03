@@ -39,7 +39,7 @@ Meteor.publishComposite('payoutInfo', function () {
 });
 
 // Only the admin user will be subscribed to this publication.
-Meteor.publishComposite('adminPayoutInfoSubscription', function() {
+Meteor.publishComposite('adminPayoutInfo', function() {
     if(this.userId) {    
         var adminId = Meteor.users.findOne({username: "admin"})._id;
                           

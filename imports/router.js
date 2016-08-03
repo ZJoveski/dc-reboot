@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Admin } from './api/users.js';
 
 Router.configure({
     loadingTemplate: 'loadingWheel',
@@ -25,6 +26,18 @@ Router.configure({
 Router.route('/', {
     name: 'home',
     template: 'outline',
+});
+
+Router.route('/adminScreen', {
+    name: 'adminScreen',
+    template: 'adminScreen',
+    onBeforeAction: function() {
+        if (Admin.isAdmin()) {
+            this.next();
+        } else {
+            this.render("login");
+        }
+    },
 });
 
 Router.route('/description1', {

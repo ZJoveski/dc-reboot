@@ -2,6 +2,7 @@
 import { Session } from './session.js';
 import { Logger } from './logging.js';
 import { ParticipantsInfo } from './collections/game_collections.js';
+import { PilotExperiment } from './collecitons/external_collection.js';
 
 export var Participants = {
     ParticipantsInfo: ParticipantsInfo,
@@ -28,10 +29,6 @@ export var Participants = {
     participationRate: {},
     participantsThreshold: 20,
     missedGamesThreshold: 1,
-
-    // TODO: remember to initialize these
-    onTime: {},
-    missedTooManyGames: {},
 
     adversaries: [],    // information by node #
 
@@ -156,7 +153,7 @@ var removeInactiveParticipants = function() {
             // If a participant missed too many games (and assuming we have enough participants), remove them from the queue
             if (Participants.missedGames[Participants.participants[i]] > Participants.missedGamesThreshold && 
                 Participants.participantsQueue.length > Participants.participantsThreshold) {
-                Participants.missedTooManyGames[Participants.participants[i]] = true;
+                PilotExperiment.update({userId: Participants.participants[i]}, {$set: {'missedTooManyGames': true}});
                 
                 var index = Participants.participantsQueue.indexOf(Participants.participants[i]);
                 Participants.participantsQueue.splice(index, 1);
