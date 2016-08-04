@@ -83,3 +83,18 @@ Router.route('/lobby', {
     }
 });
 
+Router.route('/survey', {
+    name: 'survey',
+    template: 'survey',
+    waitOn: function() {
+        var currentUser = Meteor.userId();
+        if (currentUser) {
+            return [
+                Meteor.subscribe('pilotExperiment'),
+                Meteor.subscribe('lobbyStatus'),
+                Meteor.subscribe('submissonCode')
+            ];
+        }
+    }
+});
+

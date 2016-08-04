@@ -1,0 +1,49 @@
+<template name="survey">
+    <div class="col-md-12">
+        {{#if onTime}}
+            {{#if tooManyMissedGames}}
+                It appears that you did not choose a color in more than one game. You were removed from the experiment and you will receive payment only for the games that you have played in up to this point.
+            {{/if}}
+        
+            <form class="survey">
+                <div class="form-group">
+                    <p> Thank you for your participation!  </p>
+                    
+            <p> If you have any comments that you would like to share with us, please include them in the box below. </p>
+                </div>
+
+                <textarea class="form-control" name="free" rows="3"></textarea><br/>
+                
+                <p> You can also contact us at <a href="mailto:zlatko.joveski@vanderbilt.edu">zlatko.joveski@vanderbilt.edu</a>. </p>
+                
+                <p>Because this is a research project, we ask that you do not discuss the details of this HIT or the study with other workers.</p>
+                
+                <p> To submit your comments (you may also leave the comments box empty, if you wish) and obtain your submission code, please click the button below. </p>
+                
+                <button type="submit" class="btn btn-primary">Generate code</button>
+                
+                {{#if submitted}}  
+                
+                    <div class="submissionCode">        
+                        {{#if currentUser}}       
+                            
+                            <p>You submission code: {{getsubmissionCode}}</p>
+                            <p><span style="color:red">Please copy your submission code and paste it into the corresponding field of the MTurk HIT.</span></p>
+                            <p> After you have successfully submitted the MTurk HIT, you may close this page. </p>
+                        
+                        {{/if}}
+                    </div>
+                
+                {{/if}}
+                
+            </form>
+        {{else}}
+            <form class="exit"> 
+                <div class="form-group">
+                    Unfortunately, you arrived too late. You will not receive any payment for this task. Pease return the HIT that you have accepted on MTurk.
+                </div>
+            
+            </form>
+        {{/if}}
+    </div>
+</template>
