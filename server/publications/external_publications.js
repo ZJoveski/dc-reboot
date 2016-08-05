@@ -15,7 +15,7 @@ Meteor.publishComposite('pilotExperiment', {
 
 Meteor.publishComposite('lobbyStatus', {
     find: function() { 
-        return LobbyStatus.find({userId: this.userId}); 
+        return LobbyStatus.find({}); 
     }
 });
 
