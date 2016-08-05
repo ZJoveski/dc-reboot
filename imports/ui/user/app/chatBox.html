@@ -1,0 +1,24 @@
+<template name="chatBox">
+    <div class="game" id='messages'>
+        {{#each messages}}
+          {{>chatMessage}}
+        {{/each}}
+    </div>
+    {{#if userCanSendMessages}}
+        <div class="game" id="communicationLimit" align = "center" style="font-size: 1.25vmin; color:{{communicationLimitColor}}">
+            {{communicationLimit}}
+        </div>
+        {{#if communicationIsStructured}}
+            <button class='btn btn-primary' id='reportButton'>Report Neighborhood Color Counts</button>
+        {{else}}
+            <textarea maxlength="500" id='chat-message' style = "display: block; width: 100.0%; height: 20.0%; margin-bottom: 1vh;"/>
+            <button class='btn btn-primary' id='sendButton'>Send Message</button>
+        {{/if}}
+    {{/if}}
+</template>
+
+<template name='chatMessage'>
+    <div class="game">
+        <b>{{nameOfSender}}:</b> {{message}}
+    </div>
+</template>

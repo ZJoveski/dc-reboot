@@ -19,20 +19,39 @@ export var Time = {
     updateTimeInfo: function(context) {
         var time = new Date().getTime();
         if (context == 'start experiment') {
+            this.experimentStarted = true;
             this.experimentStartTime = time;
             this.lastSessionEndTime = time;
             this.currentTime = time;
+
+            TimeInfo.upsert({}, {$set: {
+                experimentStarted: this.experimentStarted,
+                experimentStartTime: this.experimentStartTime,
+                lastSessionEndTime: this.lastSessionEndTime,
+                currentTime: this.currentTime,
+            }});
         } else if (context == 'session end') {
             this.currentTime = time;
             this.lastSessionEndTime = time;
 
+            TimeInfo.upsert({}, {$set: {
+                lastSessionEndTime: this.lastSessionEndTime,
+                currentTime: this.currentTime
+            }});
             /* Log entry. */ Logger.recordSessionCompletion(currentSession);
         } else if (context == 'session start') {
             this.currentTime = time;
             this.currentSessionStartTime = time;
 
+            TimeInfo.upsert({}, {$set: {
+                currentSessionStartTime: this.currentSessionStartTime,
+                currentTime: this.currentTime
+            }});
             /* Log entry. */ Logger.recordSessionStart(currentSession);
         } else if (context == 'current time') {
+            TimeInfo.upsert({}, {$set: {
+                currentTime: this.currentTime
+            }});
             this.currentTime = time;
         }
     },

@@ -40,7 +40,7 @@ export var Participants = {
     initializeFullListOfParticipants: function() {
         var readyUsers = Meteor.users.find({"status.online": true, username: {$ne: "admin"}, location: '/experiment'});
         readyUsers.forEach(function(user) {
-           this.participantsQueue.push(user._id); 
+           this.participantsQueue.push(user._id);
         });
 
         /* Log entry. */ Logger.recordExperimentParticipants(this.participantsQueue);
@@ -56,18 +56,24 @@ export var Participants = {
             removeInactiveParticipants();
             
             this.participants = [];
+            ParticipantsInfo.update({}, {$set: {
+                isParticipant: false
+            }});
             var participantsAdded = 0;
             while(participantsAdded < this.participantsThreshold) {
                 var nextParticipant = this.participantsQueue.shift();
                 this.participants.push(nextParticipant);
                 this.participantsQueue.push(nextParticipant);
+                ParticipantsInfo.upsert({userId: nextParticipant}, {$set: {
+                    isParticipant: true
+                }});
                 participantsAdded++;
             }
         }
         
         initializeParticipationRate(0);
 
-        Session.numberOfNodes = this.participants.length;
+        Session.setNumberOfNodes(this.participants.length);
 
         /* Log entry. */ Logger.recordSessionParticipants(this.participants);
     },
@@ -120,6 +126,13 @@ export var Participants = {
     assignAdversaries: function() {
         if (Session.adversaryAssignment == "random") {
             this.adversaries = assignRandomAdversaries();
+            for (var i = 0; i < this.adversaries.length; i++) {
+                var userId = this.participants[i];
+                var isAdversary = this.adversaries[i];
+                ParticipantsInfo.update({userId: userId}, {$set: {
+                    isAdversary: isAdversary
+                }});
+            }
         }
     },
 };

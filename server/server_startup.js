@@ -15,6 +15,8 @@ import { SubmissionCode } from '../imports/api/collections/external_collections.
 
 import '../imports/router.js';
 import '../imports/api/meteormethods/main.js';
+import '../imports/api/meteormethods/admin_methods.js';
+import '../imports/api/meteormethods/game_methods.js';
 
 Meteor.startup(function () {
     clearData();

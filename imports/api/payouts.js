@@ -58,9 +58,20 @@ export var Payouts = {
             assignDefaultModePayouts(Participants.participants);
             console.log("Assigning default mode payouts!")
         }
-        
-        //initializePotentialPayoutsInfo(); make sure to anonymize colors before sending data to client
-        
+
+        for (var i = 0; i < Participants.participants.length; i++) {
+            var individualPayout = {};
+            for (var j = 0; j < ColorMagic.colors.length; j++) {
+                var anonymizedColor = ColorMagic.anonymizeColor(Participants.id_name(Participants.participants[i]), ColorMagic.colors[j]);
+                individualPayout[anonymizedColor] = this.potentialPayouts[Participants.participants[i]][ColorMagic.colors[j]];
+            }
+            individualPayout['none'] = this.potentialPayouts[Participants.participants[i]]['none'];
+
+            PayoutInfo.upsert({id: Participants.participants[i]}, {$set: {
+                potentialPayouts: individualPayout
+            }});
+        }
+                
         /* Log entry. */ Logger.recordPotentialSessionPayouts(this.potentialPayouts);
     },
 

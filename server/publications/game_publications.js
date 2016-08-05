@@ -17,9 +17,7 @@ import { Parameters } from '../../imports/api/parameters.js';
 // userId: this.userId as our search criterion.)
 Meteor.publishComposite('neighborhoods', {
     find: function () {
-        return NeighborhoodsInfo.find({
-            userId: this.userId
-        });
+        return NeighborhoodsInfo.find({userId: this.userId});
     }
 });
 
@@ -42,6 +40,39 @@ Meteor.publishComposite('adminPayoutInfo', {
         return [];
     }
 });
+
+Meteor.publishComposite('progressInfo', {
+    find: function() {
+        return ProgressInfo.find({});
+    }
+});
+
+Meteor.publishComposite('participantsInfo', {
+    find: function() {
+        return ParticipantsInfo.find({userId: this.userId});
+    }
+});
+
+Meteor.publishComposite('sessionInfo', {
+    find: function() {
+        return SessionInfo.find({$or: [
+            {id: 'global'},
+            {id: this.userId}
+        ]});
+    }
+});
+
+Meteor.publishComposite('parametersInfo', {
+    find: function() {
+        return ParametersInfo.find({userId: this.userId});
+    }
+});
+
+Meteor.publishComposite('timeInfo') {
+    find: function() {
+        return TimeInfo.find({});
+    }
+}
 
 Meteor.publishComposite('messages', {
     find: function(clientName) {

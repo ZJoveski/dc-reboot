@@ -165,6 +165,14 @@ export var Parameters = {
             this.individualCommunicationParameters[id].communicationCostLevel = this.communicationCostLevel;
             this.individualCommunicationParameters[id].communicationLengthBound = this.communicationLengthBound;
             this.individualCommunicationParameters[id].messageLengthBound = this.messageLengthBound;
+
+            ParametersInfo.upsert({userId: id}, {$set: {
+                communication: this.communication,
+                globalCommunication: this.globalCommunication,
+                structuredCommunication: this.structuredCommunication,
+                costBasedCommunication: this.costBasedCommunication,
+                messageLengthBound: this.messageLengthBound,
+            }});
         }
         assignUniformCommunicationScopes();
 

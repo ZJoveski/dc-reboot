@@ -45,7 +45,37 @@ export var ColorMagic = {
         var deanonymizedColor = this.colors[reversePermutation[color]];
         
         return deanonymizedColor;
-    }
+    },
+
+    dummyDeanonymizeMessageColorNames: function(message) {
+        var processedMessage = message;
+        
+        // Intermediate transformation to avoid situations where all instances of one color name, say "red", get "deanonymized" to "green", 
+        // but then, all these new instances of "green" get "anonymized" back to "red".
+        for(var i = 0; i < this.colors.length; i++) {
+            processedMessage = processedMessage.replace(new RegExp("\\b" + this.colors[i] + "\\b", "gi"), 
+                                                       (this.colors[i]).toUpperCase() + "CERVANDYZ");
+        }
+        
+        return processedMessage;
+    },
+
+    anonymizeMessageColorNames: function(name, message) {
+        var processedMessage = message;
+        
+        for(var i = 0; i < this.colors.length; i++) {
+            // Also removes the temporary color code suffixes.
+            processedMessage = processedMessage.replace(new RegExp((this.colors[i]).toUpperCase() + "CERVANDYZ", "g"), 
+                                                       (anonymizeColor(name, this.colors[i])).toUpperCase());
+        }
+        
+        return processedMessage;
+    },
+
+    // Needed to restore messages visible to the admin user to their proper form.
+    clearTemporaryColorCodeSuffixes: function(message) {
+        return message.replace(new RegExp("CERVANDYZ", "g"), "");
+    },
 }
 
 // Internally, the colors are treated as integers from 0 to theColors.length

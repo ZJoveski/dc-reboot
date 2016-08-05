@@ -103,6 +103,10 @@ export var Session = {
             }
 
             this.communicationUnitsRemaining[Participants.participants[id]] = remaining;
+
+            SessionInfo.upsert({id: Participants.participants[i]}, {$set: {
+                communicationUnitsRemaining: remaining
+            }});
         }
     },
 
@@ -123,6 +127,10 @@ export var Session = {
             this.counts[color] = count;
         }
 
+        SessionInfo.upsert({id: 'global'}, {$set: {
+            colorCounts: this.counts
+        }});
+
         /* Log entry. */ Logger.recordSessionColorCounts(this.counts);
     },
 
@@ -139,6 +147,13 @@ export var Session = {
         /* Log entry. */ Logger.recordSessionOutcome(outcome);
     },
 
+    setNumberOfNodes: function(numNodes) {
+        this.numberOfNodes = numNodes;
+        SessionInfo.upsert({id: 'global'}, {$set: {
+            numberOfNodes: numNodes
+        }});
+    }
+
     clearMessages: function() {
         Messages.remove({});
     },
@@ -149,5 +164,9 @@ export var Session = {
 
     adversaryMode: function() {
         return this.batchMode == 'adversarial';
-    }
+    },
+
+    updateCommunicationUnitsRemaining: function(userId, updateAmount) {
+        SessionInfo.update({id: userId}, {$inc: {communicationUnitsRemaining: (-updateAmount)}});
+    },
 }
