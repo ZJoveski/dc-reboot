@@ -8,6 +8,8 @@ Template.lobby.helpers({
     'notReady': function() {
        var obj = LobbyStatus.findOne({userId: Meteor.userId()});
 
+       console.log(obj.ready);
+
        return obj && !obj.ready;
     },
     'numPlayers': function() {
