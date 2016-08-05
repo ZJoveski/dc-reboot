@@ -182,7 +182,7 @@ export var Session = {
         SessionInfo.upsert({id: 'global'}, {$set: {
             numberOfNodes: numNodes
         }});
-    }
+    },
 
     clearMessages: function() {
         Messages.remove({});
