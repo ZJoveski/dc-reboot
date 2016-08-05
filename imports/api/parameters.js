@@ -82,10 +82,6 @@ export var Parameters = {
         console.log("Proper games:\t" + this.properGames); 
     },
 
-    initializeCollection: function() {
-
-    },
-
     getNextAdjMatrix: function(isProperGames, currentSession) {
         var matrix = [];
         var pars = [];
