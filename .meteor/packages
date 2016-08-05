@@ -23,3 +23,5 @@ accounts-ui
 sacha:spin
 iron:router
 twbs:bootstrap
+reywood:publish-composite
+d3js:d3
