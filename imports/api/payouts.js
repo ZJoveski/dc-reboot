@@ -80,7 +80,7 @@ export var Payouts = {
     },
 
     // Called if cost of communication is nonzero
-    updatePotentialPayoutsInfo = function(userId) {
+    updatePotentialPayoutsInfo: function(userId) {
         if(Parameters.costBasedCommunication) {
             var minPotentialPayout = Math.min(this.potentialPayouts[userId][theColors[0]], 
                                               this.potentialPayouts[userId][theColors[1]]);

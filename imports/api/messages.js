@@ -122,7 +122,7 @@ var sendMessageToNeighborsOnly = function(senderId, message, timestamp) {
     var name = Participants.id_name[senderId];
     var namesOfNeighbors = Neighborhoods.NeighborhoodsInfo.findOne({userId: senderId}).namesOfNeighbors;
     
-    for(var i = 0, i < namesOfNeighbors.length; i++) {
+    for(var i = 0; i < namesOfNeighbors.length; i++) {
         Messages.insert({
             idOfSender: senderId,
             nameOfSender: name,

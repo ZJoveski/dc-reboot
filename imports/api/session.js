@@ -77,7 +77,7 @@ export var Session = {
         SessionInfo.update({id: 'global'}, {$set: {
             batchNumber: this.batchNumber
         }});
-    }
+    },
 
     // Assign default initial color to nodes.
     assignColorsToNodes: function() {
