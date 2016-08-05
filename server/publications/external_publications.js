@@ -16,8 +16,8 @@ Meteor.publishComposite('pilotExperiment', {
 Meteor.publishComposite('lobbyStatus', {
     find: function() { 
         return LobbyStatus.find({$or: [
-            {id: 'global'},
-            {id: this.userId}
+            {userId: 'global'},
+            {userId: this.userId}
         ]});
     }
 });
