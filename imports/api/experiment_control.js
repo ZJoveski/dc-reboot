@@ -72,7 +72,7 @@ var runPreGame = function() {
         }
         // If not, start the sequence of proper games.
         else {
-            startGames(true, Parameters.pilotProperGames, Parameters.properBatches);
+            startGames(true, Parameters.properGames, Parameters.properBatches);
         }
     }
     

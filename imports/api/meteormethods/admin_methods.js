@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 
 import { Time } from '../time.js';
 import { Parameters } from '../parameters.js';
+import { startGames } from '../experiment_control.js';
 
 import { ExperimentLog } from '../collections/game_collections.js';
 import { PayoutInfo } from '../collections/game_collections.js';
@@ -109,5 +110,5 @@ var startExperiment = function() {
 
 var startPilotPractice = function() {
     var proper = false;
-    startGames(proper, pilotPracticeGames, practiceBatches);
+    startGames(proper, Parameters.practiceGames, Parameters.practiceBatches);
 }
