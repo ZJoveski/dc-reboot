@@ -45,7 +45,7 @@ Meteor.startup(function () {
     UserStatus.events.on("connectionLogout", function(fields) {
         var lobbyStatus = LobbyStatus.findOne({userId: fields.userId});
         if(lobbyStatus) {
-            LobbyStatus.update({userId: fields.userId}, {$set: {online: false}});
+            LobbyStatus.update({userId: fields.userId}, {$set: {online: false, ready: false}});
         } 
         
         return Logger.recordUserLoggingOut(fields.userId, fields.connectionId, fields.lastActivity, fields.logoutTime);
