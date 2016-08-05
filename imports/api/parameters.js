@@ -78,8 +78,8 @@ export var Parameters = {
         }   
 
         // For testing purposes only
-        console.log("Practice games:\t" + practiceGames);
-        console.log("Proper games:\t" + properGames); 
+        console.log("Practice games:\t" + this.practiceGames);
+        console.log("Proper games:\t" + this.properGames); 
     },
 
     initializeCollection: function() {
