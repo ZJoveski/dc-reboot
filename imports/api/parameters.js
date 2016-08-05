@@ -43,22 +43,22 @@ export var Parameters = {
     testMode: false,        //whether or not to skip description
 
     readTreatments: function() {
-        practiceAdjacencyMatrices = readIntoPreGeneratedAdjMat("treatments/test_data/AMP_test.txt");
-        practiceParameterValues = readIntoPreGeneratedNetConfig("treatments/test_data/NCP_test.txt");
-        practiceBatchConfigs = readIntoPreGeneratedBatchConfig("treatments/test_data/BCP_test.txt");
+        practiceAdjacencyMatrices = readAdjMatrix("treatments/test_data/AMP_test.txt");
+        practiceParameterValues = readNetConfig("treatments/test_data/NCP_test.txt");
+        practiceBatchConfigs = readBatchConfig("treatments/test_data/BCP_test.txt");
         
-        adjacencyMatrices = readIntoPreGeneratedAdjMat("treatments/test_data/AM_test.txt");
-        parameterValues = readIntoPreGeneratedNetConfig("treatments/test_data/NC_test.txt");
-        batchConfigs = readIntoPreGeneratedBatchConfig("treatments/test_data/BC_test.txt");
+        adjacencyMatrices = readAdjMatrix("treatments/test_data/AM_test.txt");
+        parameterValues = readNetConfig("treatments/test_data/NC_test.txt");
+        batchConfigs = readBatchConfig("treatments/test_data/BC_test.txt");
 
         // Full Experiment Data
-        practiceAdjacencyMatrices = readIntoPreGeneratedAdjMat("treatments/input_data/adjacency_matrix_practice.txt");
-        practiceParameterValues = readIntoPreGeneratedNetConfig("treatments/input_data/network_configuration_practice.txt");
-        practiceBatchConfigs = readIntoPreGeneratedBatchConfig("treatments/input_data/batch_configuration_practice.txt");
+        practiceAdjacencyMatrices = readAdjMatrix("treatments/input_data/adjacency_matrix_practice.txt");
+        practiceParameterValues = readNetConfig("treatments/input_data/network_configuration_practice.txt");
+        practiceBatchConfigs = readBatchConfig("treatments/input_data/batch_configuration_practice.txt");
         
-        adjacencyMatrices = readIntoPreGeneratedAdjMat("treatments/input_data/adjacency_matrix.txt");
-        parameterValues = readIntoPreGeneratedNetConfig("treatments/input_data/network_configuration.txt");
-        batchConfigs = readIntoPreGeneratedBatchConfig("treatments/input_data/batch_configuration.txt");
+        adjacencyMatrices = readAdjMatrix("treatments/input_data/adjacency_matrix.txt");
+        parameterValues = readNetConfig("treatments/input_data/network_configuration.txt");
+        batchConfigs = readBatchConfig("treatments/input_data/batch_configuration.txt");
 
         // Determine the number of practice and proper games from the size of the arrays loaded above
         this.practiceGames = Math.min(practiceAdjacencyMatrices.length, practiceParameterValues.length);
