@@ -16,10 +16,10 @@ Template.lobby.helpers({
        return 25;
     },
     'numWaiting': function() {
-       return LobbyStatus.find({'ready': true}).count();
+       return LobbyStatus.find({userId: 'global'}).usersReady;
     },
     'plural': function() {
-       var count = LobbyStatus.find({'ready': true}).count();
+       var count = LobbyStatus.find({userId: 'global'}).usersReady;
        return (count !== 1);
     }
 });

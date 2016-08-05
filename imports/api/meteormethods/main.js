@@ -35,7 +35,12 @@ Meteor.methods({
 
     setLobbyStatusReady: function(ready, userId) {
         if(userId) {
-            LobbyStatus.update({userId: userId}, { $set: { ready: ready } });
+            LobbyStatus.update({userId: userId}, { $set: { ready: ready } }, function(error, result) {
+                var count = LobbyStatus.find({'ready': true}).count();
+                LobbyStatus.update({userId: 'global'}, {$set: {
+                    usersReady: count
+                }});
+            });
         }
     },
 

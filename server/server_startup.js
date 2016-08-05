@@ -20,7 +20,8 @@ import '../imports/api/meteormethods/game_methods.js';
 
 Meteor.startup(function () {
     clearData();
-    UserStatus.events.on("connectionLogin", function(fields) {
+    LobbyStatus.insert({userId: 'global', usersReady: 0});
+    UserStatus.events.on('connectionLogin', function(fields) {
         var returning = PilotExperiment.findOne({userId: fields.userId});
         
         if (!returning) {   // If this is the first time the user logs in
@@ -42,10 +43,15 @@ Meteor.startup(function () {
         return Logger.recordUserLoggingIn(fields.userId, fields.connectionId, fields.ipAddr, fields.userAgent, fields.loginTime);
     });
     
-    UserStatus.events.on("connectionLogout", function(fields) {
+    UserStatus.events.on('connectionLogout', function(fields) {
         var lobbyStatus = LobbyStatus.findOne({userId: fields.userId});
         if(lobbyStatus) {
-            LobbyStatus.update({userId: fields.userId}, {$set: {online: false, ready: false}});
+            LobbyStatus.update({userId: fields.userId}, {$set: {online: false, ready: false}}, function(error, result) {
+                var count = LobbyStatus.find({'ready': true}).count();
+                LobbyStatus.update({userId: 'global'}, {$set: {
+                    usersReady: count
+                }});
+            });
         } 
         
         return Logger.recordUserLoggingOut(fields.userId, fields.connectionId, fields.lastActivity, fields.logoutTime);
