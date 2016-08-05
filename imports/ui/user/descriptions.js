@@ -56,7 +56,7 @@ Template.description5.events({
     'click .goToLobby': function() {
         Meteor.call('updateLocation', '/lobby');
         
-        Meteor.call('setLobbyStatusReady', true);
+        Meteor.call('setLobbyStatusReady', true, Meteor.userId());
     
         Router.go('/lobby');
     },

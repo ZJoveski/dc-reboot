@@ -33,8 +33,7 @@ Meteor.methods({
         );
     },
 
-    setLobbyStatusReady: function(ready) {
-        var userId = Meteor.userId();
+    setLobbyStatusReady: function(ready, userId) {
         if(userId) {
             LobbyStatus.update({userId: userId}, { $set: { ready: ready } });
         }

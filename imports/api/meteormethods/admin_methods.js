@@ -8,7 +8,7 @@ import { PayoutInfo } from '../collections/game_collections.js';
 import { LobbyStatus } from '../collections/external_collections.js';
 
 Meteor.methods({
-    'clearExperimentLog': function() {
+    clearExperimentLog: function() {
         var adminId = Meteor.users.findOne({username: "admin"})._id;
         if(Meteor.userId() === adminId) {
             ExperimentLog.remove({});
@@ -48,7 +48,7 @@ Meteor.methods({
     },
 
     // TODO: actually sort the output
-    'getExperimentLog': function() {
+    getExperimentLog: function() {
         var adminId = Meteor.users.findOne({username: "admin"})._id;
         if(Meteor.userId() === adminId) {
             var textToWrite = "";
@@ -74,7 +74,7 @@ Meteor.methods({
         }
     },
 
-    'getPaymentCSV': function() {
+    getPaymentCSV: function() {
         var csvPaymentInfoArr = [];
         PayoutInfo.find().forEach(function(record){
             var workerId = Meteor.users.findOne(record.id).username;
@@ -88,7 +88,7 @@ Meteor.methods({
         return csvPaymentFile;
     },
 
-    'putAllUserHome': function() {
+    putAllUserHome: function() {
         Meteor.users.find({}).forEach( function(record)  {
             if(record.username != "admin") {
                 Meteor.users.update({_id: record._id}, {$set: {location: "/"}});
