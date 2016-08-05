@@ -16,14 +16,12 @@ Template.lobby.helpers({
         return 25;
     },
     'numWaiting': function() {
-        var count = LobbyStatus.find({userId: 'global'}).usersReady;
-        console.log(LobbyStatus.find({userId: "global"}));
-        console.log(LobbyStatus.find({userId: Meteor.userId()}));
+        var count = LobbyStatus.findOne({userId: 'global'}).usersReady;
         console.log(count);
         return count;
     },
     'plural': function() {
-        var count = LobbyStatus.find({userId: 'global'}).usersReady;
+        var count = LobbyStatus.findOne({userId: 'global'}).usersReady;
         return (count !== 1);
     }
 });
