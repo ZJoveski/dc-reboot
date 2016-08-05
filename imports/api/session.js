@@ -40,7 +40,7 @@ export var Session = {
         if (this.currentBatchGame == 0) {
             // Get size and mode (treatment type) of current batch from batch configuration files (if they exist)
             var batchIndex = this.batchNumber;
-            this.batchNumber++;
+            this.incrementBatchNumber();
             Parameters.setBatchParameters(isProperGames, batchIndex);
 
             if (this.batchMode == 'adversarial') {
@@ -57,9 +57,27 @@ export var Session = {
 
         SessionInfo.upsert({id: 'global'}, { $set: {
             sessionNumber: 0,
-            batchNumber: 0
+            batchNumber: 0,
+            outcome: this.outcome
+            outcomeColor: this.outcomeColor
         }});
     },
+
+    incrementSessionNumber: function() {
+        this.sessionNumber++;
+
+        SessionInfo.update({id: 'global'}, {$set: {
+            sessionNumber: this.sessionNumber
+        }});
+    },
+
+    incrementBatchNumber: function() {
+        this.batchNumber++;
+
+        SessionInfo.update({id: 'global'}, {$set: {
+            batchNumber: this.batchNumber
+        }});
+    }
 
     // Assign default initial color to nodes.
     assignColorsToNodes: function() {
@@ -144,8 +162,20 @@ export var Session = {
     setOutcome: function(outcome) {
         this.outcome = outcome;
 
+        SessionInfo.upsert({id: 'global'}, {$set: {
+            outcome: outcome
+        }});
+
         /* Log entry. */ Logger.recordSessionOutcome(outcome);
     },
+
+    setOutcomeColor: function(color) {
+        this.outcomeColor = color;
+
+        SessionInfo.upsert({id: 'global'}, {$set: {
+            outcomeColor: color
+        }});
+    }
 
     setNumberOfNodes: function(numNodes) {
         this.numberOfNodes = numNodes;

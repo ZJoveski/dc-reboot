@@ -1,0 +1,10 @@
+<template name="gameOutcomeStatus">
+    <div class="game" align = "center" style = " position: absolute; padding-top:0%; display: block; top: 42.5%; left: 2.5vmin; background-color: orange; border-style: ridge; border-style: solid; border-color: orange; width: 37.0vmin; height: 9vmin;">
+        <div class="game" style = "line-height: 100%; font-size: 6vmin; "> {{status}} </div>
+        <div class="game" style = "line-height: 100%; font-size: 1.8vmin; ">consensus was reached</div>
+    </div>
+    <div class="game" align="center" style=" position: absolute; padding-top:0%; display: block; top: 55.5%; left: 2.5vmin; background-color: orange; border-style: ridge; border-style: solid; border-color: orange; width: 37.0vmin; height: 8vmin;">
+        <div class="game" style = "line-height: 100%; font-size: 4vmin; color:{{#if consensus}}blue{{else}}red{{/if}}"> {{#if consensus}}Team Consensus{{else}}Team No-Consensus{{/if}}</div>
+        <div class="game" style = "line-height: 100%; font-size: 1.8vmin; ">has won</div>
+    </div>
+</template>

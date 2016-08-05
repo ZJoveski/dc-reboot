@@ -1,6 +1,14 @@
 <template name="gameScreen">
     <div id="gameScreen">
         {{#if userIsParticipant}}
+            {{#if postSessionInProgress}}
+                {{>gameOutcomeStatus}}
+                <div class="game" id="sessionPayoutInfo" align = "center" style = " position: absolute; padding-top:0%; display: block; top: 12.0%; left: 21.5vmin; background-color: greenyellow; border-style: ridge; border-style: solid; border-color: #ADFF2F; width: 18vmin; height: 9vmin;">
+                    <div class="game" style = "line-height: 100%; font-size: 6vmin; "> ${{sessionPayout}} </div>
+                    <div class="game" style = "line-height: 100%; font-size: 1.6vmin; ">Your Session Payout</div>
+                </div>
+            {{else}}
+            {{/if}}
             <div class="game" style = "position: relative; width:100vw;height:75vh; max-height: 100%; max-width:100%;" id='canvas'/>
             {{>progressBars}}
             <div class="game" id="colorControls">
@@ -35,10 +43,23 @@
             <div class="game" id = "chatContainer">
                 {{>chatBox}}
             </div>
-        {{else}}
-            <div class="game" id="waitStatus" align = "center" style = " position: absolute; padding-top:0%; display: block;top: 40.0%; left: 30.0%; background-color: greenyellow; border-style: ridge; border-style: solid;border-color: #ADFF2F; width: 40vw; height: 20vh; font-size: 3.0vmin">
-                {{waitForNextExperimentStatus}}
+            <div class="game" id="gameInProgressStatus" align = "center" style = " position: absolute; padding-top:0%; display: block; top: 41.5%; left: 2.5vmin; background-color: orange; border-style: ridge; border-style: solid; border-color: orange; width: 37.0vmin; height: 7vmin;">
+                <div class="game" style = "line-height: 100%; font-size: 4vmin; "> {{batchStatus}}, {{sessionStatus}}</div>
+                <div class="game" style = "line-height: 100%; font-size: 1.8vmin; ">is in progress</div>
             </div>
+            <div class="game" id="adversaryInfo" align="center" style="position: absolute; padding-top:0%; display: block; top: 36.5%; left: 2.5vmin; background-color: #FFF0F5; border-style: ridge; border-style: solid; border-color: #FFF0F5; width: 37.0vmin; height: 3.75vmin;">
+                <div class="game" style="line-height:100%; font-size: 3vmin; {{#if isAdversary}} color: red {{/if}}">
+                    {{#if isAdversary}}Team No-Consensus{{else}}Team Consensus{{/if}}
+                </div>
+            </div>
+        {{else}}
+            {{#if preSessionInProgress}}
+                {{>preSessionCountdown}}
+            {{else}}
+                <div class="game" id="waitStatus" align = "center" style = " position: absolute; padding-top:0%; display: block;top: 40.0%; left: 30.0%; background-color: greenyellow; border-style: ridge; border-style: solid;border-color: #ADFF2F; width: 40vw; height: 20vh; font-size: 3.0vmin">
+                    {{waitForNextExperimentStatus}}
+                </div>
+            {{/if}}
         {{/if}}
     </div>
 </template>

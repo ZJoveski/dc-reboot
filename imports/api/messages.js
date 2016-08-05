@@ -2,9 +2,10 @@ import { Parameters } from './parameters.js';
 import { Participants } from './participants.js';
 import { ColorMagic } from './colors_mapping.js';
 import { Messages } from './collections/game_collections.js';
+import { Neighborhoods } from './neighborhoods.js';
 
 export var Messages = {
-    Messages: 
+    Messages: Messages,
 
     calculatePotentialMessageCost: function(userId, messageLength) {    
         var messageCostInfo = {};
@@ -34,6 +35,38 @@ export var Messages = {
         messageCostInfo["costIsAffordable"] = costIsAffordable;
         
         return messageCostInfo;
+    },
+
+    // A method for calculating the character cost of a message, taking into account the fact that different color names,
+    // have different numbers of characters.
+    calculateRealMessageLength: function(message) {
+        var tempMessage = message;
+        var realMessageLength = message.length;
+        var n = ColorMagic.colors.length;
+        var matchedColorOccurences, numberOfColorOccurences;
+        
+        // Short color codes like "\r" and "\g" have priority.
+        for(var i = 0; i < n; i++) {
+            matchedColorOccurences = tempMessage.match(new RegExp("(\\\\|\\\/)" + ColorMagic.colors[i][0], "gi"));
+            
+            if(matchedColorOccurences) {
+                numberOfColorOccurences = matchedColorOccurences.length;
+                realMessageLength -= numberOfColorOccurences;
+                
+                tempMessage = tempMessage.replace(new RegExp("(\\\\|\\\/)" + ColorMagic.colors[i][0], "gi"), "");
+            }
+        }
+        
+        for(var i = 0; i < n; i++) {
+            matchedColorOccurences = tempMessage.match(new RegExp("\\b" + ColorMagic.colors[i] + "\\b", "gi"));
+            
+            if(matchedColorOccurences) {
+                numberOfColorOccurences = matchedColorOccurences.length; 
+                realMessageLength += (structuredCommunicationCharactersNumberMultiplier - (ColorMagic.colors[i]).length) * numberOfColorOccurences;
+            }
+        }
+        
+        return Math.max(realMessageLength, 0);
     },
 
     // Insert another, special, copy of the message (using the actual color labels) for the admin user.
@@ -79,23 +112,23 @@ var sendMessageToAllParticipants = function(senderId, message, timestamp) {
             nameOfSender: name,
             idOfRecipient: participants[i],
             nameOfRecipient: nameOfRecipient,
-            message: anonymizeMessageColorNames(nameOfRecipient, message),
+            message: ColorMagic.anonymizeMessageColorNames(nameOfRecipient, message),
             timestamp: timestamp
         });  
     }
-},
+}
 
 var sendMessageToNeighborsOnly = function(senderId, message, timestamp) {
     var name = Participants.id_name[senderId];
-    var namesOfNeighbors = id_namesOfNeighbors[senderId];
+    var namesOfNeighbors = Neighborhoods.NeighborhoodsInfo.findOne({userId: senderId}).namesOfNeighbors;
     
-    for(var i=0, n=namesOfNeighbors.length; i<n; i++) {
-        messages.insert({
+    for(var i = 0, i < namesOfNeighbors.length; i++) {
+        Messages.insert({
             idOfSender: senderId,
             nameOfSender: name,
             idOfRecipient: name_id[namesOfNeighbors[i]],
             nameOfRecipient: namesOfNeighbors[i],
-            message: anonymizeMessageColorNames(namesOfNeighbors[i], message),
+            message: ColorMagic.anonymizeMessageColorNames(namesOfNeighbors[i], message),
             timestamp: timestamp
         });
     }

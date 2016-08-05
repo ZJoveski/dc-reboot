@@ -141,7 +141,7 @@ var initializeGame = function() {
     Session.initializeColorChangeInfo();
 
 
-    Session.sessionNumber++;
+    Session.incrementSessionNumber();
     Session.currentBatchGame++;
 
     /* Log entry. */ Logger.recordSessionInitializationCompletion(currentSession);

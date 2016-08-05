@@ -6,6 +6,12 @@ import { SessionInfo } from '../../../api/collections/game_collections.js';
 
 import './chatBox.html';
 
+Template.chatBox.onCreated(function() {
+    var charactersLimit = ParametersInfo.findOne({id: Meteor.userId()}).messageLengthBound;
+    Session.set('charactersLimit', charactersLimit);
+    Session.set('charactersRemaining', charactersLimit);
+});
+
 Template.chatBox.helpers({
     messages: function() {
         var messagesToBeReturned = []; 
@@ -149,12 +155,6 @@ Template.chatBox.events({
     "click #reportButton": function() {
         Meteor.call('sendStructuredMessage');
     }
-});
-
-Template.chatBox.onCreated(function() {
-    var charactersLimit = ParametersInfo.findOne({id: Meteor.userId()}).messageLengthBound;
-    Session.set('charactersLimit', charactersLimit);
-    Session.set('charactersRemaining', charactersLimit);
 });
 
 var realMessageLength = function(message) {

@@ -17,6 +17,7 @@ export var Payouts = {
     adversaryPayoutAssignment: 'noConsensusOnly',
 
     resetTotalPayouts: function(participants) {
+        PayoutInfo.remove({});
         for(var i = 0; i < participants.length; i++){
             PayoutInfo.insert({
                 id: participants[i],
@@ -29,6 +30,9 @@ export var Payouts = {
         for (var i = 0; i < participants.length; i++) {
             var id = participants[i];
             this.sessionPayouts[id] = 0;
+            PayoutInfo.upsert({id: participants[i]}, {$set: {
+                sessionPayout: 0
+            }});
         }
     },
 
@@ -75,6 +79,28 @@ export var Payouts = {
         /* Log entry. */ Logger.recordPotentialSessionPayouts(this.potentialPayouts);
     },
 
+    // Called if cost of communication is nonzero
+    updatePotentialPayoutsInfo = function(userId) {
+        if(Parameters.costBasedCommunication) {
+            var minPotentialPayout = Math.min(this.potentialPayouts[userId][theColors[0]], 
+                                              this.potentialPayouts[userId][theColors[1]]);
+                                              
+            // The cost of communication is relative to the participant's minimum potential payout.
+            var sessionCommunicationCost = minPotentialPayout * Session.communicationUsageLevels[userId];
+            
+            var individualPayout = {};
+
+            for(var i = 0; i < ColorMagic.colors.length; i++) {
+                individualPayout[anonymizedColor] = this.potentialPayouts[userId][ColorMagic.colors[i]] - sessionCommunicationCost;
+            }
+            individualPayout['none'] = this.potentialPayouts[Participants.participants[i]]['none'] - sessionCommunicationCost;
+
+            PayoutInfo.update({id: userId}, {$set: {
+                potentialPayouts: individualPayout
+            }});
+        }
+    }
+
     applyIncentiveSessionPayouts: function(outcome) {
         if(outcome) {
             for(var i = 0; i < Participants.participants.length; i++){
@@ -94,7 +120,12 @@ export var Payouts = {
                 actualPayout = Utilities.precise_round_to_number(actualPayout, 2); 
                                     
                 this.sessionPayouts[Particiapnts.participants[i]] = actualPayout;
-                PayoutInfo.update({id: Participants.participants[i]}, {$inc: {totalPayout: actualPayout}});
+                PayoutInfo.update({id: Participants.participants[i]}, {$inc: {
+                    totalPayout: actualPayout
+                }});
+                PayoutInfo.update({id: Participants.participants[i]}, {$set: {
+                    sessionPayout: actualPayout
+                }});
             }
         }
         else {
@@ -113,6 +144,13 @@ export var Payouts = {
                 } else {
                     this.sessionPayouts[Participants.participants[i]] = actualPayout;
                 }
+
+                PayoutInfo.update({id: Participants.participants[i]}, {$inc: {
+                    totalPayout: actualPayout
+                }});
+                PayoutInfo.update({id: Participants.participants[i]}, {$set: {
+                    sessionPayout: actualPayout
+                }});
             }
         }
         

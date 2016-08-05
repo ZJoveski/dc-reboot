@@ -15,6 +15,8 @@ import './meteormethods/game_methods.js';
 import './progressBars.js';
 import './buttons.js';
 import './chatBox.js';
+import './preSessionCountdown.js';
+import './gameOutcomeStatus.js';
 
 import './gameScreen.html';
 
@@ -53,6 +55,28 @@ Template.gameScreen.helpers({
         }
     },
 
+    preSessionInProgress: function() {
+        var response = false;
+
+        var preSessionInProgress = ProgressInfo.findOne({}).preSessionInProgress;
+        if (preSessionInProgress != null) {
+            response = preSessionInProgress;
+        }
+        
+        return response;
+    },
+
+    postSessionInProgress: function() {
+        var response = false;
+
+        var postSessionInProgress = ProgressInfo.findOne({}).postSessionInProgress;
+        if (postSessionInProgress != null) {
+            reponse = postSessionInProgress;
+        }
+
+        return response;
+    }
+
     waitForNextExperimentStatus: function() {
         var status = '';
 
@@ -84,6 +108,17 @@ Template.gameScreen.helpers({
 
     totalPayout: function() {
         var payout = PayoutInfo.findOne({id: Meteor.userId()}).totalPayout;      
+        return Utilities.precise_round(payout, 2);
+    },
+
+    sessionPayout: function() {
+        var payout = 0;
+
+        var sessionPayout = PayoutInfo.findOne({id: Meteor.userId()}).sessionPayout;
+        if (sessionPayout != null) {
+            payout = sessionPayout;
+        }
+
         return Utilities.precise_round(payout, 2);
     },
 
@@ -149,6 +184,39 @@ Template.gameScreen.helpers({
         }
                                    
         return response;
-    }
+    },
+
+    batchStatus: function() {
+        var status = "";
+
+        var batchNumber = SessionInfo.findOne({id: 'global'}).batchNumber;
+        if (batchNumber != null) {
+            status = "Batch " + batchNumber;
+        }
+                             
+        return status;
+    },
+
+    sessionStatus: function() {
+        var status = "";
+
+        var sessionNumber = SessionInfo.findOne({id: 'global'}).sessionNumber;
+        if (sessionNumber != null) {
+            status = "Game " + sessionNumber;
+        }
+                             
+        return status;
+    },
+
+    isAdversary: function() {
+        var isAdversary = false;
+
+        var adversaryInfo = ParticipantsInfo.findOne({userId: Meteor.userId()}).isAdversary;
+        if (adversaryInfo != null) {
+            isAdversary = adversaryInfo;
+        }
+
+        return isAdversary;
+    },
 });
 

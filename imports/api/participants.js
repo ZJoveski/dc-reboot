@@ -129,7 +129,7 @@ export var Participants = {
             for (var i = 0; i < this.adversaries.length; i++) {
                 var userId = this.participants[i];
                 var isAdversary = this.adversaries[i];
-                ParticipantsInfo.update({userId: userId}, {$set: {
+                ParticipantsInfo.upsert({userId: userId}, {$set: {
                     isAdversary: isAdversary
                 }});
             }

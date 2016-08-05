@@ -7,11 +7,13 @@ import { Session } from '../session.js';
 import { ColorMagic } from '../colors_mapping.js';
 import { Neighborhoods } from '../neighborhoods.js';
 import { Messages } from '../messages.js';
+import { Logger } from '../logging.js';
+import { Payouts } from '../payouts.js';
 
 Meteor.methods({
     'sendStructuredMessage': function() {
         var id = this.userId;
-        var message = "";
+        var message = "structured message";
 
         if(Progress.sessionInProgress) {
             var messageCostInfo = Messages.calculatePotentialMessageCost(this.userId, Parameters.structuredCommunicationCharactersNumberMultiplier);
@@ -34,30 +36,59 @@ Meteor.methods({
                   last = 0;
                 }
 
-                message += neighborhoodColorCounts[ColorMagic.colors[first]] + " " + (ColorMagic.colors[first]).toUpperCase();
+                message = neighborhoodColorCounts[ColorMagic.colors[first]] + " " + (ColorMagic.colors[first]).toUpperCase();
                 message += ", " + neighborhoodColorCounts[ColorMagic.colors[last]] + " " + (ColorMagic.colors[last]).toUpperCase();
 
                 //"Translate" message colors to the "real" colors.
                 message = ColorMagic.dummyDeanonymizeMessageColorNames(message);
 
-                sendMessageToParticipants(id, message, timestamp);
-                sendMessageToAdmin(id, message, timestamp);
+                /* Log entry. */ Logger.recordMessageRequest(id, true, message);
 
-                sessionCommunicationUsageLevels[id] += messageCostInfo.relativeMessageCost;
+                Messages.sendMessageToParticipants(id, message, timestamp);
+                Messages.sendMessageToAdmin(id, message, timestamp);
 
-                /* Log entry. */ recordMessageRequest(id, true, message);
+                Session.communicationUsageLevels[id] += messageCostInfo.relativeMessageCost;
+
                 console.log(message);
-                /* Log entry. */ recordMessageSent(id, true, message);
+                /* Log entry. */ Logger.recordMessageSent(id, true, message);
 
-                updatePotentialPayoutsInfo(id);
-              }
-              else {
-                  /* Log entry. */ recordMessageRequest(id, true, message);
-                  /* Log entry. */ recordMessageFailed(id, true, message);
-              }
-             
+                Payouts.updatePotentialPayoutsInfo(id);
+            } else {
+                /* Log entry. */ Logger.recordMessageRequest(id, true, message);
+                /* Log entry. */ Logger.recordMessageFailed(id, true, message);
             }
-        },
+        }
+    },
+
+    'sendChatMessage': function(message) {
+        var id = this.userId;
+        /* Log entry. */ Logger.recordMessageRequest(id, false, message);
+
+        if(Progress.sessionInProgress) { 
+            var realMessageLength = Messages.calculateRealMessageLength(message);
+            var messageCostInfo = Messages.calculatePotentialMessageCost(id, realMessageLength);
+
+            if(messageCostInfo.costIsAffordable) {
+                var timestamp = new Date();
+
+                Session.updateCommunicationUnitsRemaining(id, realMessageLength);
+
+                //"Translate" message colors to the "real" colors.
+                message = ColorMagic.deanonymizeMessageColorNames(Participants.id_name[id], message);
+
+                Messages.sendMessageToParticipants(id, message, timestamp);
+                Messages.sendMessageToAdmin(id, message, timestamp);
+
+                Session.communicationUsageLevels[id] += messageCostInfo.relativeMessageCost;
+
+                /* Log entry. */ Logger.recordMessageSent(id, false, message);
+
+                Payouts.updatePotentialPayoutsInfo(id);
+            } else {
+                /* Log entry. */ Logger.ecordMessageFailed(id, false, message);
+            }
+        }
+    },
 });
 
 var getNeighborhoodColorCounts = function(userId, name) {

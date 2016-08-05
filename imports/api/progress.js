@@ -15,7 +15,8 @@ export var Progress = {
     },
 
     intializeProgress: function() {
-        ProgressInfo.upsert({
+        this.clearProgress();
+        ProgressInfo.insert({
             experimentInProgress: this.experimentInProgress,
             sessionInProgress: this.sessionInProgress,
             preSessionInProgress: this.preSessionInProgress,
@@ -28,8 +29,7 @@ export var Progress = {
             this.experimentInProgress = progress;
             ProgressInfo.update({}, { $set: {
                 experimentInProgress: progress
-            }
-            });
+            }});
             if (progress) {
                 /* Log entry. */ Logger.recordExperimentStart();
             } else {
@@ -39,8 +39,7 @@ export var Progress = {
             this.sessionInProgress = progress;
             ProgressInfo.update({}, { $set: {
                 sessionInProgress: progress
-            }
-            });
+            }});
             if (progress) {
                 /* L */ Time.updateTimeInfo('session start');
             } else {
@@ -50,14 +49,12 @@ export var Progress = {
             this.preSessionInProgress = progress;
             ProgressInfo.update({}, { $set: {
                 preSessionInProgress: progress
-            }
-            });
+            }});
         } else if (type == 'postSession') {
             this.postSessionInProgress = progress;
             ProgressInfo.update({}, { $set: {
                 postSessionInProgress: progress
-            }
-            });
+            }});
         }
     }
 }
