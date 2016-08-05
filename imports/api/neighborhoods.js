@@ -1,6 +1,7 @@
 import { NeighborhoodsInfo } from './collections/game_collections.js';
 import { Participants } from './participants.js';
 import { Session } from './session.js';
+import { ColorMagic } from './colors_mapping.js';
 
 export var Neighborhoods = {
     NeighborhoodsInfo: NeighborhoodsInfo,
@@ -41,7 +42,25 @@ export var Neighborhoods = {
 
             NeighborhoodsInfo.upsert({userId: userId}, {$set: {neighborhoodColors: neighborhoodColors}});          
         }
-    } 
+    },
+
+    updateNeighborhoodColors: function(newColors) {
+        for (var i = 0; i < Participants.participants.length; i++) {
+            var userId = Participants.participants[i];
+            var name = Participants.id_name[userId];
+            var namesOfNeighbors = getNamesOfNeighbors(userId);
+
+            var neighborhoodColors = {};
+            for (var j = 0; j < namesOfNeighbors.length; j++) {
+                var currentName = namesOfNeighbors[j];
+                var color = newColors[currentName];
+                var newColor = ColorMagic.anonymizeColor(currentName ,color)
+                neighborhoodColors[currentName] = newColor;
+            }
+
+            NeighborhoodsInfo.upsert({userId: userId}, {$set: {neighborhoodColors: neighborhoodColors}}); 
+        }
+    },
 };
 
 insertNeighborhood = function(id, namesOfNeighbors, neighAdjMatrix) {        

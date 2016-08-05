@@ -8,7 +8,7 @@ import { Neighborhoods } from './neighborhoods.js';
 import { ColorMagic } from './colors_mapping.js';
 import { Logger } from './logging.js';
 
-export const var startGames = function(isProperGames, numberOfGames, numberOfBatches) {
+export const startGames = function(isProperGames, numberOfGames, numberOfBatches) {
     proper = isProperGames;
     games = numberOfGames;
     batches = numberOfBatches;
@@ -19,7 +19,7 @@ export const var startGames = function(isProperGames, numberOfGames, numberOfBat
     Meteor.setTimeout(function() {
             runGames();
     }, 2000);
-}
+};
 
 var sessionTimeout, preSessionCountdown, sessionCountdown, preSessionTimeout, postSessionTimeout;
 var proper, games, batches;
@@ -147,7 +147,7 @@ var initializeGame = function() {
     /* Log entry. */ Logger.recordSessionInitializationCompletion(currentSession);
 }
 
-var terminateGame = function(outcome) {
+export const terminateGame = function(outcome) {
     Session.freeToUpdateColors = false;
     /* L */ Progress.setProgress('session', false);
 
@@ -164,7 +164,7 @@ var terminateGame = function(outcome) {
             Progress.setProgress('postSession', false);
             runPreGame();
     }), Time.postSessionLength * Time.timeUpdateRate);
-}
+};
 
 var clearPastPilotExperimentsData = function() {
     clearTimeout(sessionTimeout);

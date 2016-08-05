@@ -11,7 +11,12 @@ import { Logger } from '../logging.js';
 import { Payouts } from '../payouts.js';
 
 Meteor.methods({
-    'sendStructuredMessage': function() {
+    // Set (update) the color corresponding to the current user.
+    updateColor: function(newColor) {
+        Session.updateColor(Meteor.userId(), newColor);
+    },
+
+    sendStructuredMessage: function() {
         var id = this.userId;
         var message = "structured message";
 
@@ -60,7 +65,7 @@ Meteor.methods({
         }
     },
 
-    'sendChatMessage': function(message) {
+    sendChatMessage: function(message) {
         var id = this.userId;
         /* Log entry. */ Logger.recordMessageRequest(id, false, message);
 

@@ -24,34 +24,32 @@ Template.button2.helpers({
     }
 });
 
-// TODO
 Template.button1.events({
     'click button': function() {
         
         // Trying to reduce the lag by avoiding the piling up of repeated color change requests on the server ...
         var lastRequestedColor = Session.get('lastRequestedColor');
-        if (lastRequestedColor !== theColors[0]) {
+        if (lastRequestedColor !== ColorMagic.colors[0]) {
             // Update the 'colors' collection
-            Meteor.call('updateColor', theColors[0]);
+            Meteor.call('updateColor', ColorMagic.colors[0]);
             
             // Record the last requested color
-            Session.set('lastRequestedColor', theColors[0]);
+            Session.set('lastRequestedColor', ColorMagic.colors[0]);
         }
     }                              
 });
 
-// TODO
 Template.button2.events({
     'click button': function() {
         
         // Trying to reduce the lag by avoiding the piling up of repeated color change requests on the server ...
         var lastRequestedColor = Session.get('lastRequestedColor');
-        if (lastRequestedColor !== theColors[1]) {
+        if (lastRequestedColor !== ColorMagic.colors[1]) {
             // Update the 'colors' collection
-            Meteor.call('updateColor', theColors[1]);
+            Meteor.call('updateColor', ColorMagic.colors[1]);
             
             // Record the last requested color
-            Session.set('lastRequestedColor', theColors[1]);
+            Session.set('lastRequestedColor', ColorMagic.colors[1]);
         }
     }                              
 });

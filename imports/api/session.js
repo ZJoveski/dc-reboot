@@ -5,6 +5,8 @@ import { ColorMagic } from './colors_mapping.js';
 import { Messages } from './collections/game_collections.js';
 import { Logger } from './logging.js';
 import { SessionInfo } from './collections/game_collections.js';
+import { Time } from './time.js';
+import { terminateGame } from './experiment_control.js';
 
 
 // includes Communcation Management
@@ -59,8 +61,13 @@ export var Session = {
             sessionNumber: 0,
             batchNumber: 0,
             outcome: this.outcome,
-            outcomeColor: this.outcomeColor
         }});
+
+        for (var i = 0; i < Participants.participantsQueue.length; i++) {
+            SessionInfo.upsert({id: Participants.participantsQueue[i]}, {$set: {
+                outcomeColor: 'white'
+            }}); 
+        }        
     },
 
     incrementSessionNumber: function() {
@@ -86,6 +93,10 @@ export var Session = {
         for (var i = 0; i < Participants.participants.length; i++) {
             this.colors[Participants.node_name[i]] = this.defaultNodeColor;
         }
+
+        // SessionInfo.upsert({id: 'global'}, {$set: {
+        //     colors: this.colors
+        // }});
 
         Neighborhoods.initializeNeighborhoodColors();
 
@@ -159,6 +170,16 @@ export var Session = {
         this.freeToUpdateColors = true;
     },
 
+    updateColor: function(userId, newColor) {
+        var requestNo = this.requestToBeAssignedNext;
+        this.requestToBeAssignedNext++;
+        var name = Participants.id_name[userId];
+
+        /* Log entry. */ Logger.recordRequestMade(name, newColor, requestNo);
+          
+        updateColorInternal(userId, name, newColor, requestNo);
+    }
+
     setOutcome: function(outcome) {
         this.outcome = outcome;
 
@@ -199,4 +220,87 @@ export var Session = {
     updateCommunicationUnitsRemaining: function(userId, updateAmount) {
         SessionInfo.update({id: userId}, {$inc: {communicationUnitsRemaining: (-updateAmount)}});
     },
+};
+
+// A method which calls the setColor function, but only when a session is in progress and no other
+// color-updating request is being currently processed by the server.
+var updateColorInternal = function(id, name, newColor, requestNo) {
+    if (Progress.sessionInProgress) {
+        if (Session.freeToUpdateColors && (requestNo == Session.requestToBeProcessedNext)) {
+            /* L */ setColor(id, name, newColor, requestNo);
+        } else {
+            setTimeout(Meteor.bindEnvironment(function() {
+                updateColorInternal(id, name, newColor, requestNo);
+            }), Time.waitForTurnTime);
+        }
+    } else {
+        /* Log entry. */ Logger.recordRequestCancelled(name, newColor, requestNo);
+    }
 }
+
+var setColor = function(id, nameOfCurrentUser, colorOfCurrentUser, requestNo) {
+    Session.freeToUpdateColors = false;     
+    
+    if(Progress.sessionInProgress) {
+        /* L */ updateColorsInfoAnonymized(id, nameOfCurrentUser, colorOfCurrentUser, requestNo);
+    }
+    
+    Session.requestToBeProcessedNext++;
+}
+
+var updateColorsInfoAnonymized = function(userId, name, newColor, requestNo) {
+    var namesOfNeighbors = Neighborhoods.NeighborhoodsInfo.findOne({userId: userId}).namesOfNeighbors;
+    var actualNewColor = ColorMagic.deanonymizeColor(name, newColor);
+    var actualOldColor = Session.colors[name];
+    
+    if(Progress.sessionInProgress) {
+        // First execute the operations that do not involve querying the database, in order to quickly check
+        // for consensus, and if consensus is not reached to allow for other color-updating requests to be
+        // processed.
+        var node = Participants.name_node[name];
+        var isAdversary = false;
+        if (Session.adversaryMode())
+            isAdversary = Participants.adversaries[node];
+        if (!isAdversary) {
+            if(actualOldColor !== Session.defaultNodeColor) { Session.counts[ColorMagic.color_number[actualOldColor]]--; }
+            Session.counts[ColorMagic.color_number[actualNewColor]]++;
+            SessionInfo.update({id: 'global'}, {$set: {
+                colorCounts: Session.counts
+            }});
+        }
+        
+        // Update the participation rate of the user
+        Participants.participationRate[userId] += 1;
+        
+        /* Log entry. */ Logger.recordRequestProcessed(actualNewColor, name, requestNo);
+        /* Log entry. */ Logger.recordSessionColorCounts();
+        
+        if(Session.counts[ColorMagic.color_number[actualNewColor]] == Session.numberOfNodes - Session.numberOfAdversaries) {
+            Session.outcomeColor = actualNewColor;
+
+            for (var i = 0; i < Participants.participants.length; i++) {
+                var id = Participants.participants[i];
+                var anonymizedConsensusColor = ColorMagic.anonymizeColor(Participants.id_name[id], Session.outcomeColor);
+                SessionInfo.update({id: Participants.participants[i]}, {$set: {
+                    outcomeColor: anonymizedConsensusColor
+                }}); 
+            }
+            
+            terminateGame(true);
+        }
+        else {
+            Session.freeToUpdateColors = true;
+        }
+
+        Session.colors[name] = actualNewColor;
+
+        Neighborhoods.updateNeighborhoodColors(Session.colors);
+    }       
+}
+
+
+
+
+
+
+

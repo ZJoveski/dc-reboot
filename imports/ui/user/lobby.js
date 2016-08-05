@@ -7,9 +7,6 @@ import './lobby.html';
 Template.lobby.helpers({
     'notReady': function() {
         var obj = LobbyStatus.findOne({userId: Meteor.userId()});
-
-        console.log(obj.ready);
-
         return obj && !obj.ready;
     },
     'numPlayers': function() {
@@ -17,7 +14,6 @@ Template.lobby.helpers({
     },
     'numWaiting': function() {
         var count = LobbyStatus.findOne({userId: 'global'}).usersReady;
-        console.log(count);
         return count;
     },
     'plural': function() {
