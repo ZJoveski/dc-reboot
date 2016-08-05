@@ -14,8 +14,8 @@
     </div>
 
     <div class="progress" style = "position: absolute; padding-top:0%; display: block; left: 13.5%; top: 93.25%; width: 20%">
-        <div id = "timeProgress" class="progress-bar active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
-            <span style = "position: absolute; display: block; width: 100%; color: black;">{{> timeRemaining}}</span>
+        <div id = "timeProgress" class="progress-bar active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:{{timeWidth}}">
+            <span style = "position: absolute; display: block; width: 100%; color: black;">{{timeRemaining}}</span>
         </div>
     </div>
 </template>

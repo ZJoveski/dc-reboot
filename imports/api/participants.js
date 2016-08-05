@@ -35,7 +35,8 @@ export var Participants = {
     // List of available first names. Need to make sure there are at least as many names 
     // available as there are nodes in the full network.
     listOfNames: ["Ben", "Ava", "Dan", "Eve", "Gus", "Ivy", "Ian", "Joy", "Jay", "Kim", 
-                   "Lee", "Liz", "Pat", "Mae", "Ray", "Uma", "Sam", "Sky", "Ted", "Sue"],
+                    "Lee", "Liz", "Pat", "Mae", "Ray", "Uma", "Sam", "Sky", "Ted", "Sue", 
+                    "Bob", "Joe", "Moe", "May", "Tim"],
 
     initializeFullListOfParticipants: function() {
         var readyUsers = Meteor.users.find({"status.online": true, username: {$ne: "admin"}, location: '/experiment'});

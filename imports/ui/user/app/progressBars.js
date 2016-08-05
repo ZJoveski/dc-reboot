@@ -37,7 +37,7 @@ Template.progressBars.helpers({
 
         var timeInfo = TimeInfo.findOne({})
         var currentTime = timeInfo.currentTime;
-        var currentSessionStart = timeInfo.currentSessionStart;
+        var currentSessionStart = timeInfo.currentSessionStartTime;
 
         if (currentTime != null && currentSessionStart != null) {
             var millisecondsRemaining = Time.sessionLength * Time.timeUpdateRate - (currentTime - currentSessionStart);
@@ -45,5 +45,19 @@ Template.progressBars.helpers({
         }
 
         return timeValue;
-    }
+    },
+
+    timeWidth: function() {
+        var timeValue = 0;
+
+        var timeInfo = TimeInfo.findOne({})
+        var currentTime = timeInfo.currentTime;
+        var currentSessionStartTime = timeInfo.currentSessionStartTime;
+
+        if (currentTime != null && currentSessionStartTime != null) {
+            timeValue = Math.min(100, 100 - (currentTime - currentSessionStartTime)/1000 * 100/Time.sessionLength);
+        }
+
+        return timeValue + '%';  
+    },
 });

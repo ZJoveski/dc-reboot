@@ -1,4 +1,4 @@
-Canvas = function () {
+export var Canvas = function () {
   var self = this,                      // Reference to the canvas object itself.
       numNodes = 0,                     /* The number of nodes in the corresponding neighborhood.
                                            Until neighborhood is made known to the client, the

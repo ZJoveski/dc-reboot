@@ -12,6 +12,8 @@ import { ParametersInfo } from '../../../api/collections/game_collections.js';
 
 import './meteormethods/game_methods.js';
 
+import { Canvas } from './canvas.js'
+
 import './progressBars.js';
 import './buttons.js';
 import './chatBox.js';
@@ -33,6 +35,8 @@ Template.gameScreen.onCreated(function() {
             clearInterval(playerNoise)
         }
     }, 1200);
+
+    //var gameCanvas = new Canvas();
 });
 
 Template.gameScreen.helpers({
