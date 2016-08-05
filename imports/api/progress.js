@@ -14,7 +14,7 @@ export var Progress = {
         ProgressInfo.remove({});
     },
 
-    intializeProgress: function() {
+    initializeProgress: function() {
         this.clearProgress();
         ProgressInfo.insert({
             experimentInProgress: this.experimentInProgress,
