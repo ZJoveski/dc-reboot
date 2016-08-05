@@ -1,12 +1,10 @@
 import { Parameters } from './parameters.js';
 import { Participants } from './participants.js';
 import { ColorMagic } from './colors_mapping.js';
-import { Messages } from './collections/game_collections.js';
+import { MessagesCollection } from './collections/game_collections.js';
 import { Neighborhoods } from './neighborhoods.js';
 
 export var Messages = {
-    Messages: Messages,
-
     calculatePotentialMessageCost: function(userId, messageLength) {    
         var messageCostInfo = {};
         var relativeMessageCost;
@@ -81,7 +79,7 @@ export var Messages = {
             adminId = admin._id;
         }
           
-        Messages.insert({
+        MessagesCollection.insert({
             idOfSender: senderId,
             nameOfSender: name,
             idOfRecipient: adminId,
@@ -107,7 +105,7 @@ var sendMessageToAllParticipants = function(senderId, message, timestamp) {
     for(var i = 0; i < Participants.participants.length; i++) {
         var nameOfRecipient = Participants.id_name[Participants.participants[i]];
               
-        Messages.insert({
+        MessagesCollection.insert({
             idOfSender: senderId,
             nameOfSender: name,
             idOfRecipient: participants[i],
@@ -123,7 +121,7 @@ var sendMessageToNeighborsOnly = function(senderId, message, timestamp) {
     var namesOfNeighbors = Neighborhoods.NeighborhoodsInfo.findOne({userId: senderId}).namesOfNeighbors;
     
     for(var i = 0; i < namesOfNeighbors.length; i++) {
-        Messages.insert({
+        MessagesCollection.insert({
             idOfSender: senderId,
             nameOfSender: name,
             idOfRecipient: name_id[namesOfNeighbors[i]],

@@ -12,7 +12,7 @@ export const ExperimentLog = new Mongo.Collection('experimentLog');
 
 export const PayoutInfo = new Mongo.Collection('payoutInfo');
 
-export const Messages = new Mongo.Collection('messages');
+export const MessagesCollection = new Mongo.Collection('messages');
 
 export const ParametersInfo = new Mongo.Collection('parameters');
 

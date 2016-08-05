@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 
 import { NeighborhoodsInfo } from '../../imports/api/collections/game_collections.js';
 import { PayoutInfo } from '../../imports/api/collections/game_collections.js';
-import { Messages } from '../../imports/api/collections/game_collections.js';
+import { MessagesCollection } from '../../imports/api/collections/game_collections.js';
 import { ParametersInfo } from '../../imports/api/collections/game_collections.js';
 import { ParticipantsInfo } from '../../imports/api/collections/game_collections.js';
 import { ProgressInfo } from '../../imports/api/collections/game_collections.js';
@@ -79,7 +79,7 @@ Meteor.publishComposite('messages', {
         var id = this.userId;
         if((Participants.id_name[id] !== undefined) && (clientName == Participants.id_name[id])) {
             if(Parameters.communication) {
-                    return Messages.find({idOfRecipient: id}, {fields: {nameOfSender: 1, message: 1}});
+                    return MessagesCollection.find({idOfRecipient: id}, {fields: {nameOfSender: 1, message: 1}});
             }
         }
     }
@@ -92,7 +92,7 @@ Meteor.publishComposite('adminMessages', {
             var adminId = Meteor.users.findOne({username: "admin"})._id;
                               
             if(this.userId === adminId)
-                return Messages.find({nameOfRecipient: "admin"}, {fields: {nameOfSender: 1, message: 1}});
+                return MessagesCollection.find({nameOfRecipient: "admin"}, {fields: {nameOfSender: 1, message: 1}});
         }
         
         return [];

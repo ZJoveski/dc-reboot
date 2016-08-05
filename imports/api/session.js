@@ -175,7 +175,7 @@ export var Session = {
         SessionInfo.upsert({id: 'global'}, {$set: {
             outcomeColor: color
         }});
-    }
+    },
 
     setNumberOfNodes: function(numNodes) {
         this.numberOfNodes = numNodes;

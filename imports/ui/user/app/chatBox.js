@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 
-import { Messages } from '../../../api/collections/game_collections.js';
+import { MessagesCollection } from '../../../api/collections/game_collections.js';
 import { ParametersInfo } from '../../../api/collections/game_collections.js';
 import { SessionInfo } from '../../../api/collections/game_collections.js';
 
@@ -17,7 +17,7 @@ Template.chatBox.helpers({
         var messagesToBeReturned = []; 
         var messagesCursor;
         
-        messagesCursor = messages.find({}, {sort: {timestamp: 1}});
+        messagesCursor = MessagesCollection.find({}, {sort: {timestamp: 1}});
         var nameOfClient = '';
 
         var namesOfNeighbors = NeighborhoodsInfo.findOne({userId: Meteor.userId()}).namesOfNeighbors;
