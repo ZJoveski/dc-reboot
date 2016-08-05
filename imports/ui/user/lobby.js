@@ -6,20 +6,22 @@ import './lobby.html';
 
 Template.lobby.helpers({
     'notReady': function() {
-       var obj = LobbyStatus.findOne({userId: Meteor.userId()});
+        var obj = LobbyStatus.findOne({userId: Meteor.userId()});
 
-       console.log(obj.ready);
+        console.log(obj.ready);
 
-       return obj && !obj.ready;
+        return obj && !obj.ready;
     },
     'numPlayers': function() {
-       return 25;
+        return 25;
     },
     'numWaiting': function() {
-       return LobbyStatus.find({userId: 'global'}).usersReady;
+        var count = LobbyStatus.find({userId: 'global'}).usersReady;
+        console.log(count);
+        return count;
     },
     'plural': function() {
-       var count = LobbyStatus.find({userId: 'global'}).usersReady;
-       return (count !== 1);
+        var count = LobbyStatus.find({userId: 'global'}).usersReady;
+        return (count !== 1);
     }
 });
