@@ -99,7 +99,7 @@ export var Payouts = {
                 potentialPayouts: individualPayout
             }});
         }
-    }
+    },
 
     applyIncentiveSessionPayouts: function(outcome) {
         if(outcome) {

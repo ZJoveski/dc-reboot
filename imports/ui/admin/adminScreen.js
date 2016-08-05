@@ -2,7 +2,7 @@ import { Admin } from '../../api/users.js'
 import { Template } from 'meteor/templating';
 
 import './adminScreen.html';
-import '../../meteormethods/admin_methods.js';
+import '../../api/meteormethods/admin_methods.js';
 
 
 Template.adminScreen.helpers({

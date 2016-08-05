@@ -90,7 +90,7 @@ export var ColorMagic = {
         }
         
         return processedMessage;
-    }
+    },
 
     // Needed to restore messages visible to the admin user to their proper form.
     clearTemporaryColorCodeSuffixes: function(message) {

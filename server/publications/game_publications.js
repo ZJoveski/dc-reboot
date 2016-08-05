@@ -68,11 +68,11 @@ Meteor.publishComposite('parametersInfo', {
     }
 });
 
-Meteor.publishComposite('timeInfo') {
+Meteor.publishComposite('timeInfo', {
     find: function() {
         return TimeInfo.find({});
     }
-}
+});
 
 Meteor.publishComposite('messages', {
     find: function(clientName) {

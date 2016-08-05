@@ -104,7 +104,7 @@ export var Messages = {
 var sendMessageToAllParticipants = function(senderId, message, timestamp) {
     var name = Participants.id_name[senderId];
       
-    for(var i = 0, i < Participants.participants.length; i++) {
+    for(var i = 0; i < Participants.participants.length; i++) {
         var nameOfRecipient = Participants.id_name[Participants.participants[i]];
               
         Messages.insert({

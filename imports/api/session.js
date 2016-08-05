@@ -58,7 +58,7 @@ export var Session = {
         SessionInfo.upsert({id: 'global'}, { $set: {
             sessionNumber: 0,
             batchNumber: 0,
-            outcome: this.outcome
+            outcome: this.outcome,
             outcomeColor: this.outcomeColor
         }});
     },
