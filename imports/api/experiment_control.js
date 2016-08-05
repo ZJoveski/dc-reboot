@@ -170,8 +170,8 @@ var clearPastPilotExperimentsData = function() {
     clearTimeout(sessionTimeout);
     clearTimeout(preSessionTimeout);
     clearTimeout(postSessionTimeout);
-    clearInterval(timerIntervalS);
-    clearInterval(timerIntervalP);
+    clearInterval(sessionCountdown);
+    clearInterval(preSessionCountdown);
     
     //TODO: implement masterClear()
     masterClear();
