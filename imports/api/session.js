@@ -178,7 +178,7 @@ export var Session = {
         /* Log entry. */ Logger.recordRequestMade(name, newColor, requestNo);
           
         updateColorInternal(userId, name, newColor, requestNo);
-    }
+    },
 
     setOutcome: function(outcome) {
         this.outcome = outcome;
