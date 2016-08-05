@@ -17,6 +17,7 @@ Template.lobby.helpers({
     },
     'numWaiting': function() {
         var count = LobbyStatus.find({userId: 'global'}).usersReady;
+        console.log(LobbyStatus.find({userId: "global"}));
         console.log(count);
         return count;
     },
