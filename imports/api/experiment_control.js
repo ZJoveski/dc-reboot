@@ -174,7 +174,7 @@ var clearPastPilotExperimentsData = function() {
     clearInterval(preSessionCountdown);
     
     //TODO: implement masterClear()
-    masterClear();
+    //masterClear();
 }
 
 /* This method is called upon experiment termination */
