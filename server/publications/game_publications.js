@@ -75,9 +75,8 @@ Meteor.publishComposite('timeInfo', {
 });
 
 Meteor.publishComposite('messages', {
-    find: function(clientName) {
+    find: function() {
         var id = this.userId;
-        if((Participants.id_name[id] !== undefined) && (clientName == Participants.id_name[id])) {
             if(Parameters.communication) {
                     return MessagesCollection.find({idOfRecipient: id}, {fields: {nameOfSender: 1, message: 1}});
             }

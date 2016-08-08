@@ -5,7 +5,7 @@ import { Mongo } from 'meteor/mongo';
 // Stores information about neighborhoods of nodes corresponding to registered users 
 // (these are the "relevant" neighborhoods). The corresponding documents are of the format
 // { userId: someUserId, namesOfNeighbors: arrayOfNamesOfNeighbors, neighAdjMatrix: 
-// adjacencyMatrixOfCorrespondingNeighborhood}, neighborhoodColors: colors of self and neighbors }
+// adjacencyMatrixOfCorrespondingNeighborhood, neighborhoodColors: colors of self and neighbors }
 export const NeighborhoodsInfo = new Mongo.Collection('neighborhoods'); //corresponds to colorsInfo
 
 export const ExperimentLog = new Mongo.Collection('experimentLog');

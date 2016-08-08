@@ -98,3 +98,23 @@ Router.route('/survey', {
     }
 });
 
+Router.route('/experiment', {
+    name: 'experiment',
+    template: 'gameScreen',
+    waitOn: function() {
+        var currentUser = Meteor.userId();
+        if (currentUser) {
+            return [
+                Meteor.subscribe('progressInfo'),
+                Meteor.subscribe('participantsInfo'),
+                Meteor.subscribe('sessionInfo'),
+                Meteor.subscribe('payoutInfo'),
+                Meteor.subscribe('neighborhoods'),
+                Meteor.subscribe('parametersInfo'),
+                Meteor.subscribe('timeInfo'),
+                Meteor.subscribe('messages')
+            ];
+        }
+    }
+});
+

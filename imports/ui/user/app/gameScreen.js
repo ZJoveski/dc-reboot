@@ -22,6 +22,8 @@ import './gameOutcomeStatus.js';
 
 import './gameScreen.html';
 
+var gameCanvas;
+
 Template.gameScreen.onCreated(function() {
     // Beep at the players to get their attention
     var audio = new Audio('/mp3/beep_alert.mp3');
@@ -36,7 +38,58 @@ Template.gameScreen.onCreated(function() {
         }
     }, 1200);
 
-    //var gameCanvas = new Canvas();
+    gameCanvas = new Canvas();
+});
+
+// redraws the game nodes
+Tracker.autorun(function() {
+    var progress = ProgressInfo.findOne({});
+    var sessionInProgress = progress.sessionInProgress;
+    var postSessionInProgress = progress.postSessionInProgress;
+    var preSessionInProgress = progress.preSessionInProgress;
+    var experimentInProgress = progress.experimentInProgress;
+
+    if (sessionInProgress || postSessionInProgress) {
+        console.log("redrawing update");
+        var neighborsInfo = NeighborhoodsInfo.findOne({userId: Meteor.userId()});
+        if (neighborsInfo != null) {
+            var namesOfNeighbors = neighborsInfo.namesOfNeighbors;
+            var neighAdjMatrix = neighborsInfo.neighAdjMatrix;
+            //Session.set("clientName", namesOfNeighbors[0]);
+
+            if (gameCanvas) { 
+                console.log("redrawing canvas");
+                setTimeout(function() {
+                    gameCanvas.clear();  
+                    gameCanvas.draw(namesOfNeighbors,neighAdjMatrix); 
+                }, 200);
+            } 
+        }
+    } else if (preSessionInProgress) {
+        if (gameCanvas) {  
+                gameCanvas.clear(); 
+        }
+        
+        // ... and set the value of lastRequestedColor to 'white'
+        Session.set('lastRequestedColor', "white");
+    } else if (experimentInProgress) {
+        if(gameCanvas) {
+            gameCanvas.clear();
+        }
+    }
+});
+
+// updates the colors of the game nodes
+Tracker.autorun(function() {
+    if (gameCanvas) {
+        var neighborhoodColors = NeighborhoodsInfo.findOne({userId: Meteor.userId()}).neighborhoodColors;
+        for (var name in neighborhoodColors) {
+            if (neighborhoodColors.hasOwnProperty(name)) {
+                gameCanvas.updateNodeColor(name, neighborhoodColors[name]);
+            }
+        } 
+    }
+    
 });
 
 Template.gameScreen.helpers({
