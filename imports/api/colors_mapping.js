@@ -98,7 +98,7 @@ export var ColorMagic = {
     },
 }
 
-// Internally, the colors are treated as integers from 0 to theColors.length
+// Internally, the colors are treated as integers from 0 to ColorMagic.colors.length
 var generateColorPermutations = function() {
     var permutations = [];
 
@@ -116,7 +116,7 @@ var generateColorPermutations = function() {
         }
     }
 
-    permuteColors(range(theColors.length)).slice();
+    permuteColors(range(ColorMagic.colors.length)).slice();
     
     ColorMagic.colorPermutations = permutations;
 }
@@ -128,7 +128,7 @@ var generateReverseColorPermutationsForNodes = function() {
     for(var i = 0; i < n; i++) {
         var reversePermutation = {};
         for(var j = 0; j < n; j++) {
-            reversePermutation[theColors[colorPermutations[i][j]]] = j;
+            reversePermutation[ColorMagic.colors[ColorMagic.colorPermutations[i][j]]] = j;
         }
         ColorMagic.reverseColorPermutations[i] = reversePermutation;
     }

@@ -82,8 +82,8 @@ export var Payouts = {
     // Called if cost of communication is nonzero
     updatePotentialPayoutsInfo: function(userId) {
         if(Parameters.costBasedCommunication) {
-            var minPotentialPayout = Math.min(this.potentialPayouts[userId][theColors[0]], 
-                                              this.potentialPayouts[userId][theColors[1]]);
+            var minPotentialPayout = Math.min(this.potentialPayouts[userId][ColorMagic.colors[0]], 
+                                              this.potentialPayouts[userId][ColorMagic.colors[1]]);
                                               
             // The cost of communication is relative to the participant's minimum potential payout.
             var sessionCommunicationCost = minPotentialPayout * Session.communicationUsageLevels[userId];
