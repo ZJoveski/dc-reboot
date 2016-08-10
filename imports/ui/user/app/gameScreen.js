@@ -10,7 +10,7 @@ import { PayoutInfo } from '../../../api/collections/game_collections.js';
 import { NeighborhoodsInfo } from '../../../api/collections/game_collections.js';
 import { ParametersInfo } from '../../../api/collections/game_collections.js';
 
-import './meteormethods/game_methods.js';
+import './../../../api/meteormethods/game_methods.js';
 
 import { Canvas } from './canvas.js'
 
