@@ -52,16 +52,16 @@ var runPreGame = function() {
         Progress.setProgress('preSession', true);
 
         // ... countdown to next session.
-        preSessionCountdown = setInterval(function() {
+        preSessionCountdown = setInterval(Meteor.bindEnvironment(function() {
             Time.updateTimeInfo('current time')
-        }, Time.timeUpdateRate);
-        preSessionTimeout = setTimeout(function() {
+        }), Time.timeUpdateRate);
+        preSessionTimeout = setTimeout(Meteor.bindEnvironment(function() {
             clearInterval(preSessionCountdown);
             Progress.setProgress('preSession', false);
 
             // Start next game.
             runGame();  
-        }, Time.preSessionLength * Time.timeUpdateRate);
+        }), Time.preSessionLength * Time.timeUpdateRate);
     } else { // If this is the last game, end the sequence of games.
         /* Log entry. */ Logger.recordExperimentPayouts();
 
