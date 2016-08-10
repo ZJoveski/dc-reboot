@@ -10,5 +10,6 @@ import '../imports/ui/user/outline.js';
 import '../imports/ui/user/descriptions.js';
 import '../imports/ui/user/lobby.js';
 import '../imports/ui/admin/adminScreen.js';
+import '../imports/ui/user/gameScreen.js';
 import '../imports/api/meteormethods/main.js';
 
