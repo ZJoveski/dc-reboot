@@ -98,7 +98,7 @@ var initializeGame = function() {
     /* Log entry. */ Logger.recordSessionInitializationStart(Session.sessionNumber);
 
     Session.setAdjMatrix(Parameters.getNextAdjMatrix(proper, Session.sessionNumber));
-    /* Log entry. */ Logger.recordNetworkAdjacencyMatrix(adjMatrix);
+    /* Log entry. */ Logger.recordNetworkAdjacencyMatrix(Session.adjMatrix);
 
     Participants.participantsThreshold = Session.adjMatrix.length;
     console.log("Game participants:\t" + Participants.participantsThreshold);
