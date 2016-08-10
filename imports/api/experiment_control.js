@@ -118,9 +118,9 @@ var initializeGame = function() {
 
     /* L */ Session.assignColorsToNodes();
 
-    // If ColorsMagic.colorAnonymizationActive ==  false, then initializeAnonymizationInfo will assign the identity color 
+    // If ColorMagic.colorAnonymizationActive ==  false, then initializeAnonymizationInfo will assign the identity color 
     // permutation to each node ("red" will be mapped to "red", "green" will be mapped to "green").
-    /* L */ ColorsMagic.initializeColorAnonymization();
+    /* L */ ColorMagic.initializeColorAnonymization();
 
     setSessionIncentivesConflictParameters(proper, Session.sessionNumber);
     /* L */ Parameters.setSessionCommunicationParameters(proper, Session.sessionNumber);
