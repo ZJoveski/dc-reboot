@@ -268,7 +268,7 @@ export var Logger = {
         var correspondence = "";
         
         for (var userId in Participants.id_name) {
-            if (id_name.hasOwnProperty(userId)) {
+            if (Participants.id_name.hasOwnProperty(userId)) {
                 correspondence += userId + "\t" + Participants.id_name[userId] + "\n";
             }
         }
