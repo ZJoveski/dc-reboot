@@ -116,7 +116,7 @@ var initializeGame = function() {
 
     /* Log entry. */ Logger.recordAdversaries();
 
-    /* L */ assignColorsToNodes();
+    /* L */ Session.assignColorsToNodes();
 
     // If ColorsMagic.colorAnonymizationActive ==  false, then initializeAnonymizationInfo will assign the identity color 
     // permutation to each node ("red" will be mapped to "red", "green" will be mapped to "green").
