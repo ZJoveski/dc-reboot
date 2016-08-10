@@ -114,11 +114,11 @@ var generateColorPermutations = function() {
             permuteColors(inputArray.slice(), inMemory.concat(currentCharacter));
             inputArray.splice(i,0,currentCharacter[0]);
         }
+
+        return permutations;
     }
 
-    permuteColors(range(ColorMagic.colors.length)).slice();
-    
-    ColorMagic.colorPermutations = permutations;
+    ColorMagic.colorPermutations = permuteColors(range(ColorMagic.colors.length)).slice();
 }
 
 var generateReverseColorPermutationsForNodes = function() {
