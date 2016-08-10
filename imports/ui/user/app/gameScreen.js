@@ -132,7 +132,7 @@ Template.gameScreen.helpers({
         }
 
         return response;
-    }
+    },
 
     waitForNextExperimentStatus: function() {
         var status = '';
