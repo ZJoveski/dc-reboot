@@ -204,7 +204,7 @@ export var Parameters = {
     },
 
     setBatchParameters: function(isProperGames, batchIndex) {
-        if (!isProperGames && practiceBatchConfigurations.length > batchIndex) {
+        if (!isProperGames && practiceBatchConfigs.length > batchIndex) {
             Session.batchSize = parseInt(practiceBatchConfigs[batchIndex][0]);
             Session.batchMode = practiceBatchConfigs[batchIndex][1];
         } else if (isProperGames && batchConfigs.length > batchIndex) {
