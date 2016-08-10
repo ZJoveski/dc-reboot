@@ -85,7 +85,7 @@ export var Parameters = {
     getNextAdjMatrix: function(isProperGames, currentSession) {
         var matrix = [];
         var pars = [];
-        var index = currentSession - 1;
+        var index = currentSession;
         
         if(isProperGames) {
             if(index < this.properGames) {
