@@ -40,7 +40,7 @@ export var Parameters = {
     practiceBatches: 0, //temp value
     properBatches: 0, //temp value
 
-    testMode: false,        //whether or not to skip description
+    testMode: true,        //whether or not to skip description
 
     readTreatments: function() {
         practiceAdjacencyMatrices = readAdjMatrix("treatments/test_size_3 (adversarial)/AMP_test.txt");
