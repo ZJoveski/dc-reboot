@@ -220,6 +220,10 @@ export var Session = {
     updateCommunicationUnitsRemaining: function(userId, updateAmount) {
         SessionInfo.update({id: userId}, {$inc: {communicationUnitsRemaining: (-updateAmount)}});
     },
+
+    setAdjMatrix: function(matrix) {
+        this.adjMatrix = matrix;
+    }
 };
 
 // A method which calls the setColor function, but only when a session is in progress and no other
