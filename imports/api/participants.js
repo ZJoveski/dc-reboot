@@ -39,10 +39,10 @@ export var Participants = {
                     "Bob", "Joe", "Moe", "May", "Tim"],
 
     initializeFullListOfParticipants: function() {
-        this.participantsQueue = [];
+        var queue = this.participantsQueue;
         var readyUsers = Meteor.users.find({"status.online": true, username: {$ne: "admin"}, location: '/experiment'});
         readyUsers.forEach(function(user) {
-           this.participantsQueue.push(user._id);
+           queue.push(user._id);
         });
 
         /* Log entry. */ Logger.recordExperimentParticipants(this.participantsQueue);
