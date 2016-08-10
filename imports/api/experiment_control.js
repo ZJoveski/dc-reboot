@@ -52,7 +52,9 @@ var runPreGame = function() {
         Progress.setProgress('preSession', true);
 
         // ... countdown to next session.
-        preSessionCountdown = setInterval(Time.updateTimeInfo('current time'), Time.timeUpdateRate);
+        preSessionCountdown = setInterval(function() {
+            Time.updateTimeInfo('current time')
+        }, Time.timeUpdateRate);
         preSessionTimeout = setTimeout(function() {
             clearInterval(preSessionCountdown);
             Progress.setProgress('preSession', false);
