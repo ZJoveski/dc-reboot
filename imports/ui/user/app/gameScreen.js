@@ -1,7 +1,5 @@
 import { Template } from 'meteor/templating';
 
-import './gameScreen.html';
-
 import { Utilities } from '../../../api/util.js';
 import { ColorMagic } from '../../../api/colors_mapping.js';
 
@@ -21,6 +19,8 @@ import './buttons.js';
 import './chatBox.js';
 import './preSessionCountdown.js';
 import './gameOutcomeStatus.js';
+
+import './gameScreen.html';
 
 var gameCanvas;
 

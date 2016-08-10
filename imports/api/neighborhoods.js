@@ -111,7 +111,7 @@ getNamesOfNeighbors = function(userId) {
       
     for(var j = 0; j < Session.adjMatrix.length; j++) {
         if(Session.adjMatrix[i][j]) {
-            neighNames.push(node_name[j]);
+            neighNames.push(Participants.node_name[j]);
         }
     }
   

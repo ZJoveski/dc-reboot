@@ -3,7 +3,7 @@ import { Template } from 'meteor/templating';
 import { SessionInfo } from '../../../api/collections/game_collections.js';
 import { TimeInfo } from '../../../api/collections/game_collections.js';
 
-import './preSessionCountdown.js';
+import './preSessionCountdown.html';
 
 Template.preSessionCountdown.helpers({
     status: function() {
