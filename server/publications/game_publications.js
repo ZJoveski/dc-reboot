@@ -77,9 +77,8 @@ Meteor.publishComposite('timeInfo', {
 Meteor.publishComposite('messages', {
     find: function() {
         var id = this.userId;
-            if(Parameters.communication) {
-                    return MessagesCollection.find({idOfRecipient: id}, {fields: {nameOfSender: 1, message: 1}});
-            }
+        if(Parameters.communication) {
+                return MessagesCollection.find({idOfRecipient: id}, {fields: {nameOfSender: 1, message: 1}});
         }
     }
 });
