@@ -154,7 +154,7 @@ var assignRandomAdversaries = function() {
     return adversaries;
 }
 
-var initalizeParticipationRate = function(rate) {
+var initializeParticipationRate = function(rate) {
     for(var i = 0; i < Participants.participants.length; i++) {
         Participants.participationRate[Participants.participants[i]] = rate;
     }
