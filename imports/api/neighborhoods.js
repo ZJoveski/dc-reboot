@@ -2,6 +2,7 @@ import { NeighborhoodsInfo } from './collections/game_collections.js';
 import { Participants } from './participants.js';
 import { Session } from './session.js';
 import { ColorMagic } from './colors_mapping.js';
+import { Logger } from './logging.js';
 
 export var Neighborhoods = {
     NeighborhoodsInfo: NeighborhoodsInfo,
