@@ -102,6 +102,8 @@ export var Parameters = {
         
         console.log("Game parameters:");
         console.log(pars);
+        console.log("adjmatrix: " );
+        console.log(matrix);
         
         return matrix;
     },
@@ -295,6 +297,8 @@ var readAdjMatrix = function(fileName) {
         }
         adjMatArr.push(matArr);
     }
+    console.log("create adjmatrix: " );
+    console.log(adjMatArr);
     return adjMatArr;
 }
 
