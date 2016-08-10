@@ -100,7 +100,7 @@ Router.route('/survey', {
 
 Router.route('/experiment', {
     name: 'experiment',
-    template: 'gameScreen',
+    template: 'experiment',
     waitOn: function() {
         var currentUser = Meteor.userId();
         if (currentUser) {

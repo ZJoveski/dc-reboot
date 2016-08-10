@@ -24,7 +24,7 @@ import './gameScreen.html';
 
 var gameCanvas;
 
-Template.gameScreen.onCreated(function() {
+Template.experiment.onCreated(function() {
     // Beep at the players to get their attention
     var audio = new Audio('/mp3/beep_alert.mp3');
     var playthroughs = 3;
@@ -92,7 +92,7 @@ Tracker.autorun(function() {
     
 });
 
-Template.gameScreen.helpers({
+Template.experiment.helpers({
     userIsParticipant: function() {
         if(!Meteor.userId()) return false;
     
