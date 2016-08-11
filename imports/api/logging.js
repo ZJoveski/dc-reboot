@@ -343,9 +343,9 @@ export var Logger = {
         var anonymizationInfo = "";
         
         for(var node in ColorMagic.node_permutation) {
-            if(node_permutation.hasOwnProperty(node)) {
+            if(ColorMagic.node_permutation.hasOwnProperty(node)) {
                 anonymizationInfo += getFullPlayerIdentification(node, "nodeId") + "\t";
-                var permutation = ColorMagic.colorPermutations[node_permutation[node]];
+                var permutation = ColorMagic.colorPermutations[ColorMagic.node_permutation[node]];
                 for(var i = 0; i < permutation.length; i++) {
                     anonymizationInfo += permutation[i] + '\t';
                 }
