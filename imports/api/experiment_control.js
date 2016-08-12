@@ -122,7 +122,7 @@ var initializeGame = function() {
     // permutation to each node ("red" will be mapped to "red", "green" will be mapped to "green").
     /* L */ ColorMagic.initializeColorAnonymization();
 
-    setSessionIncentivesConflictParameters(proper, Session.sessionNumber);
+    Parameters.setSessionIncentivesConflictParameters(proper, Session.sessionNumber);
     /* L */ Parameters.setSessionCommunicationParameters(proper, Session.sessionNumber);
     /* L */ Parameters.setIndividualCommunicationParameters();
 
