@@ -182,19 +182,19 @@ export var Parameters = {
 
         // Get the level of conflicting incentives
         if(isProperGames) {
-            if(index < properGames) 
+            if(index < this.properGames) 
                 this.incentivesConflictLevel = parameterValues[index][1];
         } else {
-            if(index < practiceGames) 
+            if(index < this.practiceGames) 
                 this.incentivesConflictLevel = practiceParameterValues[index][1];
         }
 
         // Get the size of the minority
         if (isProperGames) {
-            if (index < properGames)
+            if (index < this.properGames)
                 this.minoritySize = parseInt(parameterValues[index][4]);
         } else {
-            if (index < practiceGames)
+            if (index < this.practiceGames)
                 this.minoritySize = parseInt(practiceParameterValues[index][4]);
         }
 
