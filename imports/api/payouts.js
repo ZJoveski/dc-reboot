@@ -66,7 +66,7 @@ export var Payouts = {
         for (var i = 0; i < Participants.participants.length; i++) {
             var individualPayout = {};
             for (var j = 0; j < ColorMagic.colors.length; j++) {
-                var anonymizedColor = ColorMagic.anonymizeColor(Participants.id_name(Participants.participants[i]), ColorMagic.colors[j]);
+                var anonymizedColor = ColorMagic.anonymizeColor(Participants.id_name[Participants.participants[i]], ColorMagic.colors[j]);
                 individualPayout[anonymizedColor] = this.potentialPayouts[Participants.participants[i]][ColorMagic.colors[j]];
             }
             individualPayout['none'] = this.potentialPayouts[Participants.participants[i]]['none'];
