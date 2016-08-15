@@ -147,7 +147,7 @@ var initializeGame = function() {
     Session.incrementSessionNumber();
     Session.currentBatchGame++;
 
-    /* Log entry. */ Logger.recordSessionInitializationCompletion(currentSession);
+    /* Log entry. */ Logger.recordSessionInitializationCompletion(Session.sessionNumber);
 }
 
 export const terminateGame = function(outcome) {

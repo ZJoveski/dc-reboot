@@ -2,7 +2,6 @@ import { Parameters } from './parameters.js';
 import { Participants } from './participants.js';
 import { Neighborhoods } from './neighborhoods.js';
 import { ColorMagic } from './colors_mapping.js';
-import { MessagesCollection } from './collections/game_collections.js';
 import { Logger } from './logging.js';
 import { SessionInfo } from './collections/game_collections.js';
 import { Time } from './time.js';
