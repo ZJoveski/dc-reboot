@@ -77,6 +77,8 @@ export var Participants = {
 
         Session.setNumberOfNodes(this.participants.length);
 
+        console.log('initializing participants');
+
         /* Log entry. */ Logger.recordSessionParticipants(this.participants);
     },
 
