@@ -1,5 +1,6 @@
 import { Logger } from './logging.js';
 import { TimeInfo } from './collections/game_collections.js';
+import { Session } from './session.js';
 
 export var Time = {
     TimeInfo: TimeInfo,
@@ -38,7 +39,7 @@ export var Time = {
                 lastSessionEndTime: this.lastSessionEndTime,
                 currentTime: this.currentTime
             }});
-            /* Log entry. */ Logger.recordSessionCompletion(currentSession);
+            /* Log entry. */ Logger.recordSessionCompletion(Session.sessionNumber);
         } else if (context == 'session start') {
             this.currentTime = time;
             this.currentSessionStartTime = time;
@@ -47,7 +48,7 @@ export var Time = {
                 currentSessionStartTime: this.currentSessionStartTime,
                 currentTime: this.currentTime
             }});
-            /* Log entry. */ Logger.recordSessionStart(currentSession);
+            /* Log entry. */ Logger.recordSessionStart(Session.sessionNumber);
         } else if (context == 'current time') {
             TimeInfo.upsert({}, {$set: {
                 currentTime: this.currentTime
