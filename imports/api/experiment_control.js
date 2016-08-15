@@ -86,6 +86,8 @@ var runGame = function() {
 
     /* L */ Progress.setProgress('session', true);
 
+    console.log('in runGame');
+
     // Timer that counts seconds during the session
     sessionCountdown = setInterval(Meteor.bindEnvironment(Time.updateTimeInfo('current time')), Time.timeUpdateRate);
 
