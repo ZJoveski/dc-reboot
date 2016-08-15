@@ -60,13 +60,13 @@ export const Utilities = {
     // Rounds numbers to a specific number of decimal points and returns a string. 
     precise_round: function(num, decimals) {
         var t=Math.pow(10, decimals);   
-        return (Math.round((num * t) + (decimals>0?1:0)*(sign(num) * (10 / Math.pow(100, decimals)))) / t).toFixed(decimals);
+        return (Math.round((num * t) + (decimals>0?1:0)*(this.sign(num) * (10 / Math.pow(100, decimals)))) / t).toFixed(decimals);
     },
 
     // Rounds numbers to a specific number of decimal points and returns a number. 
     precise_round_to_number: function(num, decimals) {
         var t=Math.pow(10, decimals);   
-        return Math.round((num * t) + (decimals>0?1:0)*(sign(num) * (10 / Math.pow(100, decimals)))) / t;
+        return Math.round((num * t) + (decimals>0?1:0)*(this.sign(num) * (10 / Math.pow(100, decimals)))) / t;
     },
 
     // Determines the sign of a number.
