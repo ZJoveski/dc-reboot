@@ -50,9 +50,9 @@ export var Time = {
             }});
             /* Log entry. */ Logger.recordSessionStart(Session.sessionNumber);
         } else if (context == 'current time') {
-            TimeInfo.update({}, {$set: {
-                currentTime: this.currentTime
-            }});
+            // TimeInfo.update({}, {$set: {
+            //     currentTime: this.currentTime
+            // }});
             this.currentTime = time;
             console.log('update time called');
         }
