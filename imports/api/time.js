@@ -50,12 +50,10 @@ export var Time = {
             }});
             /* Log entry. */ Logger.recordSessionStart(Session.sessionNumber);
         } else if (context == 'current time') {
-            console.log('in updateTimeInfo');
-            TimeInfo.upsert({}, {$set: {
+            TimeInfo.update({}, {$set: {
                 currentTime: this.currentTime
             }});
             this.currentTime = time;
-            console.log('leave updateTimeInfo');
         }
     },
 }
