@@ -103,13 +103,19 @@ Template.experiment.helpers({
         // Check if in session or in post session
         var inSession = false;
         var inPostSession = false;
+        var isParticipant = false;
         var progress = ProgressInfo.findOne({});
+        var participantsInfo = ParticipantsInfo.findOne({});
         if(progress !== undefined) {
             inSession = progress.sessionInProgress;
             inPostSession = progress.postSessionInProgress;
         }
+
+        if (participantsInfo != null) {
+            isParticipant = participantsInfo.isParticipant;
+        }
         
-        if((inSession || inPostSession) && (ParticipantsInfo.findOne({}).isParticipant)) {
+        if((inSession || inPostSession) && isParticipant) {
             return true;
         } else {
             return false;
