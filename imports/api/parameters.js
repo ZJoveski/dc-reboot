@@ -111,7 +111,7 @@ export var Parameters = {
     setSessionCommunicationParameters: function(isProperGames, currentSession) {
         var communicationDescription = "",          // 'none', 'local', 'global', 'minmajGL'
             communicationNature = "";               // 'structured', 'unstructured'
-        var index = currentSession - 1;
+        var index = currentSession;
         
         if(isProperGames) {
             if(index < this.properGames) {
