@@ -178,7 +178,7 @@ export var Parameters = {
     },
 
     setSessionIncentivesConflictParameters: function(isProperGames, currentSession) {
-        var index = currentSession - 1;
+        var index = currentSession;
 
         // Get the level of conflicting incentives
         if(isProperGames) {
