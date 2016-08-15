@@ -90,7 +90,7 @@ var runGame = function() {
     sessionCountdown = setInterval(Meteor.bindEnvironment(Time.updateTimeInfo('current time')), Time.timeUpdateRate);
 
     // Terminates the session once the full length of the session is up
-    sessionTimeout = setTimeout(Meteor.bindEnvironment(function(){ terminateGame(false); }), Time.sessionLength * Time.timeUpdateRate); 
+    //sessionTimeout = setTimeout(Meteor.bindEnvironment(function(){ terminateGame(false); }), Time.sessionLength * Time.timeUpdateRate); 
 }
 
 var initializeGame = function() {
