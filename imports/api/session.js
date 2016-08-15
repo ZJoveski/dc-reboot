@@ -2,12 +2,11 @@ import { Parameters } from './parameters.js';
 import { Participants } from './participants.js';
 import { Neighborhoods } from './neighborhoods.js';
 import { ColorMagic } from './colors_mapping.js';
-import { Messages } from './collections/game_collections.js';
+import { MessagesCollection } from './collections/game_collections.js';
 import { Logger } from './logging.js';
 import { SessionInfo } from './collections/game_collections.js';
 import { Time } from './time.js';
 import { terminateGame } from './experiment_control.js';
-
 
 // includes Communcation Management
 export var Session = {
@@ -203,10 +202,6 @@ export var Session = {
         SessionInfo.upsert({id: 'global'}, {$set: {
             numberOfNodes: numNodes
         }});
-    },
-
-    clearMessages: function() {
-        Messages.remove({});
     },
 
     isNewBatch: function() {

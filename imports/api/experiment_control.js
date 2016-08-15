@@ -7,6 +7,7 @@ import { Parameters } from './parameters.js';
 import { Neighborhoods } from './neighborhoods.js';
 import { ColorMagic } from './colors_mapping.js';
 import { Logger } from './logging.js';
+import { Messages } from './messages.js';
 
 export const startGames = function(isProperGames, numberOfGames, numberOfBatches) {
     proper = isProperGames;
@@ -138,7 +139,7 @@ var initializeGame = function() {
 
     /* L */ Session.initializeColorCounts();
 
-    Session.clearMessages();
+    Messages.clearMessages();
 
     Session.initializeColorChangeInfo();
 

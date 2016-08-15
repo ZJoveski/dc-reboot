@@ -5,6 +5,10 @@ import { MessagesCollection } from './collections/game_collections.js';
 import { Neighborhoods } from './neighborhoods.js';
 
 export var Messages = {
+    clearMessages: function() {
+        MessagesCollection.remove({});
+    },
+    
     calculatePotentialMessageCost: function(userId, messageLength) {    
         var messageCostInfo = {};
         var relativeMessageCost;
