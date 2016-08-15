@@ -131,7 +131,7 @@ export var Session = {
                 }
             }
 
-            this.communicationUnitsRemaining[Participants.participants[id]] = remaining;
+            this.communicationUnitsRemaining[Participants.participants[i]] = remaining;
 
             SessionInfo.upsert({id: Participants.participants[i]}, {$set: {
                 communicationUnitsRemaining: remaining
