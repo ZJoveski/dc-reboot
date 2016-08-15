@@ -114,6 +114,10 @@ Template.experiment.helpers({
         if (participantsInfo != null) {
             isParticipant = participantsInfo.isParticipant;
         }
+
+        console.log('in Session: ' + inSession);
+        console.log('in postSesion: ' + inPostSession);
+        console.log('isparticipant: ' + isParticipant);
         
         if((inSession || inPostSession) && isParticipant) {
             return true;
