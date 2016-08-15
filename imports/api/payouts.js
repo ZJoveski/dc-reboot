@@ -218,7 +218,7 @@ var assignPayout = function(payoutMultiplier, isAdversary) {
 
     if (isAdversary) {
         individualPayout[ColorMagic.colors[0]] = 0.00;
-        individualPayout[Colormagic.colors[1]] = 0.00;
+        individualPayout[ColorMagic.colors[1]] = 0.00;
         individualPayout["none"] = Payouts.adversaryBasePayout;
     } else {
         individualPayout[ColorMagic.colors[0]] = payoutMultiplier * Payouts.basePayout;
