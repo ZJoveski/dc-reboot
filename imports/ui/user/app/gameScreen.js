@@ -44,10 +44,13 @@ Template.experiment.onCreated(function() {
 // redraws the game nodes
 Tracker.autorun(function() {
     var progress = ProgressInfo.findOne({});
-    var sessionInProgress = progress.sessionInProgress;
-    var postSessionInProgress = progress.postSessionInProgress;
-    var preSessionInProgress = progress.preSessionInProgress;
-    var experimentInProgress = progress.experimentInProgress;
+    var sessionInProgress, postSessionInProgress, preSessionInProgress, experimentInProgress;
+    if (progress) {
+        sessionInProgress = progress.sessionInProgress;
+        postSessionInProgress = progress.postSessionInProgress;
+        preSessionInProgress = progress.preSessionInProgress;
+        experimentInProgress = progress.experimentInProgress;
+    }
 
     if (sessionInProgress || postSessionInProgress) {
         console.log("redrawing update");
