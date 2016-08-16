@@ -27,7 +27,7 @@ export var Participants = {
     participantsQueue: [],
     missedGames: {},
     participationRate: {},
-    participantsThreshold: 20,
+    participantsThreshold: 3,
     missedGamesThreshold: 1,
 
     adversaries: [],    // information by node #
@@ -73,6 +73,8 @@ export var Participants = {
                 participantsAdded++;
             }
         }
+
+        console.log('done initializing participation');
         
         initializeParticipationRate(0);
 
