@@ -182,10 +182,6 @@ export var Canvas = function () {
   self.drawCentralLabel = function(nodeName) {
       var nodeLabel = "Me";
       
-      if(currentUserIsTheAdmin()) {
-          nodeLabel = nodeName;
-      }
-      
       name_node[nodeName].append("text")
                          .text(nodeLabel)
                          .attr("font-family", textFont)
