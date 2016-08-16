@@ -9,7 +9,7 @@ import './chatBox.html';
 
 Template.chatBox.onCreated(function() {
     console.log('ParametersInfo');
-    console.log(ParametersInfo.findOne({id: Meteor.userId()}));
+    console.log(ParametersInfo.findOne({userId: Meteor.userId()}));
     var charactersLimit = ParametersInfo.findOne({id: Meteor.userId()}).messageLengthBound;
     Session.set('charactersLimit', charactersLimit);
     Session.set('charactersRemaining', charactersLimit);
