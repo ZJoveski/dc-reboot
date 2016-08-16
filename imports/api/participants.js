@@ -49,7 +49,7 @@ export var Participants = {
     },
 
     initializeGameParticipants: function(newBatch) {
-        if(this.participantsQueue.length <= this.participantsThreshold) {
+        if(this.participantsQueue.length < this.participantsThreshold) {
             // This should not happen, but it would be good if we have some plan B when not enough people show up.
             this.participants = this.participantsQueue;
         }
