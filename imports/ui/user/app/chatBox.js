@@ -4,6 +4,8 @@ import { Session } from 'meteor/session';
 import { MessagesCollection } from '../../../api/collections/game_collections.js';
 import { ParametersInfo } from '../../../api/collections/game_collections.js';
 import { SessionInfo } from '../../../api/collections/game_collections.js';
+import { NeighborhoodsInfo } from '../../../api/collections/game_collections.js';
+
 
 import './chatBox.html';
 
