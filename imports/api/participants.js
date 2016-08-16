@@ -58,11 +58,12 @@ export var Participants = {
             removeInactiveParticipants();
             
             this.participants = [];
-            ParticipantsInfo.update({}, {$set: {
+            ParticipantsInfo.upsert({}, {$set: {
                 isParticipant: false
             }});
             var participantsAdded = 0;
-            while(participantsAdded < this.participantsThreshold) {
+            while(participantsAdded < this.participantsThreshold && participantsAdded < this.participantsQueue.length) {
+                console.log('updating isParticipant');
                 var nextParticipant = this.participantsQueue.shift();
                 this.participants.push(nextParticipant);
                 this.participantsQueue.push(nextParticipant);
