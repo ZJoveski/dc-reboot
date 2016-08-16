@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import { SessionInfo } from '../../../api/collections/game_collections.js';
 import { TimeInfo } from '../../../api/collections/game_collections.js';
 import { Time } from '../../../api/time.js';
+import { Utilities } from '../../../api/util.js';
 
 import './progressBars.html';
 
@@ -21,7 +22,7 @@ Template.progressBars.helpers({
         var numNodes = SessionInfo.findOne({id: 'global'}).numberOfNodes;
         var numAdversaries = SessionInfo.findOne({id: 'global'}).numberOfAdversaries;
 
-        if (colorCounts != null && numNodes != null && numAdversaires != null) {
+        if (colorCounts != null && numNodes != null && numAdversaries != null) {
             var percentage = Math.round(100 * Math.max.apply(null, countsArray) / (numNodes - numAdversaries)) + '%';
         }
 
@@ -41,7 +42,7 @@ Template.progressBars.helpers({
 
         if (currentTime != null && currentSessionStart != null) {
             var millisecondsRemaining = Time.sessionLength * Time.timeUpdateRate - (currentTime - currentSessionStart);
-            timeValue = millisecondsToTime(millisecondsRemaining);
+            timeValue = Utilities.millisecondsToTime(millisecondsRemaining);
         }
 
         return timeValue;
