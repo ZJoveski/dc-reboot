@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { Session } from 'meteor/session';
 
 import { ColorMagic } from '../../../api/colors_mapping.js';
 

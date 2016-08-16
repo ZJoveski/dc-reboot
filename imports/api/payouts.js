@@ -135,7 +135,7 @@ export var Payouts = {
                     var isAdversary = Participants.adversaries[i];
                    
                     if (isAdversary) {
-                        actualPayout = precise_round_to_number(this.adversaryBasePayout, 2)
+                        actualPayout = Utilities.precise_round_to_number(this.adversaryBasePayout, 2)
                         this.sessionPayouts[Participants.participants[i]] = actualPayout;
                         PayoutInfo.update({id: Participants.participants[i]}, {$inc: {totalPayout: actualPayout}});
                     } else {

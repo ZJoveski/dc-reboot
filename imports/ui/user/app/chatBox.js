@@ -53,9 +53,11 @@ Template.chatBox.helpers({
 
     userCanSendMessages: function() {
         var response = false;
-        var communication = ParametersInfo.findOne({id: Meteor.userId()}).communication;
+        console.log('parametersInfo');
+        console.log(ParametersInfo.findOne({userId: Meteor.userId()}));
+        var parametersInfo = ParametersInfo.findOne({userId: Meteor.userId()});
         if (communication != null) {
-            response = communication;
+            response = parametersInfo.communication;
         }
 
         return response;
@@ -63,7 +65,7 @@ Template.chatBox.helpers({
 
     communicationIsStructured: function() {
         var response = false;
-        var structuredCommunication = ParametersInfo.findOne({id: Meteor.userId()}).structuredCommunication;
+        var structuredCommunication = ParametersInfo.findOne({userId: Meteor.userId()}).structuredCommunication;
         if (structuredCommunication != null) {
             response = structuredCommunication;
         }
@@ -75,7 +77,7 @@ Template.chatBox.helpers({
         var status = "";
 
         var remaining = SessionInfo.findOne({id: Meteor.userId()}).communicationUnitsRemaining;
-        var structuredCommunication = ParametersInfo.findOne({id: Meteor.userId()}).structuredCommunication;
+        var structuredCommunication = ParametersInfo.findOne({userId: Meteor.userId()}).structuredCommunication;
 
         if (structuredCommunication) {
             status += remaining + ' messages remaining.';
