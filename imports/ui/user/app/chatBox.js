@@ -56,7 +56,7 @@ Template.chatBox.helpers({
         console.log('parametersInfo');
         console.log(ParametersInfo.findOne({userId: Meteor.userId()}));
         var parametersInfo = ParametersInfo.findOne({userId: Meteor.userId()});
-        if (communication != null) {
+        if (parametersInfo != null) {
             response = parametersInfo.communication;
         }
 
