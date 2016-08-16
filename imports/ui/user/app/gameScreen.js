@@ -106,6 +106,8 @@ Template.experiment.helpers({
         var isParticipant = false;
         var progress = ProgressInfo.findOne({});
         var participantsInfo = ParticipantsInfo.findOne({});
+        console.log('participantsInfo');
+        console.log(participantsInfo);
         if(progress !== undefined) {
             inSession = progress.sessionInProgress;
             inPostSession = progress.postSessionInProgress;

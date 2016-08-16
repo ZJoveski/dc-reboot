@@ -1,3 +1,5 @@
+import { Session } from './../../../api/session.js';
+
 export var Canvas = function () {
   var self = this,                      // Reference to the canvas object itself.
       numNodes = 0,                     /* The number of nodes in the corresponding neighborhood.
@@ -42,7 +44,8 @@ export var Canvas = function () {
       nodeBorderColor = "black",
       textFont = "sans-serif",
       textSize = nodeRadius * 0.75,
-      textColor = "black";
+      textColor = "black",
+      defaultNodeColor = Session.defaultNodeColor;
   
   var createSvg = function() {
     var coordinateSystem ="0 0 " + viewBoxWidth + " " + viewBoxHeight;
