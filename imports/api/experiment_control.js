@@ -137,6 +137,8 @@ var initializeGame = function() {
         
     }
 
+    console.log('does it even get here');
+
     /* L */ Session.initializeColorCounts();
 
     Messages.clearMessages();
