@@ -57,7 +57,10 @@ export var Neighborhoods = {
                 var color = newColors[currentName];
                 console.log('newcolor');
                 console.log(currentName);
-                var newColor = ColorMagic.anonymizeColor(currentName ,color);
+                var newColor = color;
+                if (newColor != 'white') {
+                    ColorMagic.anonymizeColor(currentName, color);
+                }
                 console.log(newColor);
                 neighborhoodColors[currentName] = newColor;
             }
