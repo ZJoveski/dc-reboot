@@ -32,7 +32,7 @@ Template.experiment.onCreated(function() {
 
     var playerNoise = setInterval(function() {
         if(playthroughs > 0) {
-            audio.play();
+            //audio.play();
             playthroughs--;
         } else {
             clearInterval(playerNoise)

@@ -5,6 +5,7 @@ import { ColorMagic } from './colors_mapping.js';
 import { Logger } from './logging.js';
 import { SessionInfo } from './collections/game_collections.js';
 import { Time } from './time.js';
+import { Progress } from './progress.js';
 import { terminateGame } from './experiment_control.js';
 
 // includes Communcation Management
