@@ -54,7 +54,6 @@ export var Time = {
                 currentTime: this.currentTime
             }});
             this.currentTime = time;
-            console.log('update time called');
         }
     },
 }
