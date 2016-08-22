@@ -59,10 +59,20 @@ Tracker.autorun(function() {
         if (neighborsInfo != null) {
             var namesOfNeighbors = neighborsInfo.namesOfNeighbors;
             var neighAdjMatrix = neighborsInfo.neighAdjMatrix;
+            var neighborhoodColors = neighborsInfo.neighborhoodColors;
+
             //Session.set("clientName", namesOfNeighbors[0]);
 
             if (gameCanvas) { 
                 console.log("redrawing canvas");
+
+                for (var name in neighborhoodColors) {
+                    console.log("updating color");
+                    if (neighborhoodColors.hasOwnProperty(name)) {
+                        gameCanvas.updateNodeColor(name, neighborhoodColors[name]);
+                    }
+                } 
+
                 setTimeout(function() {
                     gameCanvas.clear();  
                     gameCanvas.draw(namesOfNeighbors,neighAdjMatrix); 
@@ -84,19 +94,19 @@ Tracker.autorun(function() {
 });
 
 // updates the colors of the game nodes
-Tracker.autorun(function() {
-    console.log('update color');
-    if (gameCanvas) {
-        console.log('there is a game canvas');
-        var neighborhoodColors = NeighborhoodsInfo.findOne({userId: Meteor.userId()}).neighborhoodColors;
-        for (var name in neighborhoodColors) {
-            if (neighborhoodColors.hasOwnProperty(name)) {
-                gameCanvas.updateNodeColor(name, neighborhoodColors[name]);
-            }
-        } 
-    }
+// Tracker.autorun(function() {
+//     console.log('update color');
+//     if (gameCanvas) {
+//         console.log('there is a game canvas');
+//         var neighborhoodColors = NeighborhoodsInfo.findOne({userId: Meteor.userId()}).neighborhoodColors;
+//         for (var name in neighborhoodColors) {
+//             if (neighborhoodColors.hasOwnProperty(name)) {
+//                 gameCanvas.updateNodeColor(name, neighborhoodColors[name]);
+//             }
+//         } 
+//     }
     
-});
+// });
 
 Template.experiment.helpers({
     userIsParticipant: function() {
