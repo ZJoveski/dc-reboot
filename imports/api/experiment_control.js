@@ -84,15 +84,15 @@ var runPreGame = function() {
 var runGame = function() {
     initializeGame();
 
-    setTimeout(function() {
-        /* L */ Progress.setProgress('session', true);
+    // setTimeout(function() {
+    //     /* L */ Progress.setProgress('session', true);
 
-        // Timer that counts seconds during the session
-        sessionCountdown = setInterval(Meteor.bindEnvironment(function() { Time.updateTimeInfo('current time') }), Time.timeUpdateRate);
+    //     // Timer that counts seconds during the session
+    //     sessionCountdown = setInterval(Meteor.bindEnvironment(function() { Time.updateTimeInfo('current time') }), Time.timeUpdateRate);
 
-        // Terminates the session once the full length of the session is up
-        sessionTimeout = setTimeout(Meteor.bindEnvironment(function(){ terminateGame(false); }), Time.sessionLength * Time.timeUpdateRate); 
-    }, 2000);
+    //     // Terminates the session once the full length of the session is up
+    //     sessionTimeout = setTimeout(Meteor.bindEnvironment(function(){ terminateGame(false); }), Time.sessionLength * Time.timeUpdateRate); 
+    // }, 5000);
 }
 
 var initializeGame = function() {
