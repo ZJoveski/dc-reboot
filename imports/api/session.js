@@ -139,6 +139,7 @@ export var Session = {
     },
 
     initializeColorCounts: function() {
+        console.log('intializeColorCounts');
         for (var i = 0; i < ColorMagic.colors; i++) {
             var color = ColorMagic.colors[i];
             var count = 0;
