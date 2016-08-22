@@ -13,11 +13,16 @@ Template.progressBars.helpers({
 
         var countsArray = [];
         var colorCounts = SessionInfo.findOne({id: 'global'}).colorCounts;
-        for (var color in colorCounts) {
-            if (colorCounts.hasOwnProperty(color)) {
-                countsArray.push(colorCounts[color]);
-            }
+        if (colorCounts) {
+            for (var color in colorCounts) {
+                if (colorCounts.hasOwnProperty(color)) {
+                    countsArray.push(colorCounts[color]);
+                }
+            }     
+        } else {
+            countsArray.push(0);
         }
+        
 
         var numNodes = SessionInfo.findOne({id: 'global'}).numberOfNodes;
         var numAdversaries = SessionInfo.findOne({id: 'global'}).numberOfAdversaries;
