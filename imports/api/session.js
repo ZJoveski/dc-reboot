@@ -160,6 +160,8 @@ export var Session = {
             colorCounts: this.counts
         }});
 
+        console.log('wtf');
+
         /* Log entry. */ Logger.recordSessionColorCounts(this.counts);
     },
 
