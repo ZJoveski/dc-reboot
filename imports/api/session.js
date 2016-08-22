@@ -156,6 +156,8 @@ export var Session = {
             this.counts[color] = count;
         }
 
+        console.log(this.counts);
+
         SessionInfo.upsert({id: 'global'}, {$set: {
             colorCounts: this.counts
         }});
