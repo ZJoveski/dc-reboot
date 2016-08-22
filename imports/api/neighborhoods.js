@@ -59,6 +59,7 @@ export var Neighborhoods = {
                 neighborhoodColors[currentName] = newColor;
             }
 
+            console.log('updateNeighborhoodColors');
             NeighborhoodsInfo.upsert({userId: userId}, {$set: {neighborhoodColors: neighborhoodColors}}); 
         }
     },
