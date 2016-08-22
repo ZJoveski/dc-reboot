@@ -26,6 +26,13 @@ Template.progressBars.helpers({
             var percentage = Math.round(100 * Math.max.apply(null, countsArray) / (numNodes - numAdversaries)) + '%';
         }
 
+        console.log('numNodes');
+        console.log(numNodes);
+        console.log('numAdversaries');
+        console.log(numAdversaries);
+        console.log('countsArray');
+        console.log(countsArray);
+
         // if(gameProgressBar = $('#gameProgress')) {
         //     gameProgressBar.css('width', percentageValue);
         // }
