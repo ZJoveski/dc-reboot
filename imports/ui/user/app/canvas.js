@@ -165,7 +165,7 @@ export var Canvas = function () {
   
   self.updateNodeColor = function(nodeName, color) {
       if(name_circle.hasOwnProperty(nodeName)) {
-          console("update color successful");
+          console.log("update color successful");
           (name_circle[nodeName]).style("fill", color);
       }
   };
