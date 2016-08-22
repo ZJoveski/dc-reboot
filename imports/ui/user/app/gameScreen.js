@@ -60,23 +60,29 @@ Tracker.autorun(function() {
             var namesOfNeighbors = neighborsInfo.namesOfNeighbors;
             var neighAdjMatrix = neighborsInfo.neighAdjMatrix;
             var neighborhoodColors = neighborsInfo.neighborhoodColors;
+            var updateColor = neighborsInfo.updateColor;
 
             //Session.set("clientName", namesOfNeighbors[0]);
 
             if (gameCanvas) { 
                 console.log("redrawing canvas");
 
-                for (var name in neighborhoodColors) {
-                    console.log("updating color");
-                    if (neighborhoodColors.hasOwnProperty(name)) {
-                        gameCanvas.updateNodeColor(name, neighborhoodColors[name]);
+                if (updateColor) {
+                    for (var name in neighborhoodColors) {
+                        console.log("updating color");
+                        if (neighborhoodColors.hasOwnProperty(name)) {
+                            console.log('neighborHoodColor');
+                            console.log(name);
+                            console.log(neighborhoodColors[name]);
+                            gameCanvas.updateNodeColor(name, neighborhoodColors[name]);
+                        }
                     }
-                } 
-
-                setTimeout(function() {
-                    gameCanvas.clear();  
-                    gameCanvas.draw(namesOfNeighbors,neighAdjMatrix); 
-                }, 200);
+                } else {
+                    setTimeout(function() {
+                        gameCanvas.clear();  
+                        gameCanvas.draw(namesOfNeighbors,neighAdjMatrix); 
+                    }, 200);
+                }
             } 
         }
     } else if (preSessionInProgress) {

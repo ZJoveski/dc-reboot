@@ -41,7 +41,7 @@ export var Neighborhoods = {
                 neighborhoodColors[namesOfNeighbors[j]] = Session.defaultNodeColor;
             }
 
-            NeighborhoodsInfo.upsert({userId: userId}, {$set: {neighborhoodColors: neighborhoodColors}});          
+            NeighborhoodsInfo.upsert({userId: userId}, {$set: {neighborhoodColors: neighborhoodColors, updateColor: false}});          
         }
     },
 
@@ -60,7 +60,7 @@ export var Neighborhoods = {
             }
 
             console.log('updateNeighborhoodColors');
-            NeighborhoodsInfo.upsert({userId: userId}, {$set: {neighborhoodColors: neighborhoodColors}}); 
+            NeighborhoodsInfo.upsert({userId: userId}, {$set: {neighborhoodColors: neighborhoodColors, updateColor: true}}); 
         }
     },
 };
