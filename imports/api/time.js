@@ -10,7 +10,7 @@ export var Time = {
     currentSessionStartTime: -1,
     lastSessionEndTime: -1,
     currentTime: -1,
-    sessionLength: 60,
+    sessionLength: 600,
     preSessionLength: 5,
     postSessionLength: 5,
     timeUpdateRate: 1000,

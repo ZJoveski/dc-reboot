@@ -272,7 +272,7 @@ var updateColorsInfoAnonymized = function(userId, name, newColor, requestNo) {
         Participants.participationRate[userId] += 1;
         
         /* Log entry. */ Logger.recordRequestProcessed(actualNewColor, name, requestNo);
-        /* Log entry. */ Logger.recordSessionColorCounts();
+        /* Log entry. */ Logger.recordSessionColorCounts(Session.counts);
         
         if(Session.counts[ColorMagic.color_number[actualNewColor]] == Session.numberOfNodes - Session.numberOfAdversaries) {
             Session.outcomeColor = actualNewColor;
