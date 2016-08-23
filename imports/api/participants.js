@@ -131,7 +131,7 @@ export var Participants = {
     assignAdversaries: function() {
         if (Session.adversaryAssignment == "random") {
             this.adversaries = assignRandomAdversaries();
-            console.log(adversaries);
+            console.log(this.adversaries);
             for (var i = 0; i < this.adversaries.length; i++) {
                 var userId = this.participants[i];
                 var isAdversary = this.adversaries[this.name_node[this.id_name[userId]]];
