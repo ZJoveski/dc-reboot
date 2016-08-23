@@ -139,7 +139,7 @@ export var Session = {
     },
 
     initializeColorCounts: function() {
-        console.log('intializeColorCounts');
+        console.log('initializeColorCounts');
         for (var i = 0; i < ColorMagic.colors.length; i++) {
             var color = ColorMagic.colors[i];
             var count = 0;
@@ -269,8 +269,8 @@ var updateColorsInfoAnonymized = function(userId, name, newColor, requestNo) {
         if (Session.adversaryMode())
             isAdversary = Participants.adversaries[node];
         if (!isAdversary) {
-            if(actualOldColor !== Session.defaultNodeColor) { Session.counts[ColorMagic.color_number[actualOldColor]]--; }
-            Session.counts[ColorMagic.color_number[actualNewColor]]++;
+            if(actualOldColor !== Session.defaultNodeColor) { Session.counts[actualOldColor]--; }
+            Session.counts[actualNewColor]++;
             SessionInfo.update({id: 'global'}, {$set: {
                 colorCounts: Session.counts
             }});
@@ -282,7 +282,7 @@ var updateColorsInfoAnonymized = function(userId, name, newColor, requestNo) {
         /* Log entry. */ Logger.recordRequestProcessed(actualNewColor, name, requestNo);
         /* Log entry. */ Logger.recordSessionColorCounts(Session.counts);
         
-        if(Session.counts[ColorMagic.color_number[actualNewColor]] == Session.numberOfNodes - Session.numberOfAdversaries) {
+        if(Session.counts[actualNewColor] == Session.numberOfNodes - Session.numberOfAdversaries) {
             Session.outcomeColor = actualNewColor;
 
             for (var i = 0; i < Participants.participants.length; i++) {
