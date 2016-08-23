@@ -14,6 +14,7 @@ Template.progressBars.helpers({
         var countsArray = [];
         var colorCounts = SessionInfo.findOne({id: 'global'}).colorCounts;
         if (colorCounts) {
+            console.log(colorCounts);
             for (var color in colorCounts) {
                 if (colorCounts.hasOwnProperty(color)) {
                     countsArray.push(colorCounts[color]);
