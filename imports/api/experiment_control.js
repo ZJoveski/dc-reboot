@@ -117,13 +117,15 @@ var initializeGame = function() {
     Participants.initializeGameParticipants(Session.isNewBatch());
     if (Session.isNewBatch()) {
         /* L */ Participants.assignIdsToNames();
+    }
 
+    /* L */ Neighborhoods.assignNeighborhoodsToClients();
+
+    if (Session.isNewBatch()) {
         if (Session.adversaryMode()) {
             Participants.assignAdversaries();
         }
     }
-
-    /* L */ Neighborhoods.assignNeighborhoodsToClients();
 
     /* Log entry. */ Logger.recordAdversaries();
 
