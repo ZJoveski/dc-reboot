@@ -137,6 +137,7 @@ export var Participants = {
                 var isAdversary = this.adversaries[this.name_node[this.id_name[userId]]];
                 console.log('isAdvesary');
                 console.log(isAdversary);
+                console.log(this.name_node[this.id_name[userId]]);
                 console.log(this.id_name[userId]);
                 ParticipantsInfo.upsert({userId: userId}, {$set: {
                     isAdversary: isAdversary
