@@ -63,7 +63,7 @@ export var Logger = {
         for (var i = 0; i < Participants.adversaries.length; i++) {
             var userId = Participants.participants[i];
             adversariesInfo += getFullPlayerIdentification(userId, "userId");
-            adversariesInfo += '\t' + Participants.adversaries[i];
+            adversariesInfo += '\t' + Participants.adversaries[Participants.name_node[Participants.id_name[userId]]];
             adversariesInfo += '\n';
         }
 

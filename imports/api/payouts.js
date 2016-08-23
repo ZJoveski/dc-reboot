@@ -119,7 +119,7 @@ export var Payouts = {
                 
                 actualPayout = Utilities.precise_round_to_number(actualPayout, 2); 
                                     
-                this.sessionPayouts[Particiapants.participants[i]] = actualPayout;
+                this.sessionPayouts[Participants.participants[i]] = actualPayout;
                 PayoutInfo.update({id: Participants.participants[i]}, {$inc: {
                     totalPayout: actualPayout
                 }});

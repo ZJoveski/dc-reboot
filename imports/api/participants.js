@@ -132,8 +132,8 @@ export var Participants = {
         if (Session.adversaryAssignment == "random") {
             this.adversaries = assignRandomAdversaries();
             for (var i = 0; i < this.adversaries.length; i++) {
-                var userId = this.name_id[this.node_name[i]];
-                var isAdversary = this.adversaries[i];
+                var userId = this.participants[i];
+                var isAdversary = this.adversaries[this.name_node[this.id_name[userId]]];
                 ParticipantsInfo.upsert({userId: userId}, {$set: {
                     isAdversary: isAdversary
                 }});
