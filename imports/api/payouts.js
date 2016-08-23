@@ -119,7 +119,7 @@ export var Payouts = {
                 
                 actualPayout = Utilities.precise_round_to_number(actualPayout, 2); 
                                     
-                this.sessionPayouts[Particiapnts.participants[i]] = actualPayout;
+                this.sessionPayouts[Particiapants.participants[i]] = actualPayout;
                 PayoutInfo.update({id: Participants.participants[i]}, {$inc: {
                     totalPayout: actualPayout
                 }});
@@ -132,7 +132,7 @@ export var Payouts = {
             for(var i = 0; i < Participants.participants.length; i++){
                 var actualPayout = 0;
                 if (Session.adversaryMode()) {
-                    var isAdversary = Participants.adversaries[i];
+                    var isAdversary = Participants.adversaries[Participants.name_node[Participants.id_name[Participants.participants[i]]]];
                    
                     if (isAdversary) {
                         actualPayout = Utilities.precise_round_to_number(this.adversaryBasePayout, 2)
