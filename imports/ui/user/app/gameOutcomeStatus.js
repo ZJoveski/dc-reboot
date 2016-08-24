@@ -9,6 +9,8 @@ Template.gameOutcomeStatus.helpers({
         var status = "";
 
         var outcome = SessionInfo.findOne({id: 'global'}).outcome;
+        console.log('outcome');
+        console.log(outcome);
         if (outcome != null) {
             if (outcome) {
                 var consensusColor = SessionInfo.findOne({id: 'global'}).outcomeColor;
