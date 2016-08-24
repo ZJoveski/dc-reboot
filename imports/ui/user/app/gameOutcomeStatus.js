@@ -13,7 +13,7 @@ Template.gameOutcomeStatus.helpers({
         console.log(outcome);
         if (outcome != null) {
             if (outcome) {
-                var consensusColor = SessionInfo.findOne({id: 'global'}).outcomeColor;
+                var consensusColor = SessionInfo.findOne({id: Meteor.userId()}).outcomeColor;
                 status = consensusColor.toUpperCase();
             } else {
                 status = 'NO';

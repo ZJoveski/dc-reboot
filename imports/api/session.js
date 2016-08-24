@@ -188,14 +188,6 @@ export var Session = {
         /* Log entry. */ Logger.recordSessionOutcome(outcome);
     },
 
-    setOutcomeColor: function(color) {
-        this.outcomeColor = color;
-
-        SessionInfo.upsert({id: 'global'}, {$set: {
-            outcomeColor: color
-        }});
-    },
-
     setNumberOfNodes: function(numNodes) {
         this.numberOfNodes = numNodes;
         SessionInfo.upsert({id: 'global'}, {$set: {
