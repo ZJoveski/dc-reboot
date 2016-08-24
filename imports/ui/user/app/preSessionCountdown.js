@@ -11,6 +11,7 @@ Template.preSessionCountdown.helpers({
 
         var sessionNumber = SessionInfo.findOne({id: 'global'}).sessionNumber;
         if (sessionNumber != null) {
+            console.log('sessionnumber not null');
             var secondsRemaining = 0;
             var currentTime = TimeInfo.findOne({}).currentTime;
             var lastSessionEndTime = TimeInfo.findOne({}).lastSessionEndTime;
