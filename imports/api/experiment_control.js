@@ -84,16 +84,6 @@ var runPreGame = function() {
 var runGame = function() {
     initializeGame();
 
-    // setTimeout(function() {
-    //     /* L */ Progress.setProgress('session', true);
-
-    //     // Timer that counts seconds during the session
-    //     sessionCountdown = setInterval(Meteor.bindEnvironment(function() { Time.updateTimeInfo('current time') }), Time.timeUpdateRate);
-
-    //     // Terminates the session once the full length of the session is up
-    //     sessionTimeout = setTimeout(Meteor.bindEnvironment(function(){ terminateGame(false); }), Time.sessionLength * Time.timeUpdateRate); 
-    // }, 5000);
-
     /* L */ Progress.setProgress('session', true);
 
     // Timer that counts seconds during the session
@@ -149,8 +139,6 @@ var initializeGame = function() {
         
     }
 
-    console.log('does it even get here');
-
     /* L */ Session.initializeColorCounts();
 
     Messages.clearMessages();
@@ -160,8 +148,6 @@ var initializeGame = function() {
 
     Session.incrementSessionNumber();
     Session.currentBatchGame++;
-
-    console.log('does it get here');
 
     /* Log entry. */ Logger.recordSessionInitializationCompletion(Session.sessionNumber);
 }

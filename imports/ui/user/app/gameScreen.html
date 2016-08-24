@@ -9,50 +9,50 @@
                     <div class="game" style = "line-height: 100%; font-size: 1.6vmin; ">Your Session Payout</div>
                 </div>
             {{else}}
+                <div class="game" style = "position: relative; width:100vw;height:100vh; max-height: 100%; max-width:100%;" id='canvas'></div>
+                {{>progressBars}}
+                <div class="game" id="colorControls">
+                    Your Color: {{>button1}} {{>button2}}
+                </div>
+                <div class="game" id="totalPayout" align = "center" style = " position: absolute; padding-top:0%; display: block; top: 12.0%; left: 2.5vmin; background-color: greenyellow; border-style: ridge; border-style: solid; border-color: #ADFF2F; width: 18vmin; height: 9vmin;">
+                    <div class="game" style = "line-height: 100%; font-size: 6vmin; "> ${{totalPayout}} </div>
+                    <div class="game" style = "line-height: 100%; font-size: 1.6vmin; ">Your Total Payout</div>
+                </div>
+                <div class="game" id="potentialPayoutsTitle" align = "center" style = " position: absolute; padding-top:0%; display: block; top: 59.0%; left: 2.5vmin; background-color: yellow; border-style: ridge; border-style: solid; border-color: yellow; width: 37.0vmin; height: 5vmin;">
+                    Potential Bonuses
+                </div>
+                {{#each potentialPayouts}}
+                    {{> potentialPayout}}
+                {{/each}}
+                <div class="game" id="currentName" align = "center" style = " position: absolute; padding-top:0%; display: block; top: 22.0%; left: 2.5vmin; background-color: CornflowerBlue; border-style: ridge; border-style: solid; border-color: CornflowerBlue; width: 37.0vmin; height: 13.75vmin;">
+                    <div class="game" style = "line-height:100%; font-size: 10vmin;">{{currentName}} </div>
+                    <div class="game" style = "line-height:100%; font-size: 3vmin;">Your Name</div>
+                </div>
+                <div class="game" id = "communicationType">
+                    <div align = "center" style = " position: absolute; padding-top:0%; display: block; top: 15%; left:75.0%; background-color: orange; border-style: ridge; border-style: solid; border-color: orange; width: 37.0vmin; height: 9vmin;">
+                        <div style = "line-height: 100%; font-size: 6vmin; "> {{communicationType}} </div>
+                        <div style = "line-height: 100%; font-size: 1.8vmin; ">communication</div>
+                    </div>
+                </div>
+                <div class="game" id = "communicationCost">
+                    <div align = "center" style = " position: absolute; padding-top:0%; display: block; top: 25%; left:75.0%; background-color: orange; border-style: ridge; border-style: solid; border-color: orange; width: 37.0vmin; height: 9vmin;">
+                        <div style = "line-height: 100%; font-size: 6vmin;"> {{communicationCost}} </div>
+                        <div style = "line-height: 100%; font-size: 1.8vmin;">communication</div>
+                    </div>
+                </div>
+                <div class="game" id = "chatContainer">
+                    {{>chatBox}}
+                </div>
+                <div class="game" id="gameInProgressStatus" align = "center" style = " position: absolute; padding-top:0%; display: block; top: 41.5%; left: 2.5vmin; background-color: orange; border-style: ridge; border-style: solid; border-color: orange; width: 37.0vmin; height: 7vmin;">
+                    <div class="game" style = "line-height: 100%; font-size: 4vmin; "> {{batchStatus}}, {{sessionStatus}}</div>
+                    <div class="game" style = "line-height: 100%; font-size: 1.8vmin; ">is in progress</div>
+                </div>
+                <div class="game" id="adversaryInfo" align="center" style="position: absolute; padding-top:0%; display: block; top: 36.5%; left: 2.5vmin; background-color: #FFF0F5; border-style: ridge; border-style: solid; border-color: #FFF0F5; width: 37.0vmin; height: 3.75vmin;">
+                    <div class="game" style="line-height:100%; font-size: 3vmin; {{#if isAdversary}} color: red {{/if}}">
+                        {{#if isAdversary}}Team No-Consensus{{else}}Team Consensus{{/if}}
+                    </div>
+                </div>
             {{/if}}
-            <div class="game" style = "position: relative; width:100vw;height:100vh; max-height: 100%; max-width:100%;" id='canvas'></div>
-            {{>progressBars}}
-            <div class="game" id="colorControls">
-                Your Color: {{>button1}} {{>button2}}
-            </div>
-            <div class="game" id="totalPayout" align = "center" style = " position: absolute; padding-top:0%; display: block; top: 12.0%; left: 2.5vmin; background-color: greenyellow; border-style: ridge; border-style: solid; border-color: #ADFF2F; width: 18vmin; height: 9vmin;">
-                <div class="game" style = "line-height: 100%; font-size: 6vmin; "> ${{totalPayout}} </div>
-                <div class="game" style = "line-height: 100%; font-size: 1.6vmin; ">Your Total Payout</div>
-            </div>
-            <div class="game" id="potentialPayoutsTitle" align = "center" style = " position: absolute; padding-top:0%; display: block; top: 59.0%; left: 2.5vmin; background-color: yellow; border-style: ridge; border-style: solid; border-color: yellow; width: 37.0vmin; height: 5vmin;">
-                Potential Bonuses
-            </div>
-            {{#each potentialPayouts}}
-                {{> potentialPayout}}
-            {{/each}}
-            <div class="game" id="currentName" align = "center" style = " position: absolute; padding-top:0%; display: block; top: 22.0%; left: 2.5vmin; background-color: CornflowerBlue; border-style: ridge; border-style: solid; border-color: CornflowerBlue; width: 37.0vmin; height: 13.75vmin;">
-                <div class="game" style = "line-height:100%; font-size: 10vmin;">{{currentName}} </div>
-                <div class="game" style = "line-height:100%; font-size: 3vmin;">Your Name</div>
-            </div>
-            <div class="game" id = "communicationType">
-                <div align = "center" style = " position: absolute; padding-top:0%; display: block; top: 15%; left:75.0%; background-color: orange; border-style: ridge; border-style: solid; border-color: orange; width: 37.0vmin; height: 9vmin;">
-                    <div style = "line-height: 100%; font-size: 6vmin; "> {{communicationType}} </div>
-                    <div style = "line-height: 100%; font-size: 1.8vmin; ">communication</div>
-                </div>
-            </div>
-            <div class="game" id = "communicationCost">
-                <div align = "center" style = " position: absolute; padding-top:0%; display: block; top: 25%; left:75.0%; background-color: orange; border-style: ridge; border-style: solid; border-color: orange; width: 37.0vmin; height: 9vmin;">
-                    <div style = "line-height: 100%; font-size: 6vmin;"> {{communicationCost}} </div>
-                    <div style = "line-height: 100%; font-size: 1.8vmin;">communication</div>
-                </div>
-            </div>
-            <div class="game" id = "chatContainer">
-                {{>chatBox}}
-            </div>
-            <div class="game" id="gameInProgressStatus" align = "center" style = " position: absolute; padding-top:0%; display: block; top: 41.5%; left: 2.5vmin; background-color: orange; border-style: ridge; border-style: solid; border-color: orange; width: 37.0vmin; height: 7vmin;">
-                <div class="game" style = "line-height: 100%; font-size: 4vmin; "> {{batchStatus}}, {{sessionStatus}}</div>
-                <div class="game" style = "line-height: 100%; font-size: 1.8vmin; ">is in progress</div>
-            </div>
-            <div class="game" id="adversaryInfo" align="center" style="position: absolute; padding-top:0%; display: block; top: 36.5%; left: 2.5vmin; background-color: #FFF0F5; border-style: ridge; border-style: solid; border-color: #FFF0F5; width: 37.0vmin; height: 3.75vmin;">
-                <div class="game" style="line-height:100%; font-size: 3vmin; {{#if isAdversary}} color: red {{/if}}">
-                    {{#if isAdversary}}Team No-Consensus{{else}}Team Consensus{{/if}}
-                </div>
-            </div>
         {{else}}
             {{#if preSessionInProgress}}
                 {{>preSessionCountdown}}

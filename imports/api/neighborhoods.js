@@ -55,14 +55,14 @@ export var Neighborhoods = {
             for (var j = 0; j < namesOfNeighbors.length; j++) {
                 var currentName = namesOfNeighbors[j];
                 var color = newColors[currentName];
-                console.log('newcolor');
-                console.log(currentName);
-                console.log(color);
+                // console.log('newcolor');
+                // console.log(currentName);
+                // console.log(color);
                 var newColor = color;
                 if (newColor != 'white') {
                     newColor = ColorMagic.anonymizeColor(name, color);
                 }
-                console.log(newColor);
+                // console.log(newColor);
                 neighborhoodColors[currentName] = newColor;
             }
 
