@@ -18,7 +18,11 @@ Template.preSessionCountdown.helpers({
             var preSessionLength = TimeInfo.findOne({}).preSessionLength;
             var postSessionLength = TimeInfo.findOne({}).postSessionLength;
 
+            console.log(currentTime);
+
             secondsRemaining = Math.ceil((1000 * preSessionLength + 1000 * postSessionLength - (currentTime - lastSessionEndTime)) / 1000);
+
+            console.log(secondsRemaining);
 
             if (sessionNumber < 1) {
                 secondsRemaining -= postSessionLength;
