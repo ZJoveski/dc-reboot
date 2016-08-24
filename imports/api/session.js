@@ -144,15 +144,6 @@ export var Session = {
             var color = ColorMagic.colors[i];
             var count = 0;
 
-            for (var name in this.colors) {
-                if (this.colors.hasOwnProperty(name)) {
-                    var nodeColor = this.colors[name];
-                    if (nodeColor == color) {
-                        count++;
-                    }
-                }
-            }
-
             console.log(color);
             console.log(count);
 
