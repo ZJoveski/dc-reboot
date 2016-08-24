@@ -161,6 +161,8 @@ Template.experiment.helpers({
         var response = false;
 
         var postSessionInProgress = ProgressInfo.findOne({}).postSessionInProgress;
+        console.log('postSession variable');
+        console.log(postSessionInProgress);
         if (postSessionInProgress != null) {
             reponse = postSessionInProgress;
         }
