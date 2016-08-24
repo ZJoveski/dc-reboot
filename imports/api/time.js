@@ -12,7 +12,7 @@ export var Time = {
     currentTime: -1,
     sessionLength: 600,
     preSessionLength: 5,
-    postSessionLength: 15,
+    postSessionLength: 5,
     timeUpdateRate: 1000,
 
     waitForTurnTime: 10,    // Specifies the number of milliseconds after which a suspended update-color request will reattempt processing.
