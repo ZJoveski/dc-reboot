@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 
 import { SessionInfo } from '../../../api/collections/game_collections.js';
 import { TimeInfo } from '../../../api/collections/game_collections.js';
+import { Time } from '../../../api/time.js';
 
 import './preSessionCountdown.html';
 
@@ -15,8 +16,8 @@ Template.preSessionCountdown.helpers({
             var secondsRemaining = 0;
             var currentTime = TimeInfo.findOne({}).currentTime;
             var lastSessionEndTime = TimeInfo.findOne({}).lastSessionEndTime;
-            var preSessionLength = TimeInfo.findOne({}).preSessionLength;
-            var postSessionLength = TimeInfo.findOne({}).postSessionLength;
+            var preSessionLength = Time.preSessionLength;
+            var postSessionLength = Time.postSessionLength;
 
             console.log('currenttime');
             console.log(currentTime);
