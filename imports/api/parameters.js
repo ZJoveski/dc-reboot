@@ -8,7 +8,7 @@ import { ParametersInfo } from './collections/game_collections.js';
 export var Parameters = {
     ParametersInfo: ParametersInfo,
 
-    communication: false,
+    communication: true,
     globalCommunication: false,
     structuredCommunication: false,
     costBasedCommunication: false,
