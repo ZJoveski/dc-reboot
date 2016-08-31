@@ -66,7 +66,7 @@ export var ColorMagic = {
         for(var i = 0; i < this.colors.length; i++) {
             // Also removes the temporary color code suffixes.
             processedMessage = processedMessage.replace(new RegExp((this.colors[i]).toUpperCase() + "CERVANDYZ", "g"), 
-                                                       (anonymizeColor(name, this.colors[i])).toUpperCase());
+                                                       (this.anonymizeColor(name, this.colors[i])).toUpperCase());
         }
         
         return processedMessage;
