@@ -6,6 +6,8 @@ import { ParametersInfo } from '../../../api/collections/game_collections.js';
 import { SessionInfo } from '../../../api/collections/game_collections.js';
 import { NeighborhoodsInfo } from '../../../api/collections/game_collections.js';
 
+import { ColorMagic } from '../../../api/colors_mapping.js';
+
 
 import './chatBox.html';
 
@@ -59,9 +61,9 @@ Template.chatBox.helpers({
         
         // Get the name of the current user
         var name = "";  
-        neigh = neighborhoods.findOne({userId: Meteor.userId()});
-        if (Meteor.user() && (neigh !== undefined)) { 
-            namesOfNeighbors = neigh.namesOfNeighbors.slice();
+        neigh = NeighborhoodsInfo.findOne({userId: Meteor.userId()});
+        if (Meteor.user() && (neigh !== null)) { 
+            namesOfNeighbors = neigh.namesOfNeighbors;
             if (namesOfNeighbors.length > 0) {  
                 name = namesOfNeighbors[0]; 
             }  
@@ -69,12 +71,12 @@ Template.chatBox.helpers({
         
         // Generate the information message based on the current state of the sender's neighborhood
         var neighborhoodColorCounts = {};
-        for(var i=0, n=theColors.length; i<n; i++) {
-          neighborhoodColorCounts[theColors[i]] = 0;
+        for(var i=0, n=ColorMagic.colors.length; i<n; i++) {
+          neighborhoodColorCounts[ColorMagic.colors[i]] = 0;
         }
       
-        var neighborhoodColors = colorsInfo.findOne({name: name});
-        if(neighborhoodColors !== undefined) {
+        var neighborhoodColors = neigh.neighborhoodColors;
+        if(neighborhoodColors !== null) {
             for(var key in neighborhoodColors) {
                 if(neighborhoodColors.hasOwnProperty(key)) {
                     if((key !== "_id") && (key !== "name")) {
@@ -85,7 +87,7 @@ Template.chatBox.helpers({
         }
         
         var first, last;
-        if (neighborhoodColorCounts[theColors[0]] >= neighborhoodColorCounts[theColors[1]]) {
+        if (neighborhoodColorCounts[ColorMagic.colors[0]] >= neighborhoodColorCounts[ColorMagic.colors[1]]) {
             first = 0;
             last = 1;
         } else {
@@ -93,8 +95,8 @@ Template.chatBox.helpers({
             last = 0;
         }
               
-        msg = neighborhoodColorCounts[theColors[first]] + " " + (theColors[first]).toUpperCase();
-        msg += ", " + neighborhoodColorCounts[theColors[last]] + " " + (theColors[last]).toUpperCase();
+        msg = neighborhoodColorCounts[ColorMagic.colors[first]] + " " + (ColorMagic.colors[first]).toUpperCase();
+        msg += ", " + neighborhoodColorCounts[ColorMagic.colors[last]] + " " + (ColorMagic.colors[last]).toUpperCase();
         
         return msg;
     },

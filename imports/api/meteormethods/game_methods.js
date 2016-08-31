@@ -65,6 +65,74 @@ Meteor.methods({
         }
     },
 
+    'sendConstrainedMessage': function(messageType) {        
+        var id = this.userId;
+        var message = "";
+        
+        if (Progress.sessionInProgress) {
+            var messageCostInfo = Messages.calculatePotentialMessageCost(this.userId, Parameters.structuredCommunicationCharactersNumberMultiplier);
+            
+            if(messageCostInfo.costIsAffordable) {
+                var timestamp = new Date();
+                Session.updateCommunicationUnitsRemaining(id, 1);
+                
+                if (messageType == "info") {
+                    var name = Participants.id_name[id];
+                    var neighborhoodColorCounts = getNeighborhoodColorCounts(id, name);
+                    var first, last;
+                    
+                    if (neighborhoodColorCounts[ColorMagic.colors[0]] > neighborhoodColorCounts[ColorMagic.colors[1]]) {
+                        first = 0;
+                        last = 1;
+                    } else if (neighborhoodColorCounts[ColorMagic.colors[0]] < neighborhoodColorCounts[ColorMagic.colors[1]]) {
+                        first = 1;
+                        last = 0;
+                    } else {
+                        // consistent displaying of messages when equal color counts
+                        if (ColorMagic.anonymizeColor(name, 'red') == 'red') {
+                            // default (identity) anonymization - no need for reversal of colors order
+                            first = 0;
+                            last = 1;
+                        } else {
+                            first = 1;
+                            last = 0;
+                        }
+                    }
+              
+                    message = neighborhoodColorCounts[ColorMagic.colors[first]] + " " + (ColorMagic.colors[first]).toUpperCase();
+                    message += ", " + neighborhoodColorCounts[ColorMagic.colors[last]] + " " + (ColorMagic.colors[last]).toUpperCase();
+              
+                    message = ColorMagic.dummyDeanonymizeMessageColorNames(message);
+                } else {
+                    var raw_message = "";
+                    if (messageType == "red") { raw_message = "Let's choose RED"; } 
+                    else if (messageType == "green") { raw_message = "Let's choose GREEN"; }
+                
+                    message = ColorMagic.deanonymizeMessageColorNames(Participants.id_name[id], raw_message);
+                }
+                
+                Messages.sendMessageToParticipants(id, message, timestamp);
+                Messages.sendMessageToAdmin(id, message, timestamp);
+              
+                Session.communicationUsageLevels[id] += messageCostInfo.relativeMessageCost;
+              
+                /* Log entry. */ Logger.recordMessageRequest(id, true, message);
+                // console.log(message);
+                /* Log entry. */ Logger.recordMessageSent(id, true, message);
+              
+                Payouts.updatePotentialPayoutsInfo(id);
+                
+            } else {
+                /* Log entry. */ Logger.recordMessageRequest(id, true, messageType + "_type");
+                /* Log entry. */ Logger.recordMessageFailed(id, true, messageType + "_type");
+            }
+            
+        } else {
+            /* Log entry. */ Logger.recordMessageRequest(id, true, messageType + "_type");
+            /* Log entry. */ Logger.recordMessageFailed(id, true, messageType + "_type");
+        }
+    },
+
     sendChatMessage: function(message) {
         var id = this.userId;
         /* Log entry. */ Logger.recordMessageRequest(id, false, message);
