@@ -54,6 +54,59 @@ Template.chatBox.helpers({
         return messagesToBeReturned;
     },
 
+    info_message: function() {
+        var msg = "";
+        
+        // Get the name of the current user
+        var name = "";  
+        neigh = neighborhoods.findOne({userId: Meteor.userId()});
+        if (Meteor.user() && (neigh !== undefined)) { 
+            namesOfNeighbors = neigh.namesOfNeighbors.slice();
+            if (namesOfNeighbors.length > 0) {  
+                name = namesOfNeighbors[0]; 
+            }  
+        }
+        
+        // Generate the information message based on the current state of the sender's neighborhood
+        var neighborhoodColorCounts = {};
+        for(var i=0, n=theColors.length; i<n; i++) {
+          neighborhoodColorCounts[theColors[i]] = 0;
+        }
+      
+        var neighborhoodColors = colorsInfo.findOne({name: name});
+        if(neighborhoodColors !== undefined) {
+            for(var key in neighborhoodColors) {
+                if(neighborhoodColors.hasOwnProperty(key)) {
+                    if((key !== "_id") && (key !== "name")) {
+                        neighborhoodColorCounts[neighborhoodColors[key]]++;
+                    }
+                }
+            }
+        }
+        
+        var first, last;
+        if (neighborhoodColorCounts[theColors[0]] >= neighborhoodColorCounts[theColors[1]]) {
+            first = 0;
+            last = 1;
+        } else {
+            first = 1;
+            last = 0;
+        }
+              
+        msg = neighborhoodColorCounts[theColors[first]] + " " + (theColors[first]).toUpperCase();
+        msg += ", " + neighborhoodColorCounts[theColors[last]] + " " + (theColors[last]).toUpperCase();
+        
+        return msg;
+    },
+    red_message: function() {
+        var msg = "Let's choose RED";
+        return msg;
+    },
+    green_message: function() {
+        var msg = "Let's choose GREEN";
+        return msg;
+    },
+
     userCanSendMessages: function() {
         var response = false;
         console.log('parametersInfo');
