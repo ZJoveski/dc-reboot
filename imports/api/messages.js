@@ -113,7 +113,7 @@ var sendMessageToAllParticipants = function(senderId, message, timestamp) {
         MessagesCollection.insert({
             idOfSender: senderId,
             nameOfSender: name,
-            idOfRecipient: participants[i],
+            idOfRecipient: Participants.participants[i],
             nameOfRecipient: nameOfRecipient,
             message: ColorMagic.anonymizeMessageColorNames(nameOfRecipient, message),
             timestamp: timestamp
