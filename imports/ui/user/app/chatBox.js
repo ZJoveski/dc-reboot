@@ -23,6 +23,8 @@ Template.chatBox.helpers({
         var messagesCursor;
         
         messagesCursor = MessagesCollection.find({}, {sort: {timestamp: 1}});
+        console.log('messages');
+        console.log(messagesCursor);
         var nameOfClient = '';
 
         var namesOfNeighbors = NeighborhoodsInfo.findOne({userId: Meteor.userId()}).namesOfNeighbors;

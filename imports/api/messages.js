@@ -96,6 +96,7 @@ export var Messages = {
 
     sendMessageToParticipants: function(senderId, message, timestamp) {   
         if(Parameters.communicationScopes[senderId] == 'global') {
+            console.log('sendMessageToParticipants');
             sendMessageToAllParticipants(senderId, message, timestamp);
         }
         else {
