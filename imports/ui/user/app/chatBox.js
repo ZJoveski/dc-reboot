@@ -32,7 +32,7 @@ Template.chatBox.helpers({
             nameOfClient = namesOfNeighbors[0];     // your own name
         }
         
-        messagesCursor.forEach( function(messageDocument) {
+        messagesCursor.forEach(function(messageDocument) {
             console.log(messageDocument);
             if((messageDocument.nameOfSender == nameOfClient)) {
                 messagesToBeReturned.push({nameOfSender: "Me [" + nameOfClient + "]", message: messageDocument.message});

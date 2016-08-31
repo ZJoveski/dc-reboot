@@ -112,6 +112,7 @@ var sendMessageToAllParticipants = function(senderId, message, timestamp) {
         var nameOfRecipient = Participants.id_name[Participants.participants[i]];
 
         console.log('insert message');
+        console.log(Participants.participants[i]);
               
         MessagesCollection.insert({
             idOfSender: senderId,
@@ -132,7 +133,7 @@ var sendMessageToNeighborsOnly = function(senderId, message, timestamp) {
         MessagesCollection.insert({
             idOfSender: senderId,
             nameOfSender: name,
-            idOfRecipient: name_id[namesOfNeighbors[i]],
+            idOfRecipient: Participants.name_id[namesOfNeighbors[i]],
             nameOfRecipient: namesOfNeighbors[i],
             message: ColorMagic.anonymizeMessageColorNames(namesOfNeighbors[i], message),
             timestamp: timestamp
