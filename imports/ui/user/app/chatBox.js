@@ -218,7 +218,8 @@ Template.chatBox.events({
     },
 
     "click #reportButton": function() {
-        Meteor.call('sendStructuredMessage');
+        // Meteor.call('sendStructuredMessage');
+        Meteor.call('sendConstrainedMessage', 'info');
     }
 });
 
