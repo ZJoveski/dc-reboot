@@ -23,6 +23,9 @@ import './gameOutcomeStatus.js';
 
 import './gameScreen.html';
 
+import { MessagesCollection } from '../../../api/collections/game_collections.js';
+
+
 var gameCanvas;
 
 Template.experiment.onCreated(function() {
