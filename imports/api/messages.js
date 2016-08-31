@@ -3,6 +3,7 @@ import { Participants } from './participants.js';
 import { ColorMagic } from './colors_mapping.js';
 import { MessagesCollection } from './collections/game_collections.js';
 import { Neighborhoods } from './neighborhoods.js';
+import { Session } from './session.js';
 
 export var Messages = {
     clearMessages: function() {
