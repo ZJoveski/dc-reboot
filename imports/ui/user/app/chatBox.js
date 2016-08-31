@@ -24,7 +24,7 @@ Template.chatBox.helpers({
         
         messagesCursor = MessagesCollection.find({}, {sort: {timestamp: 1}});
         console.log('messages');
-        console.log(messagesCursor);
+        console.log(messagesCursor.fetch());
         var nameOfClient = '';
 
         var namesOfNeighbors = NeighborhoodsInfo.findOne({userId: Meteor.userId()}).namesOfNeighbors;
