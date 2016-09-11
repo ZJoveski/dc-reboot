@@ -1,6 +1,26 @@
 import { Session } from './../../../api/session.js';
 
-export var Canvas = function () {
+export var Canvas = function() {
+    const width = 1024;
+    const height = 768;
+
+    // allData will store the unfiltered data
+    var allData = [];
+    var curLinksData = [];
+    var curNodesData = [];
+
+    var numNodes = 0;
+
+    function network(selection, namesOfNeighbors, adjMatrix) {
+        allData = formatData(namesOfNeighbors, adjMatrix);
+    }
+
+    function formatData(namesOfNeighbors, adjMatrix) {
+
+    }
+}
+
+var OldCanvas = function () {
   var self = this,                      // Reference to the canvas object itself.
       numNodes = 0,                     /* The number of nodes in the corresponding neighborhood.
                                            Until neighborhood is made known to the client, the
