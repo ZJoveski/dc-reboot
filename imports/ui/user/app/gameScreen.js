@@ -44,8 +44,8 @@ Template.experiment.onCreated(function() {
     }, 1200);
 
     gameCanvas = Canvas();
-    gameCanvas("#canvas", {}, {});
-    gameCanvasInit = true;
+    // gameCanvas("#canvas", {}, {});
+    gameCanvasInit = false;
 });
 
 // redraws the game nodes
