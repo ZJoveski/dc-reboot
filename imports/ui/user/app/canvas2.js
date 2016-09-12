@@ -126,7 +126,7 @@ export var Canvas = function() {
         var curves = [];
 
         // Initialize the central node (the one corresponding to the current client).
-        nodes.append({
+        nodes.push({
             nodeName: namesOfNeighbors[0],
             x: centerX,
             y: centerY,
@@ -137,7 +137,7 @@ export var Canvas = function() {
 
         // Initialize the remaining nodes.
         for (var i = 1; i < numNodes; i++) {
-            nodes.append({
+            nodes.push({
                 nodeName: namesOfNeighbors[i],
                 x: edgeLengthMultiplier * nodeRadius * Math.cos((Math.PI * 2 * i) / (numNodes-1)) + centerX,
                 y: edgeLengthMultiplier * nodeRadius * Math.sin((Math.PI * 2 * i) / (numNodes-1)) + centerY,
@@ -150,7 +150,7 @@ export var Canvas = function() {
             if (neighAdjMatrix[0][j]) {
                 sourceNode = getNode(nodes, namesOfNeighbors[0]);
                 destNode = getNode(nodes, namesOfNeighbors[j]);
-                links.append(makeStraightEdge(sourceNode, destNode, true))
+                links.push(makeStraightEdge(sourceNode, destNode, true))
             }
         }
 
@@ -161,9 +161,9 @@ export var Canvas = function() {
                     var sourceNode = getNode(nodes, namesOfNeighbors[i]);
                     var destNode = getNode(nodes, namesOfNeighbors[j]);
                     if (i > 0 && numNodes % 2 == 1 && j - i == (numNodes-1)/2) {
-                        curves.append(makeCurvedEdge(sourceNode, destNode));
+                        curves.push(makeCurvedEdge(sourceNode, destNode));
                     } else {
-                        links.append(makeStraightEdge(sourceNode, destNode, false));
+                        links.push(makeStraightEdge(sourceNode, destNode, false));
                     }
                 }
             }
