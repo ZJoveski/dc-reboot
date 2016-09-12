@@ -180,7 +180,7 @@ export var Canvas = function() {
             x1: sourceNode.x,
             y1: sourceNode.y,
             x2: destNode.x,
-            y2: destNode.y
+            y2: destNode.y,
             color: color
         };
     }
