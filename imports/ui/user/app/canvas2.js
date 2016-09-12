@@ -6,8 +6,8 @@ export var Canvas = function() {
     var vpHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     var vpMin = Math.min(vpWidth, vpHeight);
 
-    var freeWidth = ((vpWidth - 0.37 * vpMin - 0.25 * vpWidth)/vpWidth) * viewBoxWidth;
-    var freeHeight = viewBoxHeight;
+    var freeWidth = ((vpWidth - 0.37 * vpMin - 0.25 * vpWidth)/vpWidth) * width;
+    var freeHeight = height;
     var freeViewBoxSpace = Math.min(freeWidth, freeHeight);
 
     var leftBoundary = ((0.37 * vpMin)/vpWidth) * width;

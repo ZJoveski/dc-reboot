@@ -92,6 +92,7 @@ Tracker.autorun(function() {
                     }, 200);
                 }
             } else {
+                // TODO: get rid of this if testing works
                 console.log("intializing canvas");
 
                 gameCanvas("#canvas", namesOfNeighbors, neighAdjMatrix);
