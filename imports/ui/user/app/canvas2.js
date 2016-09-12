@@ -222,6 +222,8 @@ export var Canvas = function() {
         var selector = "#" + nodeName;
         var node = nodesG.select(selector).style("fill", color);
     }
+
+    return network;
 }
 
 

@@ -2,7 +2,7 @@ import { Session } from './../../../api/session.js';
 
 
 
-var OldCanvas = function () {
+export var OldCanvas = function () {
   var self = this,                      // Reference to the canvas object itself.
       numNodes = 0,                     /* The number of nodes in the corresponding neighborhood.
                                            Until neighborhood is made known to the client, the

@@ -13,7 +13,7 @@ import { ParametersInfo } from '../../../api/collections/game_collections.js';
 
 import './../../../api/meteormethods/game_methods.js';
 
-import { Canvas } from './canvas.js'
+import { Canvas } from './canvas2.js'
 
 import './progressBars.js';
 import './buttons.js';
@@ -27,6 +27,7 @@ import { MessagesCollection } from '../../../api/collections/game_collections.js
 
 
 var gameCanvas;
+var gameCanvasInit;
 
 Template.experiment.onCreated(function() {
     // Beep at the players to get their attention
@@ -42,7 +43,8 @@ Template.experiment.onCreated(function() {
         }
     }, 1200);
 
-    gameCanvas = new Canvas();
+    gameCanvas = Canvas();
+    gameCanvasInit = false;
 });
 
 // redraws the game nodes
@@ -67,7 +69,7 @@ Tracker.autorun(function() {
 
             //Session.set("clientName", namesOfNeighbors[0]);
 
-            if (gameCanvas) { 
+            if (gameCanvasInit) { 
                 console.log("redrawing canvas");
 
                 if (updateColor) {
@@ -78,27 +80,34 @@ Tracker.autorun(function() {
                             console.log(name);
                             console.log(neighborhoodColors[name]);
                             gameCanvas.updateNodeColor(name, neighborhoodColors[name]);
+                            // gameCanvas.updateNodeColor(name, neighborhoodColors[name]);
                         }
                     }
                 } else {
                     setTimeout(function() {
-                        gameCanvas.clear();  
-                        gameCanvas.draw(namesOfNeighbors,neighAdjMatrix); 
+                        // gameCanvas.clear();  
+                        // gameCanvas.draw(namesOfNeighbors,neighAdjMatrix);
+                        gameCanvas.updateData(namesOfNeighbors,neighAdjMatrix);
                     }, 200);
                 }
-            } 
+            } else {
+                console.log("intializing canvas");
+
+                gameCanvas("#canvas", namesOfNeighbors, neighAdjMatrix);
+                gameCanvasInit = true;
+            }
         }
     } else if (preSessionInProgress) {
-        if (gameCanvas) {  
-                gameCanvas.clear(); 
-        }
+        // if (gameCanvas) {  
+        //         gameCanvas.clear(); 
+        // }
         
         // ... and set the value of lastRequestedColor to 'white'
         Session.set('lastRequestedColor', "white");
     } else if (experimentInProgress) {
-        if(gameCanvas) {
-            gameCanvas.clear();
-        }
+        // if(gameCanvas) {
+        //     gameCanvas.clear();
+        // }
     }
 });
 
