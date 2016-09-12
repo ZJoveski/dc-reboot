@@ -102,21 +102,6 @@ Tracker.autorun(function() {
     }
 });
 
-// updates the colors of the game nodes
-// Tracker.autorun(function() {
-//     console.log('update color');
-//     if (gameCanvas) {
-//         console.log('there is a game canvas');
-//         var neighborhoodColors = NeighborhoodsInfo.findOne({userId: Meteor.userId()}).neighborhoodColors;
-//         for (var name in neighborhoodColors) {
-//             if (neighborhoodColors.hasOwnProperty(name)) {
-//                 gameCanvas.updateNodeColor(name, neighborhoodColors[name]);
-//             }
-//         } 
-//     }
-    
-// });
-
 Template.experiment.helpers({
     userIsParticipant: function() {
         if(!Meteor.userId()) return false;

@@ -113,11 +113,6 @@ export var Canvas = function() {
             .style("fill", "none");
     }
 
-    function updateData(namesOfNeighbors, adjMatrix) {
-        allData = formatData(namesOfNeighbors, adjMatrix);
-        draw(namesOfNeighbors);
-    }
-
     function formatData(namesOfNeighbors, adjMatrix) {
         numNodes = namesOfNeighbors.length;
         var nodes = [];
@@ -216,6 +211,16 @@ export var Canvas = function() {
                 return nodes[i];
             }
         }
+    }
+
+    network.updateData = function(namesOfNeighbors, adjMatrix) {
+        allData = formatData(namesOfNeighbors, adjMatrix);
+        draw(namesOfNeighbors);
+    }
+
+    network.updateNodeColor = function(nodeName, color) {
+        var selector = "#" + nodeName;
+        var node = nodesG.select(selector).style("fill", color);
     }
 }
 
