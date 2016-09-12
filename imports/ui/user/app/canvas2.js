@@ -53,7 +53,7 @@ export var Canvas = function() {
         curvesG = vis.append("g").attr("id", "curves");
         labelsG = vis.append("g").attr("id", "labels");
 
-        this.updateData(namesOfNeighbors, adjMatrix);
+        network.updateData(namesOfNeighbors, adjMatrix);
     }
 
     function draw(namesOfNeighbors) {
