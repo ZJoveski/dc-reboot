@@ -49,7 +49,7 @@ export var Canvas = function() {
                     .attr("height", height);
 
         console.log("is this ever run");
-        console.log(vis);
+        console.log(d3.select(selection));
 
         nodesG = vis.append("g").attr("id", "nodes");
         linksG = vis.append("g").attr("id", "links");
