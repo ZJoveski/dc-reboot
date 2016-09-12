@@ -1,6 +1,6 @@
 export var Canvas = function() {
-    const var width = 1024;
-    const var height = 768;
+    const width = 1024;
+    const height = 768;
 
     var vpWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var vpHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
