@@ -75,7 +75,7 @@ export var Canvas = function() {
             .style("fill", defaultNodeColor)
             .style("stroke", nodeBorderColor);
 
-        labels = textG.selectAll("text")
+        labels = labelsG.selectAll("text")
                 .data(allData.nodes);
 
         labels.enter().append("text")
@@ -147,7 +147,7 @@ export var Canvas = function() {
 
         // Add primary edges
         for (var j = 1; j < numNodes; j++) {
-            if (neighAdjMatrix[0][j]) {
+            if (adjMatrix[0][j]) {
                 sourceNode = getNode(nodes, namesOfNeighbors[0]);
                 destNode = getNode(nodes, namesOfNeighbors[j]);
                 links.push(makeStraightEdge(sourceNode, destNode, true))
@@ -157,7 +157,7 @@ export var Canvas = function() {
         // Draw secondary edges (edges between nodes of the neighborhood)
         for (var i = 1; i < numNodes; i++) {
             for (var j = i + 1; j < numNodes; j++) {
-                if (neighAdjMatrix[i][j]) {
+                if (adjMatrix[i][j]) {
                     var sourceNode = getNode(nodes, namesOfNeighbors[i]);
                     var destNode = getNode(nodes, namesOfNeighbors[j]);
                     if (i > 0 && numNodes % 2 == 1 && j - i == (numNodes-1)/2) {
