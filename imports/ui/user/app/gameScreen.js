@@ -94,6 +94,7 @@ Tracker.autorun(function() {
             } else {
                 // TODO: get rid of this if testing works
                 console.log("intializing canvas");
+                console.log(neighAdjMatrix);
 
                 gameCanvas("#canvas", namesOfNeighbors, neighAdjMatrix);
                 gameCanvasInit = true;
