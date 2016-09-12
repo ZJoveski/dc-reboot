@@ -1,3 +1,5 @@
+import { Session } from './../../../api/session.js';
+
 export var Canvas = function() {
     const width = 1024;
     const height = 768;
