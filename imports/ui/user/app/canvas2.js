@@ -48,6 +48,8 @@ export var Canvas = function() {
                     .attr("width", width)
                     .attr("height", height);
 
+        console.log("is this ever run");
+
         nodesG = vis.append("g").attr("id", "nodes");
         linksG = vis.append("g").attr("id", "links");
         curvesG = vis.append("g").attr("id", "curves");
