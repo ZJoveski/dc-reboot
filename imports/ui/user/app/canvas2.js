@@ -79,7 +79,7 @@ export var Canvas = function() {
             .attr("font-size", textSize)
             .attr("fill", textColor)
             .attr("text-anchor", "middle")
-            .attr("alignment-baseline", "middle");
+            .attr("alignment-baseline", "middle")
             .text(function(node) { 
                 if (node.center) {
                     return "Me";
