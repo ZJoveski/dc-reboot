@@ -183,13 +183,15 @@ Template.experiment.helpers({
         // Check if in session or in post session
         var inSession = false;
         var inPostSession = false;
+        var inPreSession = false;
         var progress = ProgressInfo.findOne({});
         if(progress !== undefined) {
             inSession = progress.sessionInProgress;
             inPostSession = progress.postSessionInProgress;
+            inPreSession = progress.preSessionInProgress;
         }
 
-        if (inSession || inPostSession) {
+        if (inSession || inPostSession || inPreSession) {
             status = 'You will not participate in the current batch. Please wait for the next batch. ' + 
                     'It will start soon and you will participate in it!';
             var sessionInProgress = ProgressInfo.findOne({}).sessionInProgress;
