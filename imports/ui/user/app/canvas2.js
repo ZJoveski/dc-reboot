@@ -114,10 +114,11 @@ export var Canvas = function() {
     }
 
     function drawCurves() {
-        curves = curvesG.selectAll("svg:path")
+        curves = curvesG.selectAll("#curve")
                     .data(allData.curves);
 
         curves.enter().append("svg:path")
+            .attr("id", "curve")
             .attr("d", function(curve) { return curve.path; })
             .style("stroke-width", edgeWidth)
             .style("stroke", function(curve) { return curve.color; })

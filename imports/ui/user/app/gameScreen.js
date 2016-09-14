@@ -46,6 +46,7 @@ Template.experiment.onCreated(function() {
     gameCanvas = Canvas();
     // gameCanvas("#canvas", {}, {});
     gameCanvasInit = false;
+    console.log('onCreated');
 });
 
 // redraws the game nodes
