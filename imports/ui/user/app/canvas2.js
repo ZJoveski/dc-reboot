@@ -53,9 +53,9 @@ export var Canvas = function() {
         console.log(d3.select(selection));
         console.log(vis);
 
-        nodesG = vis.append("g").attr("id", "nodes");
         linksG = vis.append("g").attr("id", "links");
         curvesG = vis.append("g").attr("id", "curves");
+        nodesG = vis.append("g").attr("id", "nodes");
         labelsG = vis.append("g").attr("id", "labels");
 
         network.updateData(namesOfNeighbors, adjMatrix);
