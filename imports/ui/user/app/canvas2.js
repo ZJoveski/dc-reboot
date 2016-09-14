@@ -62,9 +62,9 @@ export var Canvas = function() {
     }
 
     function draw(namesOfNeighbors) {
-        drawNodes();
         drawLinks();
         drawCurves();
+        drawNodes();
     }
 
     function drawNodes() {
