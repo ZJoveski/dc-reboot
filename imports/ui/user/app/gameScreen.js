@@ -179,17 +179,17 @@ Template.experiment.helpers({
 
     waitForNextExperimentStatus: function() {
         var status = '';
-
-        // See if experiment is in progress
-        var experimentInProgress = false;
+    
+        // Check if in session or in post session
+        var inSession = false;
+        var inPostSession = false;
         var progress = ProgressInfo.findOne({});
         if(progress !== undefined) {
-            experimentInProgress = progress.experimentInProgress;
-        } 
+            inSession = progress.sessionInProgress;
+            inPostSession = progress.postSessionInProgress;
+        }
 
-        if (!experimentInProgress) {
-            status = 'Please wait for the first game to begin.';
-        } else {
+        if (inSession || inPostSession) {
             status = 'You will not participate in the current batch. Please wait for the next batch. ' + 
                     'It will start soon and you will participate in it!';
             var sessionInProgress = ProgressInfo.findOne({}).sessionInProgress;
@@ -200,8 +200,25 @@ Template.experiment.helpers({
                     status += ' The current batch is on game ' + sessionNumber + '/' + batchSize + '.';
                 }
             }
-
+        } else {
+            status = 'Please wait for the first game to begin.';
         }
+
+        // if (!experimentInProgress) {
+        //     status = 'Please wait for the first game to begin.';
+        // } else {
+        //     status = 'You will not participate in the current batch. Please wait for the next batch. ' + 
+        //             'It will start soon and you will participate in it!';
+        //     var sessionInProgress = ProgressInfo.findOne({}).sessionInProgress;
+        //     if (sessionInProgress) {
+        //         var sessionNumber = SessionInfo.findOne({id: 'global'}).sessionNumber;
+        //         var batchSize = SessionInfo.findOne({id: 'global'}).batchSize;
+        //         if (sessionNumber != null && batchSize != null) {
+        //             status += ' The current batch is on game ' + sessionNumber + '/' + batchSize + '.';
+        //         }
+        //     }
+
+        // }
 
         return status;
     },
