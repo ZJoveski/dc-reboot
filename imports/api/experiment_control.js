@@ -41,7 +41,6 @@ var runGames = function() {
     Time.updateTimeInfo('start experiment');
 
     /* Log entry. */ Logger.recordExperimentInitializationCompletion();
-    /* L */ Progress.setProgress('experiment', true);
 
     // run pre game
     runPreGame();
@@ -59,6 +58,7 @@ var runPreGame = function() {
         preSessionTimeout = setTimeout(Meteor.bindEnvironment(function() {
             clearInterval(preSessionCountdown);
             Progress.setProgress('preSession', false);
+            /* L */ Progress.setProgress('experiment', true);
 
             // Start next game.
             runGame();  

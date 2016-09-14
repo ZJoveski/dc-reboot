@@ -210,7 +210,7 @@ export var Parameters = {
             Session.batchSize = parseInt(practiceBatchConfigs[batchIndex][0]);
             Session.batchMode = practiceBatchConfigs[batchIndex][1];
         } else if (isProperGames && batchConfigs.length > batchIndex) {
-            Session.batchSize = parseIng(batchConfigs[batchIndex][0]);
+            Session.batchSize = parseInt(batchConfigs[batchIndex][0]);
             Session.batchMode = batchConfigs[batchIndex][1];
         }
 
