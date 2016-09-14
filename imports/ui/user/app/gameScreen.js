@@ -93,11 +93,18 @@ Tracker.autorun(function() {
                 }
             } else {
                 // TODO: get rid of this if testing works
-                console.log("intializing canvas");
-                console.log(neighAdjMatrix);
+                setTimeout(function() {
+                    console.log("intializing canvas");
+                    console.log(neighAdjMatrix);
 
-                gameCanvas("#canvas", namesOfNeighbors, neighAdjMatrix);
-                gameCanvasInit = true;
+                    gameCanvas("#canvas", namesOfNeighbors, neighAdjMatrix);
+                    gameCanvasInit = true;
+                }, 200);
+                // console.log("intializing canvas");
+                // console.log(neighAdjMatrix);
+
+                // gameCanvas("#canvas", namesOfNeighbors, neighAdjMatrix);
+                // gameCanvasInit = true;
             }
         }
     } else if (preSessionInProgress) {
