@@ -114,6 +114,7 @@ Tracker.autorun(function() {
         // }
         
         // ... and set the value of lastRequestedColor to 'white'
+        gameCanvasInit = false;
         Session.set('lastRequestedColor', "white");
     } else if (experimentInProgress) {
         // if(gameCanvas) {
