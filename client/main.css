@@ -1,11 +1,11 @@
 /* CSS declarations go here */
-#gameScreen {
+/*#gameScreen {
     width:100%; 
     height:550px;
     overflow:hidden;
     background:lightgray;
     border: 0px solid lightgray;
-}
+}*/
 
 #colorControls {
     position: absolute; 
@@ -35,8 +35,8 @@ h1.game {
 
 div.game  {
         font-family: 'Nobile';
-        font-size: 2.5vmin;
-    background:transparent;
+/*        font-size: 2.5vmin;
+    background:transparent;*/
 }
 
 /*Canvas Attributes*/
