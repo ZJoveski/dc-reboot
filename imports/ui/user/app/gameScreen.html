@@ -1,7 +1,7 @@
 <template name="experiment">
     <div id="gameScreen">
         <div class="row">
-            <h1 class="game">Decentralized Coordination Experiment</h1>
+            <h1 class="main-title">Decentralized Coordination Experiment</h1>
         </div>
         {{#if userIsParticipant}}
             {{#if postSessionInProgress}}
@@ -14,11 +14,11 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="game panel panel-success" id="totalPayout" align = "center">
-                            <div class="game panel-title">
-                                <h2>Your Total Payout</h2>
+                            <div class="game panel-heading">
+                                <h2 class="panel-title">Your Total Payout</h2>
                             </div>
                             <div class="game panel-body">
-                                <h2>${{totalPayout}}</h2>
+                                <h1>${{totalPayout}}</h1>
                             </div>
                         </div>
 

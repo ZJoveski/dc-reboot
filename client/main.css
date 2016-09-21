@@ -24,13 +24,22 @@
 }
 
 /*Header 1 Attributes*/
-h1.game {
+/*h1.game {
         text-shadow: 1px 1px 1px #ccc;
         box-shadow: 0 0 .125em 0.125em #ccc;
         background-color: beige;
         color: black;
         text-indent: 11vw;
         font-size: 3.5vmin;
+}*/
+
+h1.main-title {
+    text-shadow: 1px 1px 1px #ccc;
+    box-shadow: 0 0 .125em 0.125em #ccc;
+    background-color: beige;
+    color: black;
+    text-indent: 11vw;
+    font-size: 3.5vmin;
 }
 
 div.game  {
