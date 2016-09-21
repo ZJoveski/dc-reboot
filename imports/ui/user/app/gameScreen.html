@@ -13,9 +13,13 @@
             {{else}}
                 <div class="row">
                     <div class="col-md-3">
-                        <div class="game" id="totalPayout" align = "center" style = "background-color: greenyellow; border-style: ridge; border-style: solid; border-color: #ADFF2F; width: 18vmin; height: 9vmin;">
-                            <div class="game" style = "line-height: 100%; font-size: 6vmin; "> ${{totalPayout}} </div>
-                            <div class="game" style = "line-height: 100%; font-size: 1.6vmin; ">Your Total Payout</div>
+                        <div class="game panel panel-success" id="totalPayout" align = "center" style = "background-color: greenyellow; border-style: ridge; border-style: solid; border-color: #ADFF2F; width: 18vmin; height: 9vmin;">
+                            <div class="game panel-title">
+                                <h2>Your Total Payout</h2>
+                            </div>
+                            <div class="game panel-body">
+                                <h1>${{totalPayout}}</h1>
+                            </div>
                         </div>
 
                         <div class="game" id="currentName" align = "center" style = "background-color: CornflowerBlue; border-style: ridge; border-style: solid; border-color: CornflowerBlue; width: 37.0vmin; height: 13.75vmin;">
@@ -120,9 +124,16 @@
 </template>
 
 <template name="potentialPayout">
+    <div class="game" id="potentialPayout1" align = "center" style = "background-color: {{background}}; border-style: ridge; border-style: solid; border-color: {{border}}; width: 18vmin; height: 9vmin;">
+        <div class="game" style = "line-height: 100%; font-size: 6vmin; "> ${{payout}} </div>
+        <div class="game" style = "line-height: 100%; font-size: 1.6vmin; ">for {{color}} consensus </div>
+    </div>
+</template>
+
+<!-- <template name="potentialPayout">
     <div class="game" id="potentialPayout1" align = "center" style = " position: absolute; padding-top:0%; display: block; top: {{top}}%; left: {{left}}vmin; background-color: {{background}}; 
                                     border-style: ridge; border-style: solid; border-color: {{border}}; width: 18vmin; height: 9vmin;">
         <div class="game" style = "line-height: 100%; font-size: 6vmin; "> ${{payout}} </div>
         <div class="game" style = "line-height: 100%; font-size: 1.6vmin; ">for {{color}} consensus </div>
     </div>
-</template>
+</template> -->
