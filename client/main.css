@@ -48,6 +48,10 @@ div.game  {
     background:transparent;*/
 }
 
+.panel-body {
+    padding: 3px;
+}
+
 /*Canvas Attributes*/
 .canvasContainer {
         width: 100vw;
