@@ -31,8 +31,20 @@
                             </div>
                         </div>
 
-<!--                         USE A LIST GROUP?!
- -->
+                        <div class="game panel panel-info" id="potentialPayouts" align="center">
+                            <div class="panel-title">
+                                <h2>Potential Bonuses</h2>
+                            </div>
+                            <div class="game panel-body">
+                                <div class="list-group">
+                                    {{#each potentialPayouts}}
+                                        {{> potentialPayout}}
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </div>
+
+                        
                         <div class="game" id="potentialPayoutsTitle" align = "center" style = "background-color: yellow; border-style: ridge; border-style: solid; border-color: yellow; width: 37.0vmin; height: 5vmin;">
                             Potential Bonuses
                         </div>
@@ -130,10 +142,14 @@
 </template>
 
 <template name="potentialPayout">
-    <div class="game" id="potentialPayout1" align = "center" style = "background-color: {{background}}; border-style: ridge; border-style: solid; border-color: {{border}}; width: 18vmin; height: 9vmin;">
+    <div class="game list-group-item" align="center" style="background-color: {{background}}; border-color: {{border}}">
         <div class="game" style = "line-height: 100%; font-size: 6vmin; "> ${{payout}} </div>
         <div class="game" style = "line-height: 100%; font-size: 1.6vmin; ">for {{color}} consensus </div>
     </div>
+<!--     <div class="game" id="potentialPayout1" align = "center" style = "background-color: {{background}}; border-style: ridge; border-style: solid; border-color: {{border}}; width: 18vmin; height: 9vmin;">
+        <div class="game" style = "line-height: 100%; font-size: 6vmin; "> ${{payout}} </div>
+        <div class="game" style = "line-height: 100%; font-size: 1.6vmin; ">for {{color}} consensus </div>
+    </div> -->
 </template>
 
 <!-- <template name="potentialPayout">
