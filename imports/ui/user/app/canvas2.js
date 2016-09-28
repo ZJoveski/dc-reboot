@@ -48,6 +48,7 @@ export var Canvas = function() {
         var vis = d3.select(selection).append("svg")
                     .attr("width", width)
                     .attr("height", height);
+                    .attr("xmlns", "http://www.w3.org/2000/svg");
 
         console.log("is this ever run");
         console.log(selection);
@@ -60,7 +61,7 @@ export var Canvas = function() {
         labelsG = vis.append("g").attr("id", "labels");
         voter = vis.append("div").attr("id", "voter");
 
-        voter.append("svg:image").attr("xlink:href", "/images/reputation/greyarrow_down.png")
+        voter.append("svg:image").attr("href", "/images/reputation/greyarrow_down.png")
                             .attr("x", 0)
                             .attr("y", 0)
                             .attr("width", 50)
