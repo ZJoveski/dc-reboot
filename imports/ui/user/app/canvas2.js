@@ -62,7 +62,9 @@ export var Canvas = function() {
 
         voter.append("svg:image").attr("xlink:href", "/images/reputation/greyarrow_down.png")
                             .attr("x", 0)
-                            .attr("y", 0);
+                            .attr("y", 0)
+                            .attr("width", 50)
+                            .attr("height", 50);
 
 
         network.updateData(namesOfNeighbors, adjMatrix);
