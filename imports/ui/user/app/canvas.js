@@ -16,7 +16,7 @@ export var OldCanvas = function () {
   
   coordinates = {};
 
-  var viewBoxWidth = 1024,              // Specifying the internal coordinate system of the view  
+  var viewBoxWidth = 768,              // Specifying the internal coordinate system of the view  
       viewBoxHeight = 768;              // box.
   
 
