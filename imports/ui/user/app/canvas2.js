@@ -60,7 +60,7 @@ export var Canvas = function() {
         labelsG = vis.append("g").attr("id", "labels");
         voter = vis.append("div").attr("id", "voter");
 
-        voter.append("image").attr("xlink:href", "/images/reputation/greyarrow_down.png")
+        voter.append("svg:image").attr("xlink:href", "/images/reputation/greyarrow_down.png")
                             .attr("x", 0)
                             .attr("y", 0);
 
