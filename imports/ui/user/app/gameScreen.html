@@ -31,19 +31,6 @@
                             </div>
                         </div>
 
-                        <div class="game panel panel-info" id="potentialPayouts" align="center">
-                            <div class="panel-heading">
-                                <h2 class="panel-title">Potential Bonuses</h2>
-                            </div>
-                            <div class="game panel-body">
-                                <div class="list-group">
-                                    {{#each potentialPayouts}}
-                                        {{> potentialPayout}}
-                                    {{/each}}
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="game panel panel-info" id="sessionInfo" align="center">
                             <div class="panel-heading">
                                 <h2 class="panel-title">Session Info</h2>
@@ -66,11 +53,39 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="game panel panel-info" id="potentialPayouts" align="center">
+                            <div class="panel-heading">
+                                <h2 class="panel-title">Potential Bonuses</h2>
+                            </div>
+                            <div class="game panel-body">
+                                <div class="list-group">
+                                    {{#each potentialPayouts}}
+                                        {{> potentialPayout}}
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="game canvas" id="canvas"></div>
                     </div>
                     <div class="col-md-3">
+                        <div class="game" id = "communicationType">
+                            <div align = "center" style = " position: absolute; padding-top:0%; display: block; top: 15%; left:75.0%; background-color: orange; border-style: ridge; border-style: solid; border-color: orange; width: 37.0vmin; height: 9vmin;">
+                                <div style = "line-height: 100%; font-size: 6vmin; "> {{communicationType}} </div>
+                                <div style = "line-height: 100%; font-size: 1.8vmin; ">communication</div>
+                            </div>
+                        </div>
+                        <div class="game" id = "communicationCost">
+                            <div align = "center" style = " position: absolute; padding-top:0%; display: block; top: 25%; left:75.0%; background-color: orange; border-style: ridge; border-style: solid; border-color: orange; width: 37.0vmin; height: 9vmin;">
+                                <div style = "line-height: 100%; font-size: 6vmin;"> {{communicationCost}} </div>
+                                <div style = "line-height: 100%; font-size: 1.8vmin;">communication</div>
+                            </div>
+                        </div>
+                        <div class="game" id = "chatContainer">
+                            {{>chatBox}}
+                        </div>
                     </div>
                 </div>
             {{/if}}
