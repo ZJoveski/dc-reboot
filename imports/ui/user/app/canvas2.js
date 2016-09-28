@@ -47,7 +47,7 @@ export var Canvas = function() {
         // create svg container and group elements
         var vis = d3.select(selection).append("svg")
                     .attr("width", width)
-                    .attr("height", height);
+                    .attr("height", height)
                     .attr("xmlns", "http://www.w3.org/2000/svg");
 
         console.log("is this ever run");
