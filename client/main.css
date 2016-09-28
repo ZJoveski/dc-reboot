@@ -76,14 +76,14 @@ div.game  {
     background:#58FAF4;
 }
 
-#chatContainer {
+/*#chatContainer {
     position: absolute;
     top: 35%;
     left:75.0%;
     display: block;
     width: 22.5%;
     height: 27.5%;
-}
+}*/
 
 #messages {
     display: block;
