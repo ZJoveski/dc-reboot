@@ -62,7 +62,7 @@ export var Canvas = function() {
         labelsG = vis.append("g").attr("id", "labels");
         voter = vis.append("div").attr("id", "voter");
 
-        voter.append("svg:image").attr("xlink:href", "greyarrow_down.png")
+        voter.append("svg:image").attr("xlink:href", "http://ninjapenguin.tech:3000/greyarrow_down.png")
                             .attr("x", 0)
                             .attr("y", 0)
                             .attr("width", 50)
