@@ -27,7 +27,8 @@ export var Canvas = function() {
         edgeLengthMultiplier = 10,
         nodeBorderColor = "black",
         textFont = "sans-serif",
-        textSize = nodeRadius * 0.75,
+        // textSize = nodeRadius * 0.75,
+        textSize = nodeRadius * .5,
         textColor = "black",
         defaultNodeColor = Session.defaultNodeColor;
 

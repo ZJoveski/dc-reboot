@@ -61,6 +61,7 @@ export var Neighborhoods = {
     },
 
     updateNeighborhoodReputations: function(newReputations) {
+        console.log("updateNeighborhoodRepuations called");
         for (var i = 0; i < Participants.participants.length; i++) {
             var userId = Participants.participants[i];
             var name = Participants.id_name[userId];

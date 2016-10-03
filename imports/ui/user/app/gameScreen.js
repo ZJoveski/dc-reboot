@@ -88,7 +88,7 @@ Tracker.autorun(function() {
                         }
                     }
 
-                    for (var name in neighborhoodColors) {
+                    for (var name in neighborhoodReputations) {
                         console.log("updating reputation");
                         if (neighborhoodReputations.hasOwnProperty(name)) {
                             console.log('neighborHoodReputation');

@@ -27,6 +27,7 @@ export var Reputations = {
     },
 
     updateReputation: function(userId, targetName, rank) {
+        console.log("updateReputation called");
         var userName = Participants.id_name[userId];
         var previousRank = this.reputationChoices[userName][targetName];
         this.reputationChoices[userName][targetName] = rank;
