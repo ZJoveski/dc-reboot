@@ -288,6 +288,8 @@ export var Canvas = function() {
         var triData = [makeTriangle(d, true), makeTriangle(d, false)];
         var voters = voter.selectAll("#tri").data(triData);
 
+        voters.exit().remove();
+
         voters.enter().append("svg:path")
                 .attr("d", function(d) { return d.path; })
                 .attr("fill", function(d) { return d.color; })
