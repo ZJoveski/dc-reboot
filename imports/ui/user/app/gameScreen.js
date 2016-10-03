@@ -74,6 +74,9 @@ Tracker.autorun(function() {
 
             //Session.set("clientName", namesOfNeighbors[0]);
 
+            console.log("neighborhoodReputations");
+            console.log(neighborhoodReputations);
+
             if (gameCanvasInit) { 
                 console.log("redrawing canvas");
 
