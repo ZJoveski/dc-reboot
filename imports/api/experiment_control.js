@@ -108,7 +108,6 @@ var initializeGame = function() {
     Participants.initializeGameParticipants(Session.isNewBatch());
     if (Session.isNewBatch()) {
         /* L */ Participants.assignIdsToNames();
-        Reputations.resetReputations();
     }
 
     /* L */ Neighborhoods.assignNeighborhoodsToClients();
@@ -117,6 +116,7 @@ var initializeGame = function() {
         if (Session.adversaryMode()) {
             Participants.assignAdversaries();
         }
+        Reputations.resetReputations();
     }
 
     /* Log entry. */ Logger.recordAdversaries();

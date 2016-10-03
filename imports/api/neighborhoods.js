@@ -70,10 +70,6 @@ export var Neighborhoods = {
             for (var j = 0; j < namesOfNeighbors.length; j++) {
                 var currentName = namesOfNeighbors[j];
                 var newRank = newReputations[currentName];
-                // console.log('newcolor');
-                // console.log(currentName);
-                // console.log(color);
-                // console.log(newColor);
                 neighborhoodReputations[currentName] = newRank;
             }
 
