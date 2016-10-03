@@ -69,7 +69,7 @@ Tracker.autorun(function() {
             var neighAdjMatrix = neighborsInfo.neighAdjMatrix;
             var neighborhoodColors = neighborsInfo.neighborhoodColors;
             var updateColor = neighborsInfo.updateColor;
-            var updateReputation = neighborsInfo.updateRepuation;
+            var updateReputation = neighborsInfo.updateReputation;
             var neighborhoodReputations = neighborsInfo.neighborhoodReputations;
 
             //Session.set("clientName", namesOfNeighbors[0]);
