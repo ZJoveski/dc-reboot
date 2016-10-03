@@ -31,7 +31,7 @@ export var Canvas = function() {
         defaultNodeColor = Session.defaultNodeColor;
 
     var triPadding = 5,
-        triWidth = nodeRadius / 4,
+        triWidth = nodeRadius / 2,
         triHeight = triWidth,
         triColor = "#1abc9c";
 
@@ -67,22 +67,22 @@ export var Canvas = function() {
         labelsG = vis.append("g").attr("id", "labels");
         voter = vis.append("g").attr("id", "voter");
 
-        var testdata = {
-            x: 50,
-            y: 50
-        };
+        // var testdata = {
+        //     x: 50,
+        //     y: 50
+        // };
 
-        var testTri = makeTriangle(testdata, true);
+        // var testTri = makeTriangle(testdata, true);
 
-        var voterTest = voter.selectAll("#tri").data([testTri]);
+        // var voterTest = voter.selectAll("#tri").data([testTri]);
 
-        console.log(testTri);
+        // console.log(testTri);
 
-        voterTest.enter().append("svg:path")
-                .attr("d", function(d) { return d.path; })
-                .attr("fill", function(d) { return d.color; })
-                .attr("stroke", function(d) { return d.color; })
-                .attr("id", "tri");
+        // voterTest.enter().append("svg:path")
+        //         .attr("d", function(d) { return d.path; })
+        //         .attr("fill", function(d) { return d.color; })
+        //         .attr("stroke", function(d) { return d.color; })
+        //         .attr("id", "tri");
 
         // voter.append("svg:path").attr("xlink:href", "http://ninjapenguin.tech:3000/greyarrow_down.png")
         //                     .attr("x", 0)
@@ -112,6 +112,8 @@ export var Canvas = function() {
             .attr("r", nodeRadius)
             .style("fill", defaultNodeColor)
             .style("stroke", nodeBorderColor);
+
+        nodes.on("mouseover", showVoter);
 
         labels = labelsG.selectAll("text")
                 .data(allData.nodes);
@@ -258,12 +260,12 @@ export var Canvas = function() {
         if (up) {
             path += ("M " + (x + nodeRadius + triPadding) + " " + y +
                         " L " + (x + nodeRadius + triPadding + triWidth) + " " + y + 
-                        " L " + (x + nodeRadius + triPadding + triWidth/2) + " " + (y + triHeight) + 
+                        " L " + (x + nodeRadius + triPadding + triWidth/2) + " " + (y - triHeight) + 
                         " Z");
         } else {
-            path += ("M " + (x - nodeRadius - triPadding) + " " + y +
-                        " L " + (x - nodeRadius - triPadding - triWidth) + " " + y + 
-                        " L " + (x - nodeRadius - triPadding - triWidth/2) + " " + (y - triHeight) + 
+            path += ("M " + (x - nodeRadius - triPadding) + " " + (y - triHeight) +
+                        " L " + (x - nodeRadius - triPadding - triWidth) + " " + (y - triHeight) + 
+                        " L " + (x - nodeRadius - triPadding - triWidth/2) + " " + (y) + 
                         " Z");
         }
         return {
@@ -281,7 +283,14 @@ export var Canvas = function() {
     }
 
     function showVoter(d, i) {
-        var content = "<image xlink:href=\"/images/reputation/greyarrow_down.png\""
+        var triData = [makeTriangle(d, true), makeTriangle(d, false)];
+        var voters = voter.selectAll("#tri").data(triData);
+
+        voters.enter().append("svg:path")
+                .attr("d", function(d) { return d.path; })
+                .attr("fill", function(d) { return d.color; })
+                .attr("stroke", function(d) { return d.color; })
+                .attr("id", "tri");
     }
 
     network.updateData = function(namesOfNeighbors, adjMatrix) {
