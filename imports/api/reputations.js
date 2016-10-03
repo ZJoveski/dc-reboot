@@ -11,7 +11,7 @@ export var Reputations = {
         for (var i = 0; i < Participants.participants.length; i++) {
             var userId = Participants.participants[i];
             var name = Participants.id_name[userId];
-            this.reputationChoices[name] = [];
+            this.reputationChoices[name] = {};
             this.reputations[name] = 0;
 
             for (var j = 0; j < Participants.participants.length; j++) {
