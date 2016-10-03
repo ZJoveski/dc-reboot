@@ -81,7 +81,7 @@ export var Canvas = function() {
         voterTest.enter().append("#tri")
                 .attr("d", function(d) { return d.path; })
                 .attr("fill", function(d) { return d.color; })
-                .attr("stroke", function(d) { return d.color; }),
+                .attr("stroke", function(d) { return d.color; })
                 .attr("id", "tri");
 
         // voter.append("svg:path").attr("xlink:href", "http://ninjapenguin.tech:3000/greyarrow_down.png")
