@@ -74,16 +74,20 @@ export var Canvas = function() {
 
         var testTri = makeTriangle(testdata, true);
 
-        voter.append("svg:path").data(testTri)
+        var voterTest = voter.selectAll("svg:path").data(testTri, function(d) { return d; });
+
+        console.log(testTri);
+
+        voterTest.enter().append("svg:path")
                 .attr("d", function(d) { return d.path; })
                 .attr("fill", function(d) { return d.color; })
                 .attr("stroke", function(d) { return d.color; });
 
-        voter.append("svg:path").attr("xlink:href", "http://ninjapenguin.tech:3000/greyarrow_down.png")
-                            .attr("x", 0)
-                            .attr("y", 0)
-                            .attr("width", 50)
-                            .attr("height", 50);
+        // voter.append("svg:path").attr("xlink:href", "http://ninjapenguin.tech:3000/greyarrow_down.png")
+        //                     .attr("x", 0)
+        //                     .attr("y", 0)
+        //                     .attr("width", 50)
+        //                     .attr("height", 50);
 
 
         network.updateData(namesOfNeighbors, adjMatrix);
