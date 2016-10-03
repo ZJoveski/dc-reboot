@@ -74,11 +74,11 @@ export var Canvas = function() {
 
         var testTri = makeTriangle(testdata, true);
 
-        var voterTest = voter.selectAll("svg:path").data(testTri, function(d) { return d; });
+        var voterTest = voter.selectAll("#tri").data(testTri, function(d) { return d; });
 
         console.log(testTri);
 
-        voterTest.enter().append("#tri")
+        voterTest.enter().append("svg:path")
                 .attr("d", function(d) { return d.path; })
                 .attr("fill", function(d) { return d.color; })
                 .attr("stroke", function(d) { return d.color; })
