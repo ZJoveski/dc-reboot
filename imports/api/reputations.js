@@ -18,7 +18,7 @@ export var Reputations = {
                 if (i != j) {
                     var otherId = Participants.participants[j];
                     var otherName = Participants.id_name[otherId];
-                    this.reputationChoices[userId][otherName] = 0;
+                    this.reputationChoices[name][otherName] = 0;
                 }
             }
         }
