@@ -77,7 +77,7 @@ Tracker.autorun(function() {
             if (gameCanvasInit) { 
                 console.log("redrawing canvas");
 
-                if (updateColor) {
+                if (updateColor || updateReputation) {
                     for (var name in neighborhoodColors) {
                         console.log("updating color");
                         if (neighborhoodColors.hasOwnProperty(name)) {
