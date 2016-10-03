@@ -337,7 +337,7 @@ export var Canvas = function() {
 
     network.updateNodeReputation = function(nodeName, rank) {
         var selector = "text#" + nodeName;
-        var node = textG.select(selector).text(function(node) { 
+        var node = labelsG.select(selector).text(function(node) { 
                 if (node.center) {
                     return "Me [" + rank + "]";
                 } else {
