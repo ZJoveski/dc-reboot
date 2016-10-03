@@ -331,7 +331,7 @@ export var Canvas = function() {
     network.updateNodeReputation = function(nodeName, rank) {
         var selector = "#" + nodeName;
         var node = getNode(allData.nodes, nodeName);
-        node[reputation] = rank;
+        node.reputation = rank;
         draw();
     }
 
