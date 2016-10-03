@@ -30,6 +30,11 @@ export var Canvas = function() {
         textColor = "black",
         defaultNodeColor = Session.defaultNodeColor;
 
+    var triPadding = 5,
+        triWidth = nodeRadius / 4,
+        triHeight = triWidth,
+        triColor = "#1abc9c";
+
     // allData will store the unfiltered data
     var allData = [];
     var curLinksData = [];
@@ -62,7 +67,19 @@ export var Canvas = function() {
         labelsG = vis.append("g").attr("id", "labels");
         voter = vis.append("div").attr("id", "voter");
 
-        voter.append("svg:image").attr("xlink:href", "http://ninjapenguin.tech:3000/greyarrow_down.png")
+        var testdata = {
+            x: 50,
+            y: 50
+        };
+
+        var testTri = makeTriangle(testdata, true);
+
+        voter.append("svg:path").data(testTri)
+                .attr("d", function(d) { return d.path; })
+                .attr("fill", function(d) { return d.color; })
+                .attr("stroke", function(d) { return d.color; });
+
+        voter.append("svg:path").attr("xlink:href", "http://ninjapenguin.tech:3000/greyarrow_down.png")
                             .attr("x", 0)
                             .attr("y", 0)
                             .attr("width", 50)
@@ -178,7 +195,7 @@ export var Canvas = function() {
                     var sourceNode = getNode(nodes, namesOfNeighbors[i]);
                     var destNode = getNode(nodes, namesOfNeighbors[j]);
                     if (i > 0 && numNodes % 2 == 1 && j - i == (numNodes-1)/2) {
-                        curves.push(makeCurvedEdge(sourceNode, destNode));
+                        curves.push(Edge(sourceNode, destNode));
                     } else {
                         links.push(makeStraightEdge(sourceNode, destNode, false));
                     }
@@ -225,6 +242,28 @@ export var Canvas = function() {
         return {
             path: path,
             color: secondaryEdgeColor
+        }
+    }
+
+    function makeTriangle(sourceNode, up) {
+        var path = "";
+        var x = sourceNode.x,
+            y = sourceNode.y;
+
+        if (up) {
+            var path += ("M " + (x + nodeRadius + triPadding) + " " + y +
+                        " L " + (x + nodeRadius + triPadding + triWidth) + " " + y + 
+                        " L " + (x + nodeRadius + triPadding + triWidth/2) + " " + (y + triHeight) + 
+                        " Z");
+        } else {
+            var path += ("M " + (x - nodeRadius - triPadding) + " " + y +
+                        " L " + (x - nodeRadius - triPadding - triWidth) + " " + y + 
+                        " L " + (x - nodeRadius - triPadding - triWidth/2) + " " + (y - triHeight) + 
+                        " Z");
+        }
+        return {
+            path: path,
+            color: triColor
         }
     }
 
