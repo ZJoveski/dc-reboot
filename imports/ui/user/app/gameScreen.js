@@ -87,7 +87,7 @@ Tracker.autorun(function() {
                             gameCanvas.updateNodeColor(name, neighborhoodColors[name]);
                         }
                     }
-                } else if (updateReputation) {
+
                     for (var name in neighborhoodColors) {
                         console.log("updating reputation");
                         if (neighborhoodReputations.hasOwnProperty(name)) {
