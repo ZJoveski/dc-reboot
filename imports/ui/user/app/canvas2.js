@@ -286,7 +286,7 @@ export var Canvas = function() {
         console.log("called showVoter");
         console.log(d);
         var triData = [makeTriangle(d, true), makeTriangle(d, false)];
-        var voters = voter.selectAll("#tri").data(triData);
+        var voters = voter.selectAll("#tri").data(triData, function(d) {return d.path; });
 
         voters.exit().remove();
 
