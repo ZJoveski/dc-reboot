@@ -1,4 +1,5 @@
 import { Session } from './../../../api/session.js';
+import './../../../api/meteormethods/game_methods.js';
 
 export var Canvas = function() {
     const width = 768;
@@ -33,7 +34,8 @@ export var Canvas = function() {
     var triPadding = 5,
         triWidth = nodeRadius / 2,
         triHeight = triWidth,
-        triColor = "#1abc9c";
+        triColorUp = "#1abc9c";
+        triColorDown = "#1abc9c";
 
     // allData will store the unfiltered data
     var allData = [];
@@ -94,7 +96,7 @@ export var Canvas = function() {
         network.updateData(namesOfNeighbors, adjMatrix);
     }
 
-    function draw(namesOfNeighbors) {
+    function draw() {
         drawLinks();
         drawCurves();
         drawNodes();
@@ -128,9 +130,9 @@ export var Canvas = function() {
             .attr("alignment-baseline", "middle")
             .text(function(node) { 
                 if (node.center) {
-                    return "Me";
+                    return "Me [" + node.reputation + "]";
                 } else {
-                    return node.nodeName;
+                    return node.nodeName + " [" + node.reputation + "]";
                 }
             });
     }
@@ -171,7 +173,8 @@ export var Canvas = function() {
             nodeName: namesOfNeighbors[0],
             x: centerX,
             y: centerY,
-            center: true
+            center: true,
+            reputation: 0
         });
 
         edgeLengthMultiplier = 4 + (numNodes - 3) / 2;
@@ -182,7 +185,8 @@ export var Canvas = function() {
                 nodeName: namesOfNeighbors[i],
                 x: edgeLengthMultiplier * nodeRadius * Math.cos((Math.PI * 2 * i) / (numNodes-1)) + centerX,
                 y: edgeLengthMultiplier * nodeRadius * Math.sin((Math.PI * 2 * i) / (numNodes-1)) + centerY,
-                center: false
+                center: false,
+                reputation: 0
             });
         }
 
@@ -254,6 +258,7 @@ export var Canvas = function() {
 
     function makeTriangle(sourceNode, up) {
         var path = "";
+        var color = triColorUp;
         var x = sourceNode.x,
             y = sourceNode.y;
 
@@ -267,10 +272,13 @@ export var Canvas = function() {
                         " L " + (x - nodeRadius - triPadding - triWidth) + " " + (y - triHeight) + 
                         " L " + (x - nodeRadius - triPadding - triWidth/2) + " " + (y) + 
                         " Z");
+            color = triColorDown;
         }
         return {
             path: path,
-            color: triColor
+            color: color
+            up: up
+            sourceNode: sourceNode.nodeName
         }
     }
 
@@ -295,16 +303,35 @@ export var Canvas = function() {
                 .attr("fill", function(d) { return d.color; })
                 .attr("stroke", function(d) { return d.color; })
                 .attr("id", "tri");
+
+        voters.on("click", sendReputation);
+    }
+
+    function sendReputation(data, i) {
+        console.log("called sendReputation");
+        var rank = -1;
+        if (data.up) {
+            rank = 1;
+        }
+
+        Meteor.call('updateReputation', data.sourceNode, rank);
     }
 
     network.updateData = function(namesOfNeighbors, adjMatrix) {
         allData = formatData(namesOfNeighbors, adjMatrix);
-        draw(namesOfNeighbors);
+        draw();
     }
 
     network.updateNodeColor = function(nodeName, color) {
         var selector = "#" + nodeName;
         var node = nodesG.select(selector).style("fill", color);
+    }
+
+    network.updateNodeReputation = function(nodeName, rank) {
+        var selector = "#" + nodeName;
+        var node = getNode(allData.nodes, nodeName);
+        node[reputation] = rank;
+        draw();
     }
 
     return network;

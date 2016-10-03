@@ -45,6 +45,43 @@ export var Neighborhoods = {
         }
     },
 
+    initializeNeighborhoodReputations: function() {
+        for(var i = 0; i < Participants.participants.length; i++) {
+            var userId = Participants.participants[i];
+            var name = Participants.id_name[userId];
+            var namesOfNeighbors = getNamesOfNeighbors(userId);
+
+            var neighborhoodReputations = {};
+            for (var j = 0; j < namesOfNeighbors.length; j++) {
+                neighborhoodReputations[namesOfNeighbors[j]] = 0;
+            }
+
+            NeighborhoodsInfo.upsert({userId: userId}, {$set: {neighborhoodReputations: neighborhoodReputations, updateReputation: false}});          
+        }
+    },
+
+    updateNeighborhoodReputations: function(newReputations) {
+        for (var i = 0; i < Participants.participants.length; i++) {
+            var userId = Participants.participants[i];
+            var name = Participants.id_name[userId];
+            var namesOfNeighbors = getNamesOfNeighbors(userId);
+
+            var neighborhoodReputations = {};
+            for (var j = 0; j < namesOfNeighbors.length; j++) {
+                var currentName = namesOfNeighbors[j];
+                var newRank = newReputations[currentName];
+                // console.log('newcolor');
+                // console.log(currentName);
+                // console.log(color);
+                // console.log(newColor);
+                neighborhoodReputations[currentName] = newRank;
+            }
+
+            console.log('updateNeighborhoodReputations');
+            NeighborhoodsInfo.upsert({userId: userId}, {$set: {neighborhoodReputations: neighborhoodReputations, updateReputation: true}}); 
+        }
+    },
+
     updateNeighborhoodColors: function(newColors) {
         for (var i = 0; i < Participants.participants.length; i++) {
             var userId = Participants.participants[i];

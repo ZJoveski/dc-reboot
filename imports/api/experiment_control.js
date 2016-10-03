@@ -8,6 +8,7 @@ import { Neighborhoods } from './neighborhoods.js';
 import { ColorMagic } from './colors_mapping.js';
 import { Logger } from './logging.js';
 import { Messages } from './messages.js';
+import { Reputations } from './reputations.js';
 
 export const startGames = function(isProperGames, numberOfGames, numberOfBatches) {
     proper = isProperGames;
@@ -107,6 +108,7 @@ var initializeGame = function() {
     Participants.initializeGameParticipants(Session.isNewBatch());
     if (Session.isNewBatch()) {
         /* L */ Participants.assignIdsToNames();
+        Reputations.resetReputations();
     }
 
     /* L */ Neighborhoods.assignNeighborhoodsToClients();

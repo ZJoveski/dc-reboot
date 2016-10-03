@@ -24,6 +24,8 @@ export const SessionInfo = new Mongo.Collection('session');
 
 export const TimeInfo = new Mongo.Collection('time');
 
+export const ReputationsCollection = new Mongo.Collection('reputations');
+
 //export const parameters = new Mongo.Collection('parameters');
 
 //export const participantsCollection = new Mongo.Collection('participantsCollection');

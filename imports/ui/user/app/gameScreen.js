@@ -10,6 +10,7 @@ import { SessionInfo } from '../../../api/collections/game_collections.js';
 import { PayoutInfo } from '../../../api/collections/game_collections.js';
 import { NeighborhoodsInfo } from '../../../api/collections/game_collections.js';
 import { ParametersInfo } from '../../../api/collections/game_collections.js';
+import { ReputationsCollection } from '../../../api/collections/game_collections.js';
 
 import './../../../api/meteormethods/game_methods.js';
 
@@ -68,6 +69,8 @@ Tracker.autorun(function() {
             var neighAdjMatrix = neighborsInfo.neighAdjMatrix;
             var neighborhoodColors = neighborsInfo.neighborhoodColors;
             var updateColor = neighborsInfo.updateColor;
+            var updateReputation = neighborsInfo.updateRepuation;
+            var neighborhoodReputations = neighborsInfo.neighborhoodReputations;
 
             //Session.set("clientName", namesOfNeighbors[0]);
 
@@ -82,7 +85,16 @@ Tracker.autorun(function() {
                             console.log(name);
                             console.log(neighborhoodColors[name]);
                             gameCanvas.updateNodeColor(name, neighborhoodColors[name]);
-                            // gameCanvas.updateNodeColor(name, neighborhoodColors[name]);
+                        }
+                    }
+                } else if (updateReputation) {
+                    for (var name in neighborhoodColors) {
+                        console.log("updating reputation");
+                        if (neighborhoodReputations.hasOwnProperty(name)) {
+                            console.log('neighborHoodReputation');
+                            console.log(name);
+                            console.log(neighborhoodReputations[name]);
+                            gameCanvas.updateNodeReputation(name, neighborhoodReputations[name]);
                         }
                     }
                 } else {

@@ -8,6 +8,7 @@ import { ParticipantsInfo } from '../../imports/api/collections/game_collections
 import { ProgressInfo } from '../../imports/api/collections/game_collections.js';
 import { SessionInfo } from '../../imports/api/collections/game_collections.js';
 import { TimeInfo } from '../../imports/api/collections/game_collections.js';
+import { ReputationsCollection } from '../../imports/api/collections/game_collections.js';
 
 import { Participants } from '../../imports/api/participants.js';
 import { Parameters } from '../../imports/api/parameters.js';
@@ -18,6 +19,12 @@ import { Parameters } from '../../imports/api/parameters.js';
 Meteor.publishComposite('neighborhoods', {
     find: function () {
         return NeighborhoodsInfo.find({userId: this.userId});
+    }
+});
+
+Meteor.publishComposite('reputations', {
+    find: function() {
+        return ReputationsCollection.find({});
     }
 });
 
