@@ -107,13 +107,13 @@ export var Canvas = function() {
     function drawNodes() {
         console.log(allData.nodes);
         nodes = nodesG.selectAll("circle.node")
-                .data(allData.nodes, function(d) { return d.nodeName + d.reputation});
+                .data(allData.nodes, function(d) { return d.nodeName + d.reputation; });
 
         nodes.exit().remove();
 
         nodes.enter().append("circle")
             .attr("class", "node")
-            .attr("id", function(node) { return node.nodeName; })
+            
             .attr("cx", function(node) { return node.x; })
             .attr("cy", function(node) { return node.y; })
             .attr("r", nodeRadius)
@@ -123,13 +123,14 @@ export var Canvas = function() {
         nodes.on("click", showVoter);
 
         labels = labelsG.selectAll("text")
-                .data(allData.nodes, function(d) { return d.nodeName + d.reputation});
+                .data(allData.nodes, function(d) { return d.nodeName + d.reputation; });
 
         labels.exit().remove();
 
         labels.enter().append("text")
             .attr("x", function(node) { return node.x; })
             .attr("y", function(node) { return node.y; })
+            .attr("id", function(node) { return node.nodeName; })
             .attr("font-family", textFont)
             .attr("font-size", textSize)
             .attr("fill", textColor)
@@ -335,10 +336,14 @@ export var Canvas = function() {
     }
 
     network.updateNodeReputation = function(nodeName, rank) {
-        var selector = "#" + nodeName;
-        var node = getNode(allData.nodes, nodeName);
-        node.reputation = rank;
-        draw();
+        var selector = "text#" + nodeName;
+        var node = textG.select(selector).text(function(node) { 
+                if (node.center) {
+                    return "Me [" + rank + "]";
+                } else {
+                    return node.nodeName + " [" + rank + "]";
+                }
+            });
     }
 
     return network;
