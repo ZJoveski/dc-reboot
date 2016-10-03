@@ -251,12 +251,12 @@ export var Canvas = function() {
             y = sourceNode.y;
 
         if (up) {
-            var path += ("M " + (x + nodeRadius + triPadding) + " " + y +
+            path += ("M " + (x + nodeRadius + triPadding) + " " + y +
                         " L " + (x + nodeRadius + triPadding + triWidth) + " " + y + 
                         " L " + (x + nodeRadius + triPadding + triWidth/2) + " " + (y + triHeight) + 
                         " Z");
         } else {
-            var path += ("M " + (x - nodeRadius - triPadding) + " " + y +
+            path += ("M " + (x - nodeRadius - triPadding) + " " + y +
                         " L " + (x - nodeRadius - triPadding - triWidth) + " " + y + 
                         " L " + (x - nodeRadius - triPadding - triWidth/2) + " " + (y - triHeight) + 
                         " Z");
