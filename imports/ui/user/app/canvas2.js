@@ -123,7 +123,7 @@ export var Canvas = function() {
         nodes.on("click", showVoter);
 
         labels = labelsG.selectAll("text")
-                .data(allData.nodes);
+                .data(allData.nodes, function(d) { return d.nodeName + d.reputation});
 
         labels.exit().remove();
 
