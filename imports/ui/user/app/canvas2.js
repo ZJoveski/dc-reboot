@@ -276,8 +276,8 @@ export var Canvas = function() {
         }
         return {
             path: path,
-            color: color
-            up: up
+            color: color,
+            up: up,
             sourceNode: sourceNode.nodeName
         }
     }
