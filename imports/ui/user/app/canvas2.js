@@ -65,7 +65,7 @@ export var Canvas = function() {
         curvesG = vis.append("g").attr("id", "curves");
         nodesG = vis.append("g").attr("id", "nodes");
         labelsG = vis.append("g").attr("id", "labels");
-        voter = vis.append("div").attr("id", "voter");
+        voter = vis.append("g").attr("id", "voter");
 
         var testdata = {
             x: 50,
@@ -78,10 +78,11 @@ export var Canvas = function() {
 
         console.log(testTri);
 
-        voterTest.enter().append("svg:path")
+        voterTest.enter().append("#tri")
                 .attr("d", function(d) { return d.path; })
                 .attr("fill", function(d) { return d.color; })
-                .attr("stroke", function(d) { return d.color; });
+                .attr("stroke", function(d) { return d.color; }),
+                .attr("id", "tri");
 
         // voter.append("svg:path").attr("xlink:href", "http://ninjapenguin.tech:3000/greyarrow_down.png")
         //                     .attr("x", 0)
