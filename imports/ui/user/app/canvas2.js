@@ -113,7 +113,7 @@ export var Canvas = function() {
             .style("fill", defaultNodeColor)
             .style("stroke", nodeBorderColor);
 
-        nodes.on("mouseover", showVoter);
+        nodes.on("click", showVoter);
 
         labels = labelsG.selectAll("text")
                 .data(allData.nodes);
