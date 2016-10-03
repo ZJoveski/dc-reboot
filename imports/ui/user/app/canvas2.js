@@ -98,12 +98,14 @@ export var Canvas = function() {
     }
 
     function draw() {
+        console.log("drawing");
         drawLinks();
         drawCurves();
         drawNodes();
     }
 
     function drawNodes() {
+        console.log(allData.nodes);
         nodes = nodesG.selectAll("circle.node")
                 .data(allData.nodes);
 
