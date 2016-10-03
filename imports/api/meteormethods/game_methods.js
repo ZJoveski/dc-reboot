@@ -19,7 +19,7 @@ Meteor.methods({
 
     updateReputation: function(targetNode, rank) {
         Reputations.updateReputation(Meteor.userId(), targetNode, rank);
-    }
+    },
 
     sendStructuredMessage: function() {
         var id = this.userId;
