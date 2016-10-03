@@ -107,7 +107,7 @@ export var Canvas = function() {
         nodes = nodesG.selectAll("circle.node")
                 .data(allData.nodes);
 
-        nodes.exit.remove();
+        nodes.exit().remove();
 
         nodes.enter().append("circle")
             .attr("class", "node")
@@ -123,7 +123,7 @@ export var Canvas = function() {
         labels = labelsG.selectAll("text")
                 .data(allData.nodes);
 
-        labels.exit.remove();
+        labels.exit().remove();
 
         labels.enter().append("text")
             .attr("x", function(node) { return node.x; })
