@@ -74,7 +74,7 @@ export var Canvas = function() {
 
         var testTri = makeTriangle(testdata, true);
 
-        var voterTest = voter.selectAll("#tri").data(testTri, function(d) { return d; });
+        var voterTest = voter.selectAll("#tri").data([testTri]);
 
         console.log(testTri);
 
