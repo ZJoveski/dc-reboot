@@ -374,7 +374,7 @@ export var Canvas = function() {
         }
 
         var selector = ".tri#" + (data.up) + data.sourceNode;
-        voters.select(selector).attr("fill", function(d) { 
+        voter.select(selector).attr("fill", function(d) { 
                                     return d.color;
                                 })
                                 .attr("stroke", function(d) { 
@@ -382,7 +382,7 @@ export var Canvas = function() {
                                 });
 
         var selector = ".tri#" + (!data.up) + data.sourceNode;
-        voters.select(selector).attr("fill", function(d) { 
+        voter.select(selector).attr("fill", function(d) { 
                                     return triColorNeutral;
                                 })
                                 .attr("stroke", function(d) { 
