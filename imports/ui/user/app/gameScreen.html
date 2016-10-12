@@ -101,6 +101,13 @@
                 </div>
             {{/if}}
         {{else}}
+            {{#if preSessionInProgress}}
+                {{>preSessionCountdown}}
+            {{else}}
+                <div class="game" id="waitStatus" align = "center" style = " position: absolute; padding-top:0%; display: block;top: 40.0%; left: 30.0%; background-color: greenyellow; border-style: ridge; border-style: solid;border-color: #ADFF2F; width: 40vw; height: 20vh; font-size: 3.0vmin">
+                    {{waitForNextExperimentStatus}}
+                </div>
+            {{/if}}
         {{/if}}
 
 
