@@ -50,10 +50,22 @@
                                             is in progress
                                         </div>
                                     </div>
+                                    <div class="game list-group-item" id="communicationType" align = "center">
+                                        <div style = "line-height: 100%; font-size: 6vmin; ">{{communicationType}}</div>
+                                        <div style = "line-height: 100%; font-size: 1.8vmin; ">communication</div>
+                                    </div>
+                                    <div class="game list-group-item" id="communicationCost" align = "center">
+                                        <div style = "line-height: 100%; font-size: 6vmin;">{{communicationCost}}</div>
+                                        <div style = "line-height: 100%; font-size: 1.8vmin;">communication</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="col-md-6">
+                        <div class="game canvas" id="canvas"></div>
+                    </div>
+                    <div class="col-md-3">
                         <div class="game panel panel-info" id="potentialPayouts" align="center">
                             <div class="panel-heading">
                                 <h2 class="panel-title">Potential Bonuses</h2>
@@ -63,28 +75,6 @@
                                     {{#each potentialPayouts}}
                                         {{> potentialPayout}}
                                     {{/each}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="game canvas" id="canvas"></div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="game panel panel-info" id="communication" align="center">
-                            <div class="panel-heading">
-                                <h2 class="panel-title">Communication Info</h2>
-                            </div>
-                            <div class="game panel-body">
-                                <div class="list-group">
-                                    <div class="game list-group-item" id="communicationType" align = "center">
-                                        <div style = "line-height: 100%; font-size: 6vmin; ">{{communicationType}}</div>
-                                        <div style = "line-height: 100%; font-size: 1.8vmin; ">communication</div>
-                                    </div>
-                                    <div class="game list-group-item" id="communicationCost" align = "center">
-                                        <div style = "line-height: 100%; font-size: 6vmin;">{{communicationCost}}</div>
-                                        <div style = "line-height: 100%; font-size: 1.8vmin;">communication</div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
