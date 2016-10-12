@@ -155,9 +155,9 @@ export var Canvas = function() {
 
         bars.enter().append("rect")
             .attr("class", "negative")
-            .attr("x", function(node) { return node.x - nodeRadius * 1; })
-            .attr("y", function(node) { return node.y - nodeRadius - triPadding; })
-            .attr("width", function(node) { return nodeRadius*1; })
+            .attr("x", function(node) { return node.x - 2*nodeRadius * 1; })
+            .attr("y", function(node) { return node.y - nodeRadius - triPadding - barHeight; })
+            .attr("width", function(node) { return 2*nodeRadius*1; })
             .attr("height", function(node) { return barHeight; })
             .attr("stroke", "black")
             .attr("fill", "red");
@@ -168,8 +168,8 @@ export var Canvas = function() {
         bars.enter().append("rect")
             .attr("class", "positive")
             .attr("x", function(node) { return node.x; })
-            .attr("y", function(node) { return node.y - nodeRadius - triPadding; })
-            .attr("width", function(node) { return nodeRadius*1; })
+            .attr("y", function(node) { return node.y - nodeRadius - triPadding - barHeight; })
+            .attr("width", function(node) { return 2*nodeRadius*1; })
             .attr("height", function(node) { return barHeight; })
             .attr("stroke", "black")
             .attr("fill", "green");
