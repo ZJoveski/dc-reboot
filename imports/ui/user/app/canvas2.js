@@ -301,18 +301,20 @@ export var Canvas = function() {
     function showVoter(d, i) {
         console.log("called showVoter");
         console.log(d);
-        var triData = [makeTriangle(d, true), makeTriangle(d, false)];
-        var voters = voter.selectAll("#tri").data(triData, function(d) {return d.path; });
+        if (!d.center) {
+            var triData = [makeTriangle(d, true), makeTriangle(d, false)];
+            var voters = voter.selectAll("#tri").data(triData, function(d) {return d.path; });
 
-        voters.exit().remove();
+            voters.exit().remove();
 
-        voters.enter().append("svg:path")
-                .attr("d", function(d) { return d.path; })
-                .attr("fill", function(d) { return d.color; })
-                .attr("stroke", function(d) { return d.color; })
-                .attr("id", "tri");
+            voters.enter().append("svg:path")
+                    .attr("d", function(d) { return d.path; })
+                    .attr("fill", function(d) { return d.color; })
+                    .attr("stroke", function(d) { return d.color; })
+                    .attr("id", "tri");
 
-        voters.on("click", sendReputation);
+            voters.on("click", sendReputation);
+        } 
     }
 
     function sendReputation(data, i) {
