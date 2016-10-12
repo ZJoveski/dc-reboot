@@ -372,7 +372,7 @@ export var Canvas = function() {
 
     network.updateNodeReputation = function(nodeName, rank) {
         var selector = "rect.negative#" + nodeName;
-        barsG.select(selector).attr("x", function(node) { return node.x - barWidth*rank; })
+        barsG.select(selector).attr("x", function(node) { return node.x - barWidth*.5; })
                                 .attr("width", function(node) { return barWidth*rank; });
 
         selector = "rect.positive#" + nodeName;
