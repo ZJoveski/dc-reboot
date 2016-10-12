@@ -98,6 +98,8 @@ div.game  {
         border: 2px solid rgb(230, 230, 230);
         margin: 0px 0px 5px 0px;
     background-color: white;
+    overflow-y:auto; 
+    height: 200px;
     
     font-size: 1.25vmin;  
         
