@@ -376,16 +376,16 @@ export var Canvas = function() {
                                 .attr("width", function(node) { return barWidth*node.rank; });
 
         selector = "rect.positive#" + nodeName;
-        labelsG.select(selector).attr("x", function(node) { return node.x + (.5-1+node.reputation)*barWidth; })
-                                .attr("width", function(node) { return barWidth*(1-node.reputation); })
+        labelsG.select(selector).attr("x", function(node) { return node.x + (.5-1+node.rank)*barWidth; })
+                                .attr("width", function(node) { return barWidth*(1-node.rank); })
 
-        // var node = labelsG.select(selector).text(function(node) { 
-        //         if (node.center) {
-        //             return "Me [" + rank + "]";
-        //         } else {
-        //             return node.nodeName + " [" + rank + "]";
-        //         }
-        //     });
+        var node = labelsG.select(selector).text(function(node) { 
+                if (node.center) {
+                    return "Me [" + rank + "]";
+                } else {
+                    return node.nodeName + " [" + rank + "]";
+                }
+            });
     }
 
     return network;
