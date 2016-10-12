@@ -39,7 +39,7 @@ export var Canvas = function() {
         triColorDown = "#1abc9c";
 
     var barHeight = 10,
-        barWidth = nodeRadius*1.5;
+        barWidth = nodeRadius*3;
 
     // allData will store the unfiltered data
     var allData = [];
@@ -156,9 +156,10 @@ export var Canvas = function() {
 
         bars.enter().append("rect")
             .attr("class", "negative")
-            .attr("x", function(node) { return node.x - barWidth * 1; })
+            .attr("id", function(node) { return node.nodeName; })
+            .attr("x", function(node) { return node.x - barWidth*node.reputation; })
             .attr("y", function(node) { return node.y - nodeRadius - triPadding - barHeight; })
-            .attr("width", function(node) { return barWidth*1; })
+            .attr("width", function(node) { return barWidth*node.reputation; })
             .attr("height", function(node) { return barHeight; })
             .attr("stroke", "black")
             .attr("fill", "red");
@@ -168,9 +169,10 @@ export var Canvas = function() {
 
         bars.enter().append("rect")
             .attr("class", "positive")
-            .attr("x", function(node) { return node.x; })
+            .attr("id", function(node) { return node.nodeName; })
+            .attr("x", function(node) { return node.x + (.5-1+node.reputation)*barWidth; })
             .attr("y", function(node) { return node.y - nodeRadius - triPadding - barHeight; })
-            .attr("width", function(node) { return barWidth*1; })
+            .attr("width", function(node) { return barWidth*(1-node.reputation); })
             .attr("height", function(node) { return barHeight; })
             .attr("stroke", "black")
             .attr("fill", "green");
@@ -369,16 +371,21 @@ export var Canvas = function() {
     }
 
     network.updateNodeReputation = function(nodeName, rank) {
-        console.log("rank");
-        console.log(rank);
-        var selector = "text#" + nodeName;
-        var node = labelsG.select(selector).text(function(node) { 
-                if (node.center) {
-                    return "Me [" + rank + "]";
-                } else {
-                    return node.nodeName + " [" + rank + "]";
-                }
-            });
+        var selector = "rect.negative#" + nodeName;
+        labelsG.select(selector).attr("x", function(node) { return node.x - barWidth*node.rank; })
+                                .attr("width", function(node) { return barWidth*node.rank; });
+
+        selector = "rect.positive#" + nodeName;
+        labelsG.select(selector).attr("x", function(node) { return node.x + (.5-1+node.reputation)*barWidth; })
+                                .attr("width", function(node) { return barWidth*(1-node.reputation); })
+
+        // var node = labelsG.select(selector).text(function(node) { 
+        //         if (node.center) {
+        //             return "Me [" + rank + "]";
+        //         } else {
+        //             return node.nodeName + " [" + rank + "]";
+        //         }
+        //     });
     }
 
     return network;
