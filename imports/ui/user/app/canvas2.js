@@ -69,7 +69,10 @@ export var Canvas = function() {
         curvesG = vis.append("g").attr("id", "curves");
         nodesG = vis.append("g").attr("id", "nodes");
         labelsG = vis.append("g").attr("id", "labels");
-        barsG = vis.append("foreignobject").attr("id", "bars");
+        barsG = vis.append("foreignobject")
+                    .attr("id", "bars")
+                    .attr("width", width)
+                    .attr("height", height);
         voter = vis.append("g").attr("id", "voter");
 
         // var testdata = {
