@@ -87,7 +87,7 @@ div.game  {
 
 .messages{
     display: block;
-    height:27.5%;
+    min-height:27.5%;
     font-size: 1.25vmin;  
 }
 
