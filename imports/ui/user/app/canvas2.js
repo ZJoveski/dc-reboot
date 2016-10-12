@@ -50,6 +50,7 @@ export var Canvas = function() {
     var curvesG = null;
     var labelsG = null;
     var voterG = null;
+    var barsG = null;
 
     function network(selection, namesOfNeighbors, adjMatrix) {
         // create svg container and group elements
@@ -68,6 +69,7 @@ export var Canvas = function() {
         curvesG = vis.append("g").attr("id", "curves");
         nodesG = vis.append("g").attr("id", "nodes");
         labelsG = vis.append("g").attr("id", "labels");
+        barsG = vis.append("g").attr("id", "bars");
         voter = vis.append("g").attr("id", "voter");
 
         // var testdata = {
@@ -143,6 +145,25 @@ export var Canvas = function() {
                     return node.nodeName + " [" + node.reputation + "]";
                 }
             });
+
+        bars = barsG.selectAll("div.progress")
+                .data(allData.nodes, function(d) { return d.nodeName + d.reputation; });
+
+        bars.exit().remove();
+
+        var barEnter = bars.enter().append("div")
+                        .attr("class", "progress")
+                        .style("width", 4 * nodeRadius)
+                        .style("top", function(node) { return node.y; })
+                        .style("left", function(node) { return node.x; });
+
+        barEnter.append("div")
+                .attr("class", "progress-bar progress-bar-success")
+                .style("width", "50%");
+
+        barEnter.append("div")
+                .attr("class", "progress-bar progress-bar-danger")
+                .style("width", "50%");
     }
 
     function drawLinks() {
