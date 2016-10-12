@@ -35,8 +35,10 @@ export var Canvas = function() {
     var triPadding = 5,
         triWidth = nodeRadius / 2,
         triHeight = triWidth,
-        triColorUp = "#1abc9c";
-        triColorDown = "#1abc9c";
+        triColorUp = "green",
+        triColorDown = "red",
+        triColorNeutral = "grey";
+
 
     var barHeight = 10,
         barWidth = nodeRadius*3;
@@ -149,33 +151,33 @@ export var Canvas = function() {
                 }
             });
 
-        bars = barsG.selectAll("rect.negative")
+        bars = barsG.selectAll("rect.positive")
                 .data(allData.nodes, function(d) { return d.nodeName + d.reputation; });
 
         bars.exit().remove();
 
         bars.enter().append("rect")
-            .attr("class", "negative")
+            .attr("class", "positive")
             .attr("id", function(node) { return node.nodeName; })
             .attr("x", function(node) { return node.x - barWidth*node.reputation; })
             .attr("y", function(node) { return node.y - nodeRadius - triPadding - barHeight; })
             .attr("width", function(node) { return barWidth*node.reputation; })
             .attr("height", function(node) { return barHeight; })
             .attr("stroke", "black")
-            .attr("fill", "red");
+            .attr("fill", "green");
 
-        bars = barsG.selectAll("rect.positive")
+        bars = barsG.selectAll("rect.negative")
                 .data(allData.nodes, function(d) { return d.nodeName + d.reputation; });
 
         bars.enter().append("rect")
-            .attr("class", "positive")
+            .attr("class", "negative")
             .attr("id", function(node) { return node.nodeName; })
             .attr("x", function(node) { return node.x + (.5-1+node.reputation)*barWidth; })
             .attr("y", function(node) { return node.y - nodeRadius - triPadding - barHeight; })
             .attr("width", function(node) { return barWidth*(1-node.reputation); })
             .attr("height", function(node) { return barHeight; })
             .attr("stroke", "black")
-            .attr("fill", "green");
+            .attr("fill", "red");
     }
 
     function drawLinks() {
@@ -319,7 +321,8 @@ export var Canvas = function() {
             path: path,
             color: color,
             up: up,
-            sourceNode: sourceNode.nodeName
+            sourceNode: sourceNode.nodeName,
+            chosen: false
         }
     }
 
@@ -336,15 +339,28 @@ export var Canvas = function() {
         console.log(d);
         if (!d.center) {
             var triData = [makeTriangle(d, true), makeTriangle(d, false)];
-            var voters = voter.selectAll("#tri").data(triData, function(d) {return d.path; });
+            var voters = voter.selectAll(".tri").data(triData, function(d) {return d.path; });
 
             voters.exit().remove();
 
             voters.enter().append("svg:path")
                     .attr("d", function(d) { return d.path; })
-                    .attr("fill", function(d) { return d.color; })
-                    .attr("stroke", function(d) { return d.color; })
-                    .attr("id", "tri");
+                    .attr("fill", function(d) { 
+                        if (d.chosen) {
+                            return d.color;
+                        } else {
+                            return triColorNeutral;
+                        }
+                    })
+                    .attr("stroke", function(d) { 
+                        if (d.chosen) {
+                            return d.color;
+                        } else {
+                            return triColorNeutral;
+                        }
+                    })
+                    .attr("class", "tri")
+                    .attr("id", function(d) { return d.up + d.sourceNode; });
 
             voters.on("click", sendReputation);
         } 
@@ -356,6 +372,23 @@ export var Canvas = function() {
         if (data.up) {
             rank = 1;
         }
+
+        var selector = ".tri#" + (data.up) + data.sourceNode;
+        voters.select(selector).attr("fill", function(d) { 
+                                    return d.color;
+                                })
+                                .attr("stroke", function(d) { 
+                                    return d.color;
+                                });
+
+        var selector = ".tri#" + (!data.up) + data.sourceNode;
+        voters.select(selector).attr("fill", function(d) { 
+                                    return triColorNeutral;
+                                })
+                                .attr("stroke", function(d) { 
+                                    return triColorNeutral;
+                                });
+
 
         Meteor.call('updateReputation', data.sourceNode, rank);
     }
@@ -371,11 +404,11 @@ export var Canvas = function() {
     }
 
     network.updateNodeReputation = function(nodeName, rank) {
-        var selector = "rect.negative#" + nodeName;
+        var selector = "rect.positive#" + nodeName;
         barsG.select(selector).attr("x", function(node) { return node.x - barWidth*.5; })
                                 .attr("width", function(node) { return barWidth*rank; });
 
-        selector = "rect.positive#" + nodeName;
+        selector = "rect.negative#" + nodeName;
         barsG.select(selector).attr("x", function(node) { return node.x + (.5-1+rank)*barWidth; })
                                 .attr("width", function(node) { return barWidth*(1-rank); })
 
