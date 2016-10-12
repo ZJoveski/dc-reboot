@@ -113,7 +113,7 @@ export var Canvas = function() {
 
         nodes.enter().append("circle")
             .attr("class", "node")
-            
+            .attr("id", function(node) { return node.nodeName; })
             .attr("cx", function(node) { return node.x; })
             .attr("cy", function(node) { return node.y; })
             .attr("r", nodeRadius)
