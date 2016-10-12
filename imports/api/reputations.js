@@ -12,7 +12,7 @@ export var Reputations = {
             var userId = Participants.participants[i];
             var name = Participants.id_name[userId];
             this.reputationChoices[name] = {};
-            this.reputations[name] = 0;
+            this.reputations[name] = .5;
 
             for (var j = 0; j < Participants.participants.length; j++) {
                 if (i != j) {
@@ -29,10 +29,22 @@ export var Reputations = {
     updateReputation: function(userId, targetName, rank) {
         console.log("updateReputation called");
         var userName = Participants.id_name[userId];
-        var previousRank = this.reputationChoices[userName][targetName];
         this.reputationChoices[userName][targetName] = rank;
-        var diff = rank - previousRank;
-        this.reputations[targetName] += diff;
+        var total_rankers = 0;
+        var total_rank = 0;
+        for (var i = 0; i < Participants.participants.length; i++) {
+            var userId = Participants.participants[i];
+            var name = Participants.id_name[userId];
+            var temp_rank = reputationChoices[name][targetName];
+            if (temp_rank != 0) {
+                total_rank += temp_rank;
+                total_rankers++;
+            }
+        }
+
+        var percentage = total_rank / total_rankers;
+        var new_rep = .5 + percentage*.5;
+        this.reputations[targetName] = new_rep;
 
         Neighborhoods.updateNeighborhoodReputations(this.reputations);
     },
