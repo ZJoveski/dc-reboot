@@ -213,7 +213,7 @@ export var Canvas = function() {
             x: centerX,
             y: centerY,
             center: true,
-            reputation: 0
+            reputation: .5
         });
 
         edgeLengthMultiplier = 4 + (numNodes - 3) / 2;
@@ -225,7 +225,7 @@ export var Canvas = function() {
                 x: edgeLengthMultiplier * nodeRadius * Math.cos((Math.PI * 2 * i) / (numNodes-1)) + centerX,
                 y: edgeLengthMultiplier * nodeRadius * Math.sin((Math.PI * 2 * i) / (numNodes-1)) + centerY,
                 center: false,
-                reputation: 0
+                reputation: .5
             });
         }
 
@@ -302,14 +302,14 @@ export var Canvas = function() {
             y = sourceNode.y;
 
         if (up) {
-            path += ("M " + (x + nodeRadius + triPadding) + " " + y +
-                        " L " + (x + nodeRadius + triPadding + triWidth) + " " + y + 
-                        " L " + (x + nodeRadius + triPadding + triWidth/2) + " " + (y - triHeight) + 
+            path += ("M " + (x + nodeRadius + triPadding) + " " + (y - triPadding) +
+                        " L " + (x + nodeRadius + triPadding + triWidth) + " " + (y - triPadding) + 
+                        " L " + (x + nodeRadius + triPadding + triWidth/2) + " " + (y - triPadding - triHeight) + 
                         " Z");
         } else {
-            path += ("M " + (x - nodeRadius - triPadding) + " " + (y - triHeight) +
-                        " L " + (x - nodeRadius - triPadding - triWidth) + " " + (y - triHeight) + 
-                        " L " + (x - nodeRadius - triPadding - triWidth/2) + " " + (y) + 
+            path += ("M " + (x - nodeRadius - triPadding) + " " + (y - triPadding - triHeight) +
+                        " L " + (x - nodeRadius - triPadding - triWidth) + " " + (y - triPadding - triHeight) + 
+                        " L " + (x - nodeRadius - triPadding - triWidth/2) + " " + (y - triPadding) + 
                         " Z");
             color = triColorDown;
         }
@@ -369,6 +369,8 @@ export var Canvas = function() {
     }
 
     network.updateNodeReputation = function(nodeName, rank) {
+        console.log("rank");
+        console.log(rank);
         var selector = "text#" + nodeName;
         var node = labelsG.select(selector).text(function(node) { 
                 if (node.center) {
