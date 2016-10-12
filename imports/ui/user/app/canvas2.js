@@ -38,6 +38,8 @@ export var Canvas = function() {
         triColorUp = "#1abc9c";
         triColorDown = "#1abc9c";
 
+    var barHeight = 20;
+
     // allData will store the unfiltered data
     var allData = [];
     var curLinksData = [];
@@ -69,10 +71,7 @@ export var Canvas = function() {
         curvesG = vis.append("g").attr("id", "curves");
         nodesG = vis.append("g").attr("id", "nodes");
         labelsG = vis.append("g").attr("id", "labels");
-        barsG = vis.append("foreignobject")
-                    .attr("id", "bars")
-                    .attr("width", width)
-                    .attr("height", height);
+        barsG = vis.append("g").attr("id", "bars");
         voter = vis.append("g").attr("id", "voter");
 
         // var testdata = {
@@ -149,24 +148,31 @@ export var Canvas = function() {
                 }
             });
 
-        bars = barsG.selectAll("div.progress")
+        bars = barsG.selectAll("rect.negative")
                 .data(allData.nodes, function(d) { return d.nodeName + d.reputation; });
 
         bars.exit().remove();
 
-        var barEnter = bars.enter().append("div")
-                        .attr("class", "progress")
-                        .style("width", 4 * nodeRadius)
-                        .style("top", function(node) { return node.y; })
-                        .style("left", function(node) { return node.x; });
+        bars.enter().append("rect")
+            .attr("class", "negative")
+            .attr("x", function(node) { return node.x - nodeRadius * 1; })
+            .attr("y", function(node) { return node.y - nodeRadius - triPadding; })
+            .attr("width", function(node) { return nodeRadius*1; })
+            .attr("height", function(node) { return barHeight; })
+            .attr("stroke", "black")
+            .attr("fill", "red");
 
-        barEnter.append("div")
-                .attr("class", "progress-bar progress-bar-success")
-                .style("width", "50%");
+        bars = barsG.selectAll("rect.positive")
+                .data(allData.nodes, function(d) { return d.nodeName + d.reputation; });
 
-        barEnter.append("div")
-                .attr("class", "progress-bar progress-bar-danger")
-                .style("width", "50%");
+        bars.enter().append("rect")
+            .attr("class", "positive")
+            .attr("x", function(node) { return node.x; })
+            .attr("y", function(node) { return node.y - nodeRadius - triPadding; })
+            .attr("width", function(node) { return nodeRadius*1; })
+            .attr("height", function(node) { return barHeight; })
+            .attr("stroke", "black")
+            .attr("fill", "green");
     }
 
     function drawLinks() {
