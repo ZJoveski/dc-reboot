@@ -38,7 +38,8 @@ export var Canvas = function() {
         triColorUp = "#1abc9c";
         triColorDown = "#1abc9c";
 
-    var barHeight = 20;
+    var barHeight = 10,
+        barWidth = nodeRadius*1.5;
 
     // allData will store the unfiltered data
     var allData = [];
@@ -155,9 +156,9 @@ export var Canvas = function() {
 
         bars.enter().append("rect")
             .attr("class", "negative")
-            .attr("x", function(node) { return node.x - 2*nodeRadius * 1; })
+            .attr("x", function(node) { return node.x - barWidth * 1; })
             .attr("y", function(node) { return node.y - nodeRadius - triPadding - barHeight; })
-            .attr("width", function(node) { return 2*nodeRadius*1; })
+            .attr("width", function(node) { return barWidth*1; })
             .attr("height", function(node) { return barHeight; })
             .attr("stroke", "black")
             .attr("fill", "red");
@@ -169,7 +170,7 @@ export var Canvas = function() {
             .attr("class", "positive")
             .attr("x", function(node) { return node.x; })
             .attr("y", function(node) { return node.y - nodeRadius - triPadding - barHeight; })
-            .attr("width", function(node) { return 2*nodeRadius*1; })
+            .attr("width", function(node) { return barWidth*1; })
             .attr("height", function(node) { return barHeight; })
             .attr("stroke", "black")
             .attr("fill", "green");
