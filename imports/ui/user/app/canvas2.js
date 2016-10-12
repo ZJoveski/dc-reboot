@@ -372,12 +372,12 @@ export var Canvas = function() {
 
     network.updateNodeReputation = function(nodeName, rank) {
         var selector = "rect.negative#" + nodeName;
-        barsG.select(selector).attr("x", function(node) { return node.x - barWidth*node.rank; })
-                                .attr("width", function(node) { return barWidth*node.rank; });
+        barsG.select(selector).attr("x", function(node) { return node.x - barWidth*rank; })
+                                .attr("width", function(node) { return barWidth*rank; });
 
         selector = "rect.positive#" + nodeName;
-        barsG.select(selector).attr("x", function(node) { return node.x + (.5-1+node.rank)*barWidth; })
-                                .attr("width", function(node) { return barWidth*(1-node.rank); })
+        barsG.select(selector).attr("x", function(node) { return node.x + (.5-1+rank)*barWidth; })
+                                .attr("width", function(node) { return barWidth*(1-rank); })
 
         selector = "text#" + nodeName;
 
