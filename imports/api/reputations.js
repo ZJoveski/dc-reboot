@@ -35,20 +35,19 @@ export var Reputations = {
         for (var i = 0; i < Participants.participants.length; i++) {
             var userId = Participants.participants[i];
             var name = Participants.id_name[userId];
-            var temp_rank = this.reputationChoices[name][targetName];
-            console.log("temp_rank: " + temp_rank);
-            if (temp_rank != 0) {
-                total_rank += temp_rank;
-                total_rankers++;
+            if (targetName != name) {
+                var temp_rank = this.reputationChoices[name][targetName];
+                if (temp_rank != 0) {
+                    total_rank += temp_rank;
+                    total_rankers++;
+                }
             }
         }
         var percentage = .5;
         if (total_rankers > 0) {
             percentage = total_rank / total_rankers;
         }
-        console.log("percentage: " + percentage);
         var new_rep = .5 + percentage*.5;
-        console.log("new rep: " + new_rep);
         this.reputations[targetName] = new_rep;
 
         Neighborhoods.updateNeighborhoodReputations(this.reputations);
