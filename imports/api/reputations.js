@@ -35,7 +35,7 @@ export var Reputations = {
         for (var i = 0; i < Participants.participants.length; i++) {
             var userId = Participants.participants[i];
             var name = Participants.id_name[userId];
-            var temp_rank = reputationChoices[name][targetName];
+            var temp_rank = this.reputationChoices[name][targetName];
             if (temp_rank != 0) {
                 total_rank += temp_rank;
                 total_rankers++;
