@@ -41,9 +41,13 @@ export var Reputations = {
                 total_rankers++;
             }
         }
-
-        var percentage = total_rank / total_rankers;
+        var percentage = .5;
+        if (total_rankers > 0) {
+            percentage = total_rank / total_rankers;
+        }
+        console.log("percentage: " + percentage);
         var new_rep = .5 + percentage*.5;
+        console.log("new rep: " + new_rep);
         this.reputations[targetName] = new_rep;
 
         Neighborhoods.updateNeighborhoodReputations(this.reputations);
