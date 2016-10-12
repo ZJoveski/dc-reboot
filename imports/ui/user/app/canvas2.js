@@ -107,7 +107,7 @@ export var Canvas = function() {
     function drawNodes() {
         console.log(allData.nodes);
         nodes = nodesG.selectAll("circle.node")
-                .data(allData.nodes, function(d) { return d.nodeName + d.reputation; });
+                .data(allData.nodes);
 
         nodes.exit().remove();
 
