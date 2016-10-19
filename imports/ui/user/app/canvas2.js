@@ -2,8 +2,8 @@ import { Session } from './../../../api/session.js';
 import './../../../api/meteormethods/game_methods.js';
 
 export var Canvas = function() {
-    const width = 768;
-    const height = 768;
+    const width = 600;
+    const height = 500;
 
     var vpWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var vpHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
