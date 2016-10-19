@@ -145,9 +145,9 @@ export var Canvas = function() {
             .attr("alignment-baseline", "middle")
             .text(function(node) { 
                 if (node.center) {
-                    return "Me [" + node.reputation + "]";
+                    return "Me";
                 } else {
-                    return node.nodeName + " [" + node.reputation + "]";
+                    return node.nodeName;
                 }
             });
 
