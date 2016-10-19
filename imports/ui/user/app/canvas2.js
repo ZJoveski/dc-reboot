@@ -220,7 +220,7 @@ export var Canvas = function() {
             x: centerX,
             y: centerY,
             center: true,
-            reputation: neighReputations[namesOfNeighbors[0]]
+            reputation: .5
         });
 
         edgeLengthMultiplier = 4 + (numNodes - 3) / 2;
@@ -232,7 +232,7 @@ export var Canvas = function() {
                 x: edgeLengthMultiplier * nodeRadius * Math.cos((Math.PI * 2 * i) / (numNodes-1)) + centerX,
                 y: edgeLengthMultiplier * nodeRadius * Math.sin((Math.PI * 2 * i) / (numNodes-1)) + centerY,
                 center: false,
-                reputation: neighReputations[namesOfNeighbors[i]]
+                reputation: .5
             });
         }
 
