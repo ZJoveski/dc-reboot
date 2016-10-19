@@ -53,7 +53,7 @@ export var Neighborhoods = {
 
             var neighborhoodReputations = {};
             for (var j = 0; j < namesOfNeighbors.length; j++) {
-                neighborhoodReputations[namesOfNeighbors[j]] = 0;
+                neighborhoodReputations[namesOfNeighbors[j]] = .5;
             }
 
             NeighborhoodsInfo.upsert({userId: userId}, {$set: {neighborhoodReputations: neighborhoodReputations, updateReputation: false}});          
