@@ -57,7 +57,7 @@ export var Canvas = function() {
     var voterG = null;
     var barsG = null;
 
-    function network(selection, namesOfNeighbors, adjMatrix) {
+    function network(selection, namesOfNeighbors, adjMatrix, neighReputations) {
         // create svg container and group elements
         var vis = d3.select(selection).append("svg")
                     .attr("width", width)
@@ -101,7 +101,7 @@ export var Canvas = function() {
         //                     .attr("height", 50);
 
 
-        network.updateData(namesOfNeighbors, adjMatrix);
+        network.updateData(namesOfNeighbors, adjMatrix, neighReputations);
     }
 
     function draw() {
@@ -205,11 +205,12 @@ export var Canvas = function() {
             .style("fill", "none");
     }
 
-    function formatData(namesOfNeighbors, adjMatrix) {
+    function formatData(namesOfNeighbors, adjMatrix, neighReputations) {
         numNodes = namesOfNeighbors.length;
         var nodes = [];
         var links = [];
         var curves = [];
+
 
         // Initialize the central node (the one corresponding to the current client).
         nodes.push({
@@ -217,7 +218,7 @@ export var Canvas = function() {
             x: centerX,
             y: centerY,
             center: true,
-            reputation: .5
+            reputation: neighReputations[0]
         });
 
         edgeLengthMultiplier = 4 + (numNodes - 3) / 2;
@@ -229,7 +230,7 @@ export var Canvas = function() {
                 x: edgeLengthMultiplier * nodeRadius * Math.cos((Math.PI * 2 * i) / (numNodes-1)) + centerX,
                 y: edgeLengthMultiplier * nodeRadius * Math.sin((Math.PI * 2 * i) / (numNodes-1)) + centerY,
                 center: false,
-                reputation: .5
+                reputation: neighReputations[i]
             });
         }
 
@@ -393,8 +394,8 @@ export var Canvas = function() {
         Meteor.call('updateReputation', data.sourceNode, rank);
     }
 
-    network.updateData = function(namesOfNeighbors, adjMatrix) {
-        allData = formatData(namesOfNeighbors, adjMatrix);
+    network.updateData = function(namesOfNeighbors, adjMatrix, neighReputations) {
+        allData = formatData(namesOfNeighbors, adjMatrix, neighReputations);
         draw();
     }
 

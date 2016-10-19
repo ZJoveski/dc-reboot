@@ -106,7 +106,7 @@ Tracker.autorun(function() {
                     setTimeout(function() {
                         // gameCanvas.clear();  
                         // gameCanvas.draw(namesOfNeighbors,neighAdjMatrix);
-                        gameCanvas.updateData(namesOfNeighbors,neighAdjMatrix);
+                        gameCanvas.updateData(namesOfNeighbors,neighAdjMatrix, neighborhoodReputations);
                     }, 200);
                 }
             } else {
@@ -115,7 +115,7 @@ Tracker.autorun(function() {
                     console.log("intializing canvas");
                     console.log(neighAdjMatrix);
 
-                    gameCanvas("#canvas", namesOfNeighbors, neighAdjMatrix);
+                    gameCanvas("#canvas", namesOfNeighbors, neighAdjMatrix, neighborhoodReputations);
                     gameCanvasInit = true;
                 }, 200);
                 // console.log("intializing canvas");
