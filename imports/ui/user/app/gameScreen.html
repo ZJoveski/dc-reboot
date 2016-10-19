@@ -84,9 +84,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    {{>progressBars}}
-                    <div class="game" id="colorControls">
-                        Your Color: {{>button1}} {{>button2}}
+                    <div class="col-md-4">
+                        {{>progressBars}}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="game" id="colorControls">
+                            Your Color: {{>button1}} {{>button2}}
+                        </div>
                     </div>
                 </div>
             {{/if}}
