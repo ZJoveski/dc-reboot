@@ -211,6 +211,8 @@ export var Canvas = function() {
         var links = [];
         var curves = [];
 
+        console.log(neighReputations);
+
 
         // Initialize the central node (the one corresponding to the current client).
         nodes.push({
