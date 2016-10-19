@@ -3,7 +3,7 @@ import './../../../api/meteormethods/game_methods.js';
 
 export var Canvas = function() {
     const width = 600;
-    const height = 500;
+    const height = 550;
 
     var vpWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var vpHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -16,7 +16,7 @@ export var Canvas = function() {
     var leftBoundary = ((0.37 * vpMin)/vpWidth) * width;
     var rightBoundary = 0.75 * width;
 
-    var nodeRadius = freeViewBoxSpace / 19.5; 
+    var nodeRadius = freeViewBoxSpace / 15.5; 
 
     var centerX = (leftBoundary + rightBoundary)/2, // The coordinates of the center of the circle representing
     centerY = height/2;                             // the node belonging to the current client.
