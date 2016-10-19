@@ -79,7 +79,7 @@ Tracker.autorun(function() {
             console.log("updateReputation");
             console.log(updateReputation);
             console.log("neighborhoodreputation");
-            console.log(neighborHoodReputations);
+            console.log(neighborhoodReputations);
 
             if (gameCanvasInit) { 
                 console.log("redrawing canvas");
