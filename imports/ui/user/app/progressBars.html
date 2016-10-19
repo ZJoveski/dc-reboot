@@ -3,9 +3,9 @@
         <h7 style = "position: absolute; padding-top:0%; display: block; left: 2.5vmin; width: 11%"> Progress: </h7>
     </div>  -->
 
-    <div class="game" id = "timeInfo" style = " position: absolute; padding-top:0%; display: block; width: 100%; top: 93.25%;">
+    <!-- <div class="game" id = "timeInfo" style = " position: absolute; padding-top:0%; display: block; width: 100%; top: 93.25%;">
         <h7 style = "position: absolute; padding-top:0%; display: block; left: 2.5vmin; width: 11%"> Time Remaining: </h7>
-    </div>  
+    </div>  --> 
 
     <!-- <div class="progress" style = "position: absolute; padding-top:0%; display: block; left: 13.5%; top: 89.5%; width: 20%; text-align: center;">
         <div id = "gameProgress" class="progress-bar active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:{{progressPercentage}}">
@@ -13,9 +13,20 @@
         </div>
     </div> -->
 
-    <div class="progress" style = "position: absolute; padding-top:0%; display: block; left: 13.5%; top: 93.25%; width: 20%">
+    <!-- <div class="progress" style = "position: absolute; padding-top:0%; display: block; left: 13.5%; top: 93.25%; width: 20%">
         <div id = "timeProgress" class="progress-bar active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:{{timeWidth}}">
             <span style = "position: absolute; display: block; width: 100%; color: black;">{{timeRemaining}}</span>
+        </div>
+    </div> -->
+
+
+    <div class="game" id = "timeInfo" style = "width: 100%;">
+        <h7 style = "display: block; width: 11%"> Time Remaining: </h7>
+    </div>  
+
+    <div class="progress" style = "display: block; width: 20%">
+        <div id = "timeProgress" class="progress-bar active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:{{timeWidth}}">
+            <span style = "display: block; width: 100%; color: black;">{{timeRemaining}}</span>
         </div>
     </div>
 </template>
