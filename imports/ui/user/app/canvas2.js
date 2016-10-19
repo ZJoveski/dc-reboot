@@ -416,9 +416,9 @@ export var Canvas = function() {
 
         var node = labelsG.select(selector).text(function(node) { 
                 if (node.center) {
-                    return "Me [" + rank + "]";
+                    return "Me";
                 } else {
-                    return node.nodeName + " [" + rank + "]";
+                    return node.nodeName;
                 }
             });
     }
