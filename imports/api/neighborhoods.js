@@ -47,7 +47,23 @@ export var Neighborhoods = {
         }
     },
 
-    initializeNeighborhoodReputations: function() {
+    initializeNeighborhoodReputations: function(oldReputations) {
+        for(var i = 0; i < Participants.participants.length; i++) {
+            var userId = Participants.participants[i];
+            var name = Participants.id_name[userId];
+            var namesOfNeighbors = getNamesOfNeighbors(userId);
+
+            var neighborhoodReputations = {};
+            for (var j = 0; j < namesOfNeighbors.length; j++) {
+                var currentName = namesOfNeighbors[j];
+                neighborhoodReputations[namesOfNeighbors[j]] = oldReputations[currentName];
+            }
+
+            ReputationsCollection.upsert({userId: userId}, {$set: {neighborhoodReputations: neighborhoodReputations, updateReputation: false}});          
+        }
+    },
+
+    resetNeighborhoodReputations: function() {
         for(var i = 0; i < Participants.participants.length; i++) {
             var userId = Participants.participants[i];
             var name = Participants.id_name[userId];

@@ -159,7 +159,7 @@ export var Canvas = function() {
         bars.enter().append("rect")
             .attr("class", "positive")
             .attr("id", function(node) { return node.nodeName; })
-            .attr("x", function(node) { return node.x - barWidth*node.reputation; })
+            .attr("x", function(node) { return node.x - barWidth*.5; })
             .attr("y", function(node) { return node.y - nodeRadius - triPadding - barHeight; })
             .attr("width", function(node) { return barWidth*node.reputation; })
             .attr("height", function(node) { return barHeight; })

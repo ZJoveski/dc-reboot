@@ -24,7 +24,11 @@ export var Reputations = {
             }
         }
 
-        Neighborhoods.initializeNeighborhoodReputations();
+        Neighborhoods.resetNeighborhoodReputations();
+    },
+
+    initializeReputations: function() {
+        Neighborhoods.initializeNeighborhoodReputations(this.reputations);
     },
 
     updateReputation: function(userId, targetName, rank) {

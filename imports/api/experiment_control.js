@@ -111,6 +111,7 @@ var initializeGame = function() {
     }
 
     /* L */ Neighborhoods.assignNeighborhoodsToClients();
+    /* L */ Reputations.initializeReputations();
 
     if (Session.isNewBatch()) {
         if (Session.adversaryMode()) {
