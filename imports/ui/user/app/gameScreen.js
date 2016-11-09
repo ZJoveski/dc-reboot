@@ -73,8 +73,8 @@ Tracker.autorun(function() {
             var updateReputation = false;
             var neighborhoodReputations = null;
             if (reputationsInfo != null) {
-                updateReputation = neighborsInfo.updateReputation;
-                neighborhoodReputations = neighborsInfo.neighborhoodReputations;
+                updateReputation = reputationsInfo.updateReputation;
+                neighborhoodReputations = reputationsInfo.neighborhoodReputations;
             }
 
             console.log("neighborhoodReputations");
