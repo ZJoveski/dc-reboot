@@ -64,7 +64,7 @@ Tracker.autorun(function() {
     if (sessionInProgress || postSessionInProgress) {
         console.log("redrawing update");
         var neighborsInfo = NeighborhoodsInfo.findOne({userId: Meteor.userId()});
-        var reputationsInfo = ReputationsCollection.findOne({userid: Meteor.userId()});
+        var reputationsInfo = ReputationsCollection.findOne({userId: Meteor.userId()});
         console.log(reputationsInfo);
         console.log(ReputationsCollection);
         console.log(ReputationsCollection.findOne({}));
