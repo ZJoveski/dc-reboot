@@ -67,7 +67,7 @@ Tracker.autorun(function() {
         var reputationsInfo = ReputationsCollection.findOne({userid: Meteor.userId()});
         console.log(reputationsInfo);
         console.log(ReputationsCollection);
-        console.log(ReputationsCollection.find({}));
+        console.log(ReputationsCollection.findOne({}));
         if (neighborsInfo != null && reputationsInfo != null) {
             var namesOfNeighbors = neighborsInfo.namesOfNeighbors;
             var neighAdjMatrix = neighborsInfo.neighAdjMatrix;
