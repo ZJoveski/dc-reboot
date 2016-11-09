@@ -7,6 +7,7 @@ import { Logger } from './logging.js';
 
 export var Neighborhoods = {
     NeighborhoodsInfo: NeighborhoodsInfo,
+    ReputationsCollection: ReputationsCollection,
 
     clearNeighborhoods: function() {
         NeighborhoodsInfo.remove({});
