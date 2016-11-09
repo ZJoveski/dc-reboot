@@ -64,15 +64,18 @@ Tracker.autorun(function() {
     if (sessionInProgress || postSessionInProgress) {
         console.log("redrawing update");
         var neighborsInfo = NeighborhoodsInfo.findOne({userId: Meteor.userId()});
+        var reputationsInfo = ReputationsCollection.findOne({userid: Meteor.userId()});
         if (neighborsInfo != null) {
             var namesOfNeighbors = neighborsInfo.namesOfNeighbors;
             var neighAdjMatrix = neighborsInfo.neighAdjMatrix;
             var neighborhoodColors = neighborsInfo.neighborhoodColors;
             var updateColor = neighborsInfo.updateColor;
-            var updateReputation = neighborsInfo.updateReputation;
-            var neighborhoodReputations = neighborsInfo.neighborhoodReputations;
-
-            //Session.set("clientName", namesOfNeighbors[0]);
+            var updateReputation = false;
+            var neighborhoodReputations = null;
+            if (reputationsInfo != null) {
+                updateReputation = neighborsInfo.updateReputation;
+                neighborhoodReputations = neighborsInfo.neighborhoodReputations;
+            }
 
             console.log("neighborhoodReputations");
             console.log(neighborhoodReputations);

@@ -1,5 +1,6 @@
 import { Participants } from './participants.js';
 import { Neighborhoods } from './neighborhoods.js';
+import { ReputationsCollection } from './collections/game_collections.js';
 
 export var Reputations = {
 

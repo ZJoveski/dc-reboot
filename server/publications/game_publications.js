@@ -24,7 +24,7 @@ Meteor.publishComposite('neighborhoods', {
 
 Meteor.publishComposite('reputations', {
     find: function() {
-        return ReputationsCollection.find({});
+        return ReputationsCollection.find({userId: this.userId});
     }
 });
 

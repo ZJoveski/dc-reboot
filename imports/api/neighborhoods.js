@@ -1,4 +1,5 @@
 import { NeighborhoodsInfo } from './collections/game_collections.js';
+import { ReputationsCollection } from './collections/game_collections.js';
 import { Participants } from './participants.js';
 import { Session } from './session.js';
 import { ColorMagic } from './colors_mapping.js';
@@ -56,7 +57,7 @@ export var Neighborhoods = {
                 neighborhoodReputations[namesOfNeighbors[j]] = .5;
             }
 
-            NeighborhoodsInfo.upsert({userId: userId}, {$set: {neighborhoodReputations: neighborhoodReputations, updateReputation: false}});          
+            ReputationsCollection.upsert({userId: userId}, {$set: {neighborhoodReputations: neighborhoodReputations, updateReputation: false}});          
         }
     },
 
@@ -75,7 +76,7 @@ export var Neighborhoods = {
             }
 
             console.log('updateNeighborhoodReputations');
-            NeighborhoodsInfo.upsert({userId: userId}, {$set: {neighborhoodReputations: neighborhoodReputations, updateReputation: true}}); 
+            ReputationsCollection.upsert({userId: userId}, {$set: {neighborhoodReputations: neighborhoodReputations, updateReputation: true}}); 
         }
     },
 

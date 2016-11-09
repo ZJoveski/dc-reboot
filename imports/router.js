@@ -113,6 +113,7 @@ Router.route('/experiment', {
                 Meteor.subscribe('parametersInfo'),
                 Meteor.subscribe('timeInfo'),
                 Meteor.subscribe('messages'),
+                Meteor.subscribe('reputations')
             ];
         }
     }
