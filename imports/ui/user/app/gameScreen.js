@@ -65,17 +65,14 @@ Tracker.autorun(function() {
         console.log("redrawing update");
         var neighborsInfo = NeighborhoodsInfo.findOne({userId: Meteor.userId()});
         var reputationsInfo = ReputationsCollection.findOne({userid: Meteor.userId()});
-        if (neighborsInfo != null) {
+        console.log(reputationsInfo);
+        if (neighborsInfo != null || reputationsInfo != null) {
             var namesOfNeighbors = neighborsInfo.namesOfNeighbors;
             var neighAdjMatrix = neighborsInfo.neighAdjMatrix;
             var neighborhoodColors = neighborsInfo.neighborhoodColors;
             var updateColor = neighborsInfo.updateColor;
-            var updateReputation = false;
-            var neighborhoodReputations = null;
-            if (reputationsInfo != null) {
-                updateReputation = reputationsInfo.updateReputation;
-                neighborhoodReputations = reputationsInfo.neighborhoodReputations;
-            }
+            var updateReputation = reputationsInfo.updateReputation;
+            var neighborhoodReputations = reputationsInfo.neighborhoodReputations;
 
             console.log("neighborhoodReputations");
             console.log(neighborhoodReputations);
