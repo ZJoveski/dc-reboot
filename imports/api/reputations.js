@@ -59,5 +59,6 @@ export var Reputations = {
 
         Neighborhoods.updateNeighborhoodReputations(this.reputations);
         Logger.recordReputationChange(userId, targetName, rank);
+        console.log(reputationChoices);
     },
 }
