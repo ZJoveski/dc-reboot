@@ -34,7 +34,6 @@ export var Reputations = {
     },
 
     updateReputation: function(userId, targetName, rank) {
-        console.log("updateReputation called");
         var userName = Participants.id_name[userId];
         this.reputationChoices[userName][targetName] = rank;
         var total_rankers = 0;
@@ -59,6 +58,5 @@ export var Reputations = {
 
         Neighborhoods.updateNeighborhoodReputations(this.reputations);
         Logger.recordReputationChange(userId, targetName, rank);
-        console.log(this.reputationChoices);
     },
 }

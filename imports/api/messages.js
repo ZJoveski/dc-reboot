@@ -110,9 +110,6 @@ var sendMessageToAllParticipants = function(senderId, message, timestamp) {
       
     for(var i = 0; i < Participants.participants.length; i++) {
         var nameOfRecipient = Participants.id_name[Participants.participants[i]];
-
-        console.log('insert message');
-        console.log(Participants.participants[i]);
               
         MessagesCollection.insert({
             idOfSender: senderId,

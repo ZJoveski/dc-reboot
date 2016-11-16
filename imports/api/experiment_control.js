@@ -117,7 +117,6 @@ var initializeGame = function() {
         if (Session.adversaryMode()) {
             Participants.assignAdversaries();
         }
-        console.log('reputations reset');
         Reputations.resetReputations();
     }
 

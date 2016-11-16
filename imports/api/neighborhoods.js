@@ -79,7 +79,6 @@ export var Neighborhoods = {
     },
 
     updateNeighborhoodReputations: function(newReputations) {
-        console.log("updateNeighborhoodRepuations called");
         for (var i = 0; i < Participants.participants.length; i++) {
             var userId = Participants.participants[i];
             var name = Participants.id_name[userId];
@@ -92,7 +91,6 @@ export var Neighborhoods = {
                 neighborhoodReputations[currentName] = newRank;
             }
 
-            console.log('updateNeighborhoodReputations');
             ReputationsCollection.upsert({userId: userId}, {$set: {neighborhoodReputations: neighborhoodReputations, updateReputation: true}}); 
         }
     },
@@ -107,18 +105,13 @@ export var Neighborhoods = {
             for (var j = 0; j < namesOfNeighbors.length; j++) {
                 var currentName = namesOfNeighbors[j];
                 var color = newColors[currentName];
-                // console.log('newcolor');
-                // console.log(currentName);
-                // console.log(color);
                 var newColor = color;
                 if (newColor != 'white') {
                     newColor = ColorMagic.anonymizeColor(name, color);
                 }
-                // console.log(newColor);
                 neighborhoodColors[currentName] = newColor;
             }
 
-            console.log('updateNeighborhoodColors');
             NeighborhoodsInfo.upsert({userId: userId}, {$set: {neighborhoodColors: neighborhoodColors, updateColor: true}}); 
         }
     },

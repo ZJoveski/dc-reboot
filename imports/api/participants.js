@@ -72,8 +72,6 @@ export var Participants = {
                 participantsAdded++;
             }
         }
-
-        console.log('done initializing participation');
         
         initializeParticipationRate(0);
 

@@ -59,7 +59,6 @@ Meteor.methods({
 
                 Session.communicationUsageLevels[id] += messageCostInfo.relativeMessageCost;
 
-                console.log(message);
                 /* Log entry. */ Logger.recordMessageSent(id, true, message);
 
                 Payouts.updatePotentialPayoutsInfo(id);
@@ -122,7 +121,6 @@ Meteor.methods({
                 Session.communicationUsageLevels[id] += messageCostInfo.relativeMessageCost;
               
                 /* Log entry. */ Logger.recordMessageRequest(id, true, message);
-                // console.log(message);
                 /* Log entry. */ Logger.recordMessageSent(id, true, message);
               
                 Payouts.updatePotentialPayoutsInfo(id);

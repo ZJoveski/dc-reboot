@@ -47,7 +47,6 @@ Template.experiment.onCreated(function() {
     gameCanvas = Canvas();
     // gameCanvas("#canvas", {}, {});
     gameCanvasInit = false;
-    console.log('onCreated');
 });
 
 // redraws the game nodes
@@ -154,8 +153,6 @@ Template.experiment.helpers({
         var isParticipant = false;
         var progress = ProgressInfo.findOne({});
         var participantsInfo = ParticipantsInfo.findOne({});
-        console.log('participantsInfo');
-        console.log(participantsInfo);
         if(progress !== undefined) {
             inSession = progress.sessionInProgress;
             inPostSession = progress.postSessionInProgress;
@@ -164,10 +161,6 @@ Template.experiment.helpers({
         if (participantsInfo != null) {
             isParticipant = participantsInfo.isParticipant;
         }
-
-        console.log('in Session: ' + inSession);
-        console.log('in postSesion: ' + inPostSession);
-        console.log('isparticipant: ' + isParticipant);
         
         if((inSession || inPostSession) && isParticipant) {
             return true;

@@ -65,11 +65,6 @@ export var Canvas = function() {
                     .attr("xmlns", "http://www.w3.org/2000/svg")
                     .attr("xmlns:xlink", "http://www.w3.org/1999/xlink");
 
-        console.log("is this ever run");
-        console.log(selection);
-        console.log(d3.select(selection));
-        console.log(vis);
-
         linksG = vis.append("g").attr("id", "links");
         curvesG = vis.append("g").attr("id", "curves");
         nodesG = vis.append("g").attr("id", "nodes");
@@ -77,42 +72,16 @@ export var Canvas = function() {
         barsG = vis.append("g").attr("id", "bars");
         voter = vis.append("g").attr("id", "voter");
 
-        // var testdata = {
-        //     x: 50,
-        //     y: 50
-        // };
-
-        // var testTri = makeTriangle(testdata, true);
-
-        // var voterTest = voter.selectAll("#tri").data([testTri]);
-
-        // console.log(testTri);
-
-        // voterTest.enter().append("svg:path")
-        //         .attr("d", function(d) { return d.path; })
-        //         .attr("fill", function(d) { return d.color; })
-        //         .attr("stroke", function(d) { return d.color; })
-        //         .attr("id", "tri");
-
-        // voter.append("svg:path").attr("xlink:href", "http://ninjapenguin.tech:3000/greyarrow_down.png")
-        //                     .attr("x", 0)
-        //                     .attr("y", 0)
-        //                     .attr("width", 50)
-        //                     .attr("height", 50);
-
-
         network.updateData(namesOfNeighbors, adjMatrix, neighReputations);
     }
 
     function draw() {
-        console.log("drawing");
         drawLinks();
         drawCurves();
         drawNodes();
     }
 
     function drawNodes() {
-        console.log(allData.nodes);
         nodes = nodesG.selectAll("circle.node")
                 .data(allData.nodes);
 
@@ -210,9 +179,6 @@ export var Canvas = function() {
         var nodes = [];
         var links = [];
         var curves = [];
-
-        console.log(neighReputations);
-
 
         // Initialize the central node (the one corresponding to the current client).
         nodes.push({
@@ -338,8 +304,6 @@ export var Canvas = function() {
     }
 
     function showVoter(d, i) {
-        console.log("called showVoter");
-        console.log(d);
         if (!d.center) {
             var triData = [makeTriangle(d, true), makeTriangle(d, false)];
             var voters = voter.selectAll(".tri").data(triData, function(d) {return d.path; });
@@ -370,7 +334,6 @@ export var Canvas = function() {
     }
 
     function sendReputation(data, i) {
-        console.log("called sendReputation");
         var rank = -1;
         if (data.up) {
             rank = 1;

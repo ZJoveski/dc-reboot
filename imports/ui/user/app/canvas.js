@@ -54,7 +54,6 @@ export var OldCanvas = function () {
     svg = d3.select('#canvas').append('svg')
             .attr("viewBox", coordinateSystem)
             .classed("svg-content-responsive",true);
-    console.log(d3.select('#canvas'));
     console.log("svg created");
   };
   createSvg();
@@ -152,7 +151,6 @@ export var OldCanvas = function () {
   };
       
   self.drawCentralNode = function(nodeName) {
-      console.log("drawing central node");
       // Define a "g" SVG element that will be used for grouping the circle and the text together.
       name_node[nodeName] = svg.append("g")
                                .attr("transform", "translate(" + coordinates[nodeName].x + "," + coordinates[nodeName].y + ")");
@@ -167,7 +165,6 @@ export var OldCanvas = function () {
   
   self.updateNodeColor = function(nodeName, color) {
       if(name_circle.hasOwnProperty(nodeName)) {
-          console.log("update color successful");
           (name_circle[nodeName]).style("fill", color);
       }
   };
