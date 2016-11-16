@@ -1,6 +1,7 @@
 import { Participants } from './participants.js';
 import { Neighborhoods } from './neighborhoods.js';
 import { ReputationsCollection } from './collections/game_collections.js';
+import { Logger } from './logging.js';
 
 export var Reputations = {
 
@@ -29,6 +30,7 @@ export var Reputations = {
 
     initializeReputations: function() {
         Neighborhoods.initializeNeighborhoodReputations(this.reputations);
+        Logger.recordReputations(this.reputations);
     },
 
     updateReputation: function(userId, targetName, rank) {
@@ -56,5 +58,6 @@ export var Reputations = {
         this.reputations[targetName] = new_rep;
 
         Neighborhoods.updateNeighborhoodReputations(this.reputations);
+        Logger.recordReputationChange(userId, targetName, rank);
     },
 }

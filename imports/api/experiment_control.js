@@ -111,7 +111,7 @@ var initializeGame = function() {
     }
 
     /* L */ Neighborhoods.assignNeighborhoodsToClients();
-    /* L */ Reputations.initializeReputations();
+    
 
     if (Session.isNewBatch()) {
         if (Session.adversaryMode()) {
@@ -120,6 +120,8 @@ var initializeGame = function() {
         console.log('reputations reset');
         Reputations.resetReputations();
     }
+
+    /* L */ Reputations.initializeReputations();
 
     /* Log entry. */ Logger.recordAdversaries();
 
