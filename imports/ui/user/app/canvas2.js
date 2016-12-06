@@ -2,9 +2,10 @@ import { Session } from './../../../api/session.js';
 import './../../../api/meteormethods/game_methods.js';
 
 export var Canvas = function() {
-    var vpWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    var vpHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    var vpMin = Math.min(vpWidth, vpHeight);
+    // var vpWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    // var vpHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    var vpWidth = $(".canvas").width();
+    var vpHeight = $(".canvas").height();
 
     const width = vpWidth;
     const height = vpHeight;
