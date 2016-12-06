@@ -6,7 +6,7 @@ export var Canvas = function() {
     var vpHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     var vpMin = Math.min(vpWidth, vpHeight);
 
-    const width = 768;
+    const width = 1024;
     const height = 768;
 
     var freeWidth = ((vpWidth - 0.37 * vpMin - 0.25 * vpWidth)/vpWidth) * width;
@@ -16,7 +16,7 @@ export var Canvas = function() {
     var leftBoundary = ((0.37 * vpMin)/vpWidth) * width;
     var rightBoundary = 0.75 * width;
 
-    var nodeRadius = freeViewBoxSpace / 15.5; 
+    var nodeRadius = freeViewBoxSpace / 19.5; 
 
     var centerX = (leftBoundary + rightBoundary)/2, // The coordinates of the center of the circle representing
     centerY = height/2;                             // the node belonging to the current client.
@@ -58,10 +58,11 @@ export var Canvas = function() {
     var barsG = null;
 
     function network(selection, namesOfNeighbors, adjMatrix, neighReputations) {
+        var coordinateSystem ="0 0 " + width + " " + height;
         // create svg container and group elements
         var vis = d3.select(selection).append("svg")
-                    .attr("width", width)
-                    .attr("height", height)
+                    .attr("viewBox", coordinateSystem)
+                    .classed("svg-content-responsive",true);
                     .attr("xmlns", "http://www.w3.org/2000/svg")
                     .attr("xmlns:xlink", "http://www.w3.org/1999/xlink");
 
