@@ -260,7 +260,7 @@ export var Canvas = function() {
         var cosGamma = Math.abs(x2-x1)/hyp;
 
         var path = ("M " + x1 + " " + y1 + " C" + " " + x1 + " " + y1 + " " +
-                  (cx - edgeLengthMultiplier * nodeRadius * sinGamma) + " " + (cy + edgeLengthMultiplier * nodeRadius  * cosGamma) 
+                  (centerX - edgeLengthMultiplier * nodeRadius * sinGamma) + " " + (centerY + edgeLengthMultiplier * nodeRadius  * cosGamma) 
                   + " "+ x2 + " " + y2);
 
         return {
