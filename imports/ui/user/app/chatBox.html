@@ -1,4 +1,4 @@
-<template name="chatBox">
+<!-- <template name="chatBox">
     <div class="game panel-heading">
         <h2 class="panel-title">Chat</h2>
     </div>
@@ -28,6 +28,39 @@
             {{/if}}
         {{/if}}
     </div>
+</template>
+
+<template name='chatMessage'>
+    <div class="game">
+        <b>{{nameOfSender}}:</b> {{message}}
+    </div>
+</template> -->
+
+<template name="chatBox">
+    <div class="game" id='messages'>
+        {{#each messages}}
+          {{>chatMessage}}
+        {{/each}}
+    </div>
+    {{#if userCanSendMessages}}
+        <div class="game" id="communicationLimit" align = "center" style="font-size: 1.25vmin; color:{{communicationLimitColor}}">
+            {{communicationLimit}}
+        </div>
+        {{#if communicationIsStructured}}
+            
+            <button class='btn btn-primary' id='reportButton'>Report Neighborhood Color Counts</button>
+
+            <form>
+                <input type="radio" id = "info_msg" name="constrained_msg" value="info" checked="checked"> {{info_message}} <br>
+                <input type="radio" id = "red_msg" name="constrained_msg" value="red"> {{red_message}} <br>
+                <input type="radio" id = "green_msg" name="constrained_msg" value="green"> {{green_message}}
+            </form><br>
+           
+        {{else}}
+            <textarea maxlength="500" id='chat-message' style = "display: block; width: 100.0%; height: 20.0%; margin-bottom: 1vh;"></textarea>
+            <button class='btn btn-primary' id='sendButton'>Send Message</button>
+        {{/if}}
+    {{/if}}
 </template>
 
 <template name='chatMessage'>
