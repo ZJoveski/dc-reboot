@@ -6,6 +6,7 @@ export var Canvas = function() {
     // var vpHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     var vpWidth = $(".canvas").width();
     var vpHeight = $(".canvas").height();
+    var vpMin = Math.min(vpWidth, vpHeight);
 
     const width = vpWidth;
     const height = vpHeight;
