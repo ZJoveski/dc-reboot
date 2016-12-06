@@ -110,10 +110,11 @@ var initializeGame = function() {
         /* L */ Participants.assignIdsToNames();
     }
 
-    /* L */ Neighborhoods.assignNeighborhoodsToClients();
+    
     
 
     if (Session.isNewBatch()) {
+        /* L */ Neighborhoods.assignNeighborhoodsToClients();
         if (Session.adversaryMode()) {
             Participants.assignAdversaries();
         }
