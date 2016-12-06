@@ -62,7 +62,7 @@ export var Canvas = function() {
         // create svg container and group elements
         var vis = d3.select(selection).append("svg")
                     .attr("viewBox", coordinateSystem)
-                    .classed("svg-content-responsive",true);
+                    .classed("svg-content-responsive",true)
                     .attr("xmlns", "http://www.w3.org/2000/svg")
                     .attr("xmlns:xlink", "http://www.w3.org/1999/xlink");
 
