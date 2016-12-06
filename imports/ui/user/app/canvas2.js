@@ -2,8 +2,8 @@ import { Session } from './../../../api/session.js';
 import './../../../api/meteormethods/game_methods.js';
 
 export var Canvas = function() {
-    const width = 600;
-    const height = 550;
+    const width = 1280;
+    const height = 720;
 
     var vpWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var vpHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -218,7 +218,7 @@ export var Canvas = function() {
                     var sourceNode = getNode(nodes, namesOfNeighbors[i]);
                     var destNode = getNode(nodes, namesOfNeighbors[j]);
                     if (i > 0 && numNodes % 2 == 1 && j - i == (numNodes-1)/2) {
-                        curves.push(Edge(sourceNode, destNode));
+                        curves.push(makeCurvedEdge(sourceNode, destNode));
                     } else {
                         links.push(makeStraightEdge(sourceNode, destNode, false));
                     }
