@@ -108,12 +108,6 @@ var initializeGame = function() {
     Participants.initializeGameParticipants(Session.isNewBatch());
     if (Session.isNewBatch()) {
         /* L */ Participants.assignIdsToNames();
-    }
-
-    
-    
-
-    if (Session.isNewBatch()) {
         /* L */ Neighborhoods.assignNeighborhoodsToClients();
         if (Session.adversaryMode()) {
             Participants.assignAdversaries();

@@ -53,6 +53,9 @@ export var Neighborhoods = {
             var name = Participants.id_name[userId];
             var namesOfNeighbors = getNamesOfNeighbors(userId);
 
+            console.log("names of neighbors");
+            console.log(namesOfNeighbors);
+
             var neighborhoodReputations = {};
             for (var j = 0; j < namesOfNeighbors.length; j++) {
                 var currentName = namesOfNeighbors[j];
