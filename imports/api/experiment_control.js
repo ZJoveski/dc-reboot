@@ -50,8 +50,6 @@ var runGames = function() {
 
 var runPreGame = function() {
     // If this is not the last game, ...
-    console.log("GAMES");
-    console.log(games);
     if (Session.sessionNumber < games) {
         Progress.setProgress('preSession', true);
 
