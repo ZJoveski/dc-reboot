@@ -72,6 +72,15 @@ export var Parameters = {
         this.practiceBatches = practiceBatchConfigs.length;
         this.properBatches = batchConfigs.length;
 
+        // Determine the number of practice and proper games from the batch configs
+        for (var i = 0; i < practiceBatchConfigs.length; i++) {
+            this.practiceGames += parseInt(practiceBatchConfigs[i][0]);
+        }
+
+        for (var i = 0; i < batchConfigs.length; i++) {
+            this.properGames += parseInt(batchConfigs[i][0]);
+        }
+
         // For testing purposes only
         console.log("Practice batches:\t" + this.practiceBatches);
         console.log("Proper games:\t" + this.properBatches); 
