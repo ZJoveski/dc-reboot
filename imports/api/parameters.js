@@ -43,22 +43,22 @@ export var Parameters = {
     testMode: true,        //whether or not to skip description
 
     readTreatments: function() {
-        // practiceAdjacencyMatrices = readAdjMatrix("treatments/test_size_3 (adversarial)/AMP_test.txt");
-        // practiceParameterValues = readNetConfig("treatments/test_size_3 (adversarial)/NCP_test.txt");
-        // practiceBatchConfigs = readBatchConfig("treatments/test_size_3 (adversarial)/BCP_test.txt");
+        practiceAdjacencyMatrices = readAdjMatrix("treatments/test_size_3 (adversarial)/AMP_test.txt");
+        practiceParameterValues = readNetConfig("treatments/test_size_3 (adversarial)/NCP_test.txt");
+        practiceBatchConfigs = readBatchConfig("treatments/test_size_3 (adversarial)/BCP_test.txt");
         
-        // adjacencyMatrices = readAdjMatrix("treatments/test_size_3 (adversarial)/AM_test.txt");
-        // parameterValues = readNetConfig("treatments/test_size_3 (adversarial)/NC_test.txt");
-        // batchConfigs = readBatchConfig("treatments/test_size_3 (adversarial)/BC_test.txt");
+        adjacencyMatrices = readAdjMatrix("treatments/test_size_3 (adversarial)/AM_test.txt");
+        parameterValues = readNetConfig("treatments/test_size_3 (adversarial)/NC_test.txt");
+        batchConfigs = readBatchConfig("treatments/test_size_3 (adversarial)/BC_test.txt");
 
         // Full Experiment Data
-        practiceAdjacencyMatrices = readAdjMatrix("treatments/input_data/adjacency_matrix_practice.txt");
-        practiceParameterValues = readNetConfig("treatments/input_data/network_configuration_practice.txt");
-        practiceBatchConfigs = readBatchConfig("treatments/input_data/batch_configuration_practice.txt");
+        // practiceAdjacencyMatrices = readAdjMatrix("treatments/input_data/adjacency_matrix_practice.txt");
+        // practiceParameterValues = readNetConfig("treatments/input_data/network_configuration_practice.txt");
+        // practiceBatchConfigs = readBatchConfig("treatments/input_data/batch_configuration_practice.txt");
         
-        adjacencyMatrices = readAdjMatrix("treatments/input_data/adjacency_matrix.txt");
-        parameterValues = readNetConfig("treatments/input_data/network_configuration.txt");
-        batchConfigs = readBatchConfig("treatments/input_data/batch_configuration.txt");
+        // adjacencyMatrices = readAdjMatrix("treatments/input_data/adjacency_matrix.txt");
+        // parameterValues = readNetConfig("treatments/input_data/network_configuration.txt");
+        // batchConfigs = readBatchConfig("treatments/input_data/batch_configuration.txt");
 
         // practiceAdjacencyMatrices = readAdjMatrix("treatments/test_data (20-25 nodes)/AMP_test.txt");
         // practiceParameterValues = readNetConfig("treatments/test_data (20-25 nodes)/NCP_test.txt");
