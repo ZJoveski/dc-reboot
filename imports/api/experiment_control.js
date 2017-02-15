@@ -100,9 +100,7 @@ var initializeGame = function() {
     /* Log entry. */ Logger.recordSessionInitializationStart(Session.sessionNumber);
 
     //TODO: currently each adj matrix is different, which causes reputations to glitch
-    if (Session.isNewBatch()) {
-            Session.setAdjMatrix(Parameters.getNextAdjMatrix(proper, Session.sessionNumber));
-    }
+    Session.setAdjMatrix(Parameters.getNextAdjMatrix(proper, Session.sessionNumber));
     /* Log entry. */ Logger.recordNetworkAdjacencyMatrix(Session.adjMatrix);
 
     Participants.participantsThreshold = Session.adjMatrix.length;
