@@ -100,7 +100,9 @@ var initializeGame = function() {
     /* Log entry. */ Logger.recordSessionInitializationStart(Session.sessionNumber);
 
     //TODO: currently each adj matrix is different, which causes reputations to glitch
-    Session.setAdjMatrix(Parameters.getNextAdjMatrix(proper, Session.sessionNumber));
+    if (Session.isNewBatch()) {
+        Session.setAdjMatrix(Parameters.getNextAdjMatrix(proper, Session.batchNumber));
+    }    
     /* Log entry. */ Logger.recordNetworkAdjacencyMatrix(Session.adjMatrix);
 
     Participants.participantsThreshold = Session.adjMatrix.length;
@@ -126,8 +128,8 @@ var initializeGame = function() {
     // permutation to each node ("red" will be mapped to "red", "green" will be mapped to "green").
     /* L */ ColorMagic.initializeColorAnonymization();
 
-    Parameters.setSessionIncentivesConflictParameters(proper, Session.sessionNumber);
-    /* L */ Parameters.setSessionCommunicationParameters(proper, Session.sessionNumber);
+    Parameters.setSessionIncentivesConflictParameters(proper, Session.batchNumber);
+    /* L */ Parameters.setSessionCommunicationParameters(proper, Session.batchNumber);
     /* L */ Parameters.setIndividualCommunicationParameters();
 
     Payouts.initializeSessionPayoutInfo(Participants.participants);

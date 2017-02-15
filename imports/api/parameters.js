@@ -68,41 +68,56 @@ export var Parameters = {
         // parameterValues = readNetConfig("treatments/test_data (20-25 nodes)/NC_test.txt");
         // batchConfigs = readBatchConfig("treatments/test_data (20-25 nodes)/BC_test.txt");
 
-        // Determine the number of practice and proper games from the size of the arrays loaded above
-        this.practiceGames = Math.min(practiceAdjacencyMatrices.length, practiceParameterValues.length);
-        this.properGames = Math.min(adjacencyMatrices.length, parameterValues.length);
+        // // Determine the number of practice and proper games from the size of the arrays loaded above
+        // this.practiceGames = Math.min(practiceAdjacencyMatrices.length, practiceParameterValues.length);
+        // this.properGames = Math.min(adjacencyMatrices.length, parameterValues.length);
 
-        // Determine the number of batches
-        if (practiceBatchConfigs.length > 0) {
-            this.practiceBatches = practiceBatchConfigs.length;
-        } else {
-            this.practiceBatches = Math.floor(this.practiceGames / Session.batchSize);
+        // // Determine the number of batches
+        // if (practiceBatchConfigs.length > 0) {
+        //     this.practiceBatches = practiceBatchConfigs.length;
+        // } else {
+        //     this.practiceBatches = Math.floor(this.practiceGames / Session.batchSize);
+        // }
+
+        // if (batchConfigs.length > 0) {
+        //     this.properBatches = batchConfigs.length;
+        // } else {
+        //     this.properBatches = Math.ceil(this.properGames / Session.batchSize);
+        // }   
+
+        // Determine the number of practice and proper batches from the size of the arrays loaded above
+        this.practiceBatches = practiceBatchConfigs.length;
+        this.properBatches = batchConfigs.length;
+
+        // Determine the number of practice and proper games from the batch configs
+        for (var i = 0; i < practiceBatchConfigs.length; i++) {
+            this.practiceGames += parseInt(practiceBatchConfigs[i][0]);
         }
 
-        if (batchConfigs.length > 0) {
-            this.properBatches = batchConfigs.length;
-        } else {
-            this.properBatches = Math.ceil(this.properGames / Session.batchSize);
-        }   
+        for (var i = 0; i < batchConfigs.length; i++) {
+            this.properGames += parseInt(batchConfigs[i][0]);
+        }
 
         // For testing purposes only
         console.log("Practice games:\t" + this.practiceGames);
         console.log("Proper games:\t" + this.properGames); 
     },
 
-    getNextAdjMatrix: function(isProperGames, currentSession) {
+    getNextAdjMatrix: function(isProperGames, currentBatch) {
+        console.log("call to getNextAdjMatrix");
+        console.log(currentBatch);
         var matrix = [];
         var pars = [];
-        var index = currentSession;
+        var index = currentBatch;
         
         if(isProperGames) {
-            if(index < this.properGames) {
+            if(index < this.properBatches) {
                 matrix = adjacencyMatrices[index];
                 pars = parameterValues[index];
             }
         }
         else {
-            if(index < this.practiceGames) {
+            if(index < this.practiceBatches) {
                 matrix = practiceAdjacencyMatrices[index];
                 pars = practiceParameterValues[index];
             }
