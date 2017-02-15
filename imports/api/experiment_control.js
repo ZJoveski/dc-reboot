@@ -101,6 +101,7 @@ var initializeGame = function() {
 
     //TODO: currently each adj matrix is different, which causes reputations to glitch
     if (Session.isNewBatch()) {
+            console.log(Parameters.getNextAdjMatrix(proper, Session.batchNumber));
             Session.setAdjMatrix(Parameters.getNextAdjMatrix(proper, Session.batchNumber));
     }
     /* Log entry. */ Logger.recordNetworkAdjacencyMatrix(Session.adjMatrix);

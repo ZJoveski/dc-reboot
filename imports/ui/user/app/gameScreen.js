@@ -162,6 +162,7 @@ Template.experiment.helpers({
             isParticipant = participantsInfo.isParticipant;
         }
         
+        // TODO: Take another look at the logic (see 444 in old gameScreen.js)
         if((inSession || inPostSession) && isParticipant) {
             return true;
         } else {
