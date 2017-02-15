@@ -85,15 +85,6 @@ export var Parameters = {
             this.properBatches = Math.ceil(this.properGames / Session.batchSize);
         }   
 
-        // Determine the number of practice and proper games from the batch configs
-        for (var i = 0; i < practiceBatchConfigs.length; i++) {
-            this.practiceGames += parseInt(practiceBatchConfigs[i][0]);
-        }
-
-        for (var i = 0; i < batchConfigs.length; i++) {
-            this.properGames += parseInt(batchConfigs[i][0]);
-        }
-
         // For testing purposes only
         console.log("Practice games:\t" + this.practiceGames);
         console.log("Proper games:\t" + this.properGames); 
