@@ -105,7 +105,10 @@ export var Parameters = {
 
     getNextAdjMatrix: function(isProperGames, currentBatch) {
         console.log("call to getNextAdjMatrix");
-        console.log(currentBatch);
+        console.log("currentBatch " + currentBatch);
+        console.log("practiceBatches " + practiceBatches);
+        console.log("practiceAdjacencyMatrices:");
+        console.log(practiceAdjacencyMatrices);
         var matrix = [];
         var pars = [];
         var index = currentBatch;
