@@ -111,7 +111,7 @@ export var Parameters = {
         console.log(practiceAdjacencyMatrices);
         var matrix = [];
         var pars = [];
-        var index = currentBatch;
+        var index = currentBatch - 1;
         
         if(isProperGames) {
             if(index < this.properBatches) {
@@ -134,19 +134,19 @@ export var Parameters = {
         return matrix;
     },
 
-    setSessionCommunicationParameters: function(isProperGames, currentSession) {
+    setSessionCommunicationParameters: function(isProperGames, currentBatch) {
         var communicationDescription = "",          // 'none', 'local', 'global', 'minmajGL'
             communicationNature = "";               // 'structured', 'unstructured'
-        var index = currentSession;
+        var index = currentBatch - 1;
         
         if(isProperGames) {
-            if(index < this.properGames) {
+            if(index < this.properBatches) {
                 communicationDescription = parameterValues[index][2];
                 communicationNature = parameterValues[index][3];
             }   
         }
         else {
-            if(index < this.practiceGames) {
+            if(index < this.practiceBatches) {
                 communicationDescription = practiceParameterValues[index][2];
                 communicationNature = practiceParameterValues[index][3];
             }
@@ -203,24 +203,24 @@ export var Parameters = {
         /* Log entry. */ Logger.recordIndividualCommunicationScopes(this.communicationScopes);
     },
 
-    setSessionIncentivesConflictParameters: function(isProperGames, currentSession) {
-        var index = currentSession;
+    setSessionIncentivesConflictParameters: function(isProperGames, currentBatch) {
+        var index = currentBatch - 1;
 
         // Get the level of conflicting incentives
         if(isProperGames) {
-            if(index < this.properGames) 
+            if(index < this.properBatches) 
                 this.incentivesConflictLevel = parameterValues[index][1];
         } else {
-            if(index < this.practiceGames) 
+            if(index < this.practiceBatches) 
                 this.incentivesConflictLevel = practiceParameterValues[index][1];
         }
 
         // Get the size of the minority
         if (isProperGames) {
-            if (index < this.properGames)
+            if (index < this.properBatches)
                 this.minoritySize = parseInt(parameterValues[index][4]);
         } else {
-            if (index < this.practiceGames)
+            if (index < this.practiceBatches)
                 this.minoritySize = parseInt(practiceParameterValues[index][4]);
         }
 
