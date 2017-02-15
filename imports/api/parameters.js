@@ -43,22 +43,22 @@ export var Parameters = {
     testMode: true,        //whether or not to skip description
 
     readTreatments: function() {
-        practiceAdjacencyMatrices = readAdjMatrix("treatments/test_size_3 (adversarial)/AMP_test.txt");
-        practiceParameterValues = readNetConfig("treatments/test_size_3 (adversarial)/NCP_test.txt");
-        practiceBatchConfigs = readBatchConfig("treatments/test_size_3 (adversarial)/BCP_test.txt");
+        // practiceAdjacencyMatrices = readAdjMatrix("treatments/test_size_3 (adversarial)/AMP_test.txt");
+        // practiceParameterValues = readNetConfig("treatments/test_size_3 (adversarial)/NCP_test.txt");
+        // practiceBatchConfigs = readBatchConfig("treatments/test_size_3 (adversarial)/BCP_test.txt");
         
-        adjacencyMatrices = readAdjMatrix("treatments/test_size_3 (adversarial)/AM_test.txt");
-        parameterValues = readNetConfig("treatments/test_size_3 (adversarial)/NC_test.txt");
-        batchConfigs = readBatchConfig("treatments/test_size_3 (adversarial)/BC_test.txt");
+        // adjacencyMatrices = readAdjMatrix("treatments/test_size_3 (adversarial)/AM_test.txt");
+        // parameterValues = readNetConfig("treatments/test_size_3 (adversarial)/NC_test.txt");
+        // batchConfigs = readBatchConfig("treatments/test_size_3 (adversarial)/BC_test.txt");
 
         // Full Experiment Data
-        // practiceAdjacencyMatrices = readAdjMatrix("treatments/input_data/adjacency_matrix_practice.txt");
-        // practiceParameterValues = readNetConfig("treatments/input_data/network_configuration_practice.txt");
-        // practiceBatchConfigs = readBatchConfig("treatments/input_data/batch_configuration_practice.txt");
+        practiceAdjacencyMatrices = readAdjMatrix("treatments/input_data/adjacency_matrix_practice.txt");
+        practiceParameterValues = readNetConfig("treatments/input_data/network_configuration_practice.txt");
+        practiceBatchConfigs = readBatchConfig("treatments/input_data/batch_configuration_practice.txt");
         
-        // adjacencyMatrices = readAdjMatrix("treatments/input_data/adjacency_matrix.txt");
-        // parameterValues = readNetConfig("treatments/input_data/network_configuration.txt");
-        // batchConfigs = readBatchConfig("treatments/input_data/batch_configuration.txt");
+        adjacencyMatrices = readAdjMatrix("treatments/input_data/adjacency_matrix.txt");
+        parameterValues = readNetConfig("treatments/input_data/network_configuration.txt");
+        batchConfigs = readBatchConfig("treatments/input_data/batch_configuration.txt");
 
         // practiceAdjacencyMatrices = readAdjMatrix("treatments/test_data (20-25 nodes)/AMP_test.txt");
         // practiceParameterValues = readNetConfig("treatments/test_data (20-25 nodes)/NCP_test.txt");
@@ -66,11 +66,24 @@ export var Parameters = {
         
         // adjacencyMatrices = readAdjMatrix("treatments/test_data (20-25 nodes)/AM_test.txt");
         // parameterValues = readNetConfig("treatments/test_data (20-25 nodes)/NC_test.txt");
-        // batchConfigs = readBatchConfig("treatments/test_data (20-25 nodes)/BC_test.txt");  
+        // batchConfigs = readBatchConfig("treatments/test_data (20-25 nodes)/BC_test.txt");
 
-        // Determine the number of practice and proper batches from the size of the arrays loaded above
-        this.practiceBatches = practiceBatchConfigs.length;
-        this.properBatches = batchConfigs.length;
+        // Determine the number of practice and proper games from the size of the arrays loaded above
+        this.practiceGames = Math.min(practiceAdjacencyMatrices.length, practiceParameterValues.length);
+        this.properGames = Math.min(adjacencyMatrices.length, parameterValues.length);
+
+        // Determine the number of batches
+        if (practiceBatchConfigs.length > 0) {
+            this.practiceBatches = practiceBatchConfigs.length;
+        } else {
+            this.practiceBatches = Math.floor(this.practiceGames / Session.batchSize);
+        }
+
+        if (batchConfigs.length > 0) {
+            this.properBatches = batchConfigs.length;
+        } else {
+            this.properBatches = Math.ceil(this.properGames / Session.batchSize);
+        }   
 
         // Determine the number of practice and proper games from the batch configs
         for (var i = 0; i < practiceBatchConfigs.length; i++) {
@@ -86,19 +99,19 @@ export var Parameters = {
         console.log("Proper games:\t" + this.properGames); 
     },
 
-    getNextAdjMatrix: function(isProperGames, currentBatch) {
+    getNextAdjMatrix: function(isProperGames, currentSession) {
         var matrix = [];
         var pars = [];
-        var index = currentBatch;
+        var index = currentSession;
         
         if(isProperGames) {
-            if(index < this.properBatches) {
+            if(index < this.properGames) {
                 matrix = adjacencyMatrices[index];
                 pars = parameterValues[index];
             }
         }
         else {
-            if(index < this.practiceBatches) {
+            if(index < this.practiceGames) {
                 matrix = practiceAdjacencyMatrices[index];
                 pars = practiceParameterValues[index];
             }
@@ -112,19 +125,19 @@ export var Parameters = {
         return matrix;
     },
 
-    setSessionCommunicationParameters: function(isProperGames, currentBatch) {
+    setSessionCommunicationParameters: function(isProperGames, currentSession) {
         var communicationDescription = "",          // 'none', 'local', 'global', 'minmajGL'
             communicationNature = "";               // 'structured', 'unstructured'
-        var index = currentBatch;
+        var index = currentSession;
         
         if(isProperGames) {
-            if(index < this.properBatches) {
+            if(index < this.properGames) {
                 communicationDescription = parameterValues[index][2];
                 communicationNature = parameterValues[index][3];
             }   
         }
         else {
-            if(index < this.practiceBatches) {
+            if(index < this.practiceGames) {
                 communicationDescription = practiceParameterValues[index][2];
                 communicationNature = practiceParameterValues[index][3];
             }
@@ -181,24 +194,24 @@ export var Parameters = {
         /* Log entry. */ Logger.recordIndividualCommunicationScopes(this.communicationScopes);
     },
 
-    setSessionIncentivesConflictParameters: function(isProperGames, currentBatch) {
-        var index = currentBatch;
+    setSessionIncentivesConflictParameters: function(isProperGames, currentSession) {
+        var index = currentSession;
 
         // Get the level of conflicting incentives
         if(isProperGames) {
-            if(index < this.properBatches) 
+            if(index < this.properGames) 
                 this.incentivesConflictLevel = parameterValues[index][1];
         } else {
-            if(index < this.practiceBatches) 
+            if(index < this.practiceGames) 
                 this.incentivesConflictLevel = practiceParameterValues[index][1];
         }
 
         // Get the size of the minority
         if (isProperGames) {
-            if (index < this.properBatches)
+            if (index < this.properGames)
                 this.minoritySize = parseInt(parameterValues[index][4]);
         } else {
-            if (index < this.practiceBatches)
+            if (index < this.practiceGames)
                 this.minoritySize = parseInt(practiceParameterValues[index][4]);
         }
 
