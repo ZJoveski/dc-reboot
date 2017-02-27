@@ -50,10 +50,10 @@ export var Time = {
             }});
             /* Log entry. */ Logger.recordSessionStart(Session.sessionNumber);
         } else if (context == 'current time') {
+            this.currentTime = time;
             TimeInfo.update({}, {$set: {
                 currentTime: this.currentTime
             }});
-            this.currentTime = time;
         }
     },
 }
