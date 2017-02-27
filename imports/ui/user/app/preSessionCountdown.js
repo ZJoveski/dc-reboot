@@ -18,12 +18,16 @@ Template.preSessionCountdown.helpers({
             var preSessionLength = Time.preSessionLength;
             var postSessionLength = Time.postSessionLength;
 
-            secondsRemaining = Math.ceil((1000 * preSessionLength  - (currentTime - lastSessionEndTime)) / 1000) - 1;
+            secondsRemaining = Math.ceil((1000 * preSessionLength + 1000 * postSessionLength - (currentTime - lastSessionEndTime)) / 1000);
 
-            console.log("time");
-            console.log(preSessionLength);
-            console.log(secondsRemaining);
-            console.log(currentTime - lastSessionEndTime);
+            if (sessionNumber < 1) {
+                secondsRemaining -= postSessionLength;
+            } else {
+                console.log('time');
+                console.log(preSessionLength);
+                console.log(secondsRemaining);
+                secondsRemaining = Math.min(preSessionLength, secondsRemaining);
+            }
 
             status = secondsRemaining;
         }
