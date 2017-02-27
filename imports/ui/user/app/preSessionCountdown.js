@@ -23,11 +23,12 @@ Template.preSessionCountdown.helpers({
             if (sessionNumber < 1) {
                 secondsRemaining -= postSessionLength;
             } else {
-                console.log("time");
-                console.log(preSessionLength);
-                console.log(secondsRemaining);
-                secondsRemaining = Math.min(preSessionLength, secondsRemaining);
+                
+                //secondsRemaining = Math.min(preSessionLength, secondsRemaining);
             }
+            console.log("time");
+            console.log(preSessionLength);
+            console.log(secondsRemaining);
 
             status = secondsRemaining;
         }
