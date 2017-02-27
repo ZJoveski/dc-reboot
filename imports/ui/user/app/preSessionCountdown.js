@@ -23,6 +23,7 @@ Template.preSessionCountdown.helpers({
             console.log("time");
             console.log(preSessionLength);
             console.log(secondsRemaining);
+            console.log(currentTime - lastSessionEndTime);
 
             status = secondsRemaining;
         }
