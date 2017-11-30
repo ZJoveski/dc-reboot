@@ -139,7 +139,6 @@ export var Session = {
     },
 
     initializeColorCounts: function() {
-        console.log('initializeColorCounts');
         for (var i = 0; i < ColorMagic.colors.length; i++) {
             var color = ColorMagic.colors[i];
             var count = 0;
@@ -155,8 +154,6 @@ export var Session = {
         SessionInfo.upsert({id: 'global'}, {$set: {
             colorCounts: this.counts
         }});
-
-        console.log('wtf');
 
         /* Log entry. */ Logger.recordSessionColorCounts(this.counts);
     },

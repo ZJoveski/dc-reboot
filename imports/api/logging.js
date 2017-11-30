@@ -396,6 +396,30 @@ export var Logger = {
         
         insertExperimentLogEntry("USLO2", record);
     },
+
+    // REPA1
+    recordReputations: function(reputations) {
+        var reputationsRecord = "";
+
+        for (var name in reputations) {
+            if (reputations.hasOwnProperty(name)) {
+                reputationsRecord += name + "\t" + reputations[name] + "\n";
+            }
+        }
+        
+        // Remove the last "\n" character.
+        reputationsRecord = reputationsRecord.slice(0, reputationsRecord.length - 1);
+        
+        insertExperimentLogEntry("REPA1", reputationsRecord);
+    },
+
+    // REPC1
+    recordReputationChange: function(userId, targetName, rank) {
+        var reputationChangeRecord = getFullPlayerIdentification(userId, "userId") + "\t"
+                                        + targetName + "\t" + rank;
+
+        insertExperimentLogEntry("REPC1", reputationChangeRecord);
+    },
 };
 
 

@@ -1,4 +1,5 @@
 import { NeighborhoodsInfo } from './collections/game_collections.js';
+import { ReputationsCollection } from './collections/game_collections.js';
 import { Participants } from './participants.js';
 import { Session } from './session.js';
 import { ColorMagic } from './colors_mapping.js';
@@ -6,6 +7,7 @@ import { Logger } from './logging.js';
 
 export var Neighborhoods = {
     NeighborhoodsInfo: NeighborhoodsInfo,
+    ReputationsCollection: ReputationsCollection,
 
     clearNeighborhoods: function() {
         NeighborhoodsInfo.remove({});
@@ -45,6 +47,57 @@ export var Neighborhoods = {
         }
     },
 
+    initializeNeighborhoodReputations: function(oldReputations) {
+        for(var i = 0; i < Participants.participants.length; i++) {
+            var userId = Participants.participants[i];
+            var name = Participants.id_name[userId];
+            var namesOfNeighbors = getNamesOfNeighbors(userId);
+
+            console.log("names of neighbors");
+            console.log(namesOfNeighbors);
+
+            var neighborhoodReputations = {};
+            for (var j = 0; j < namesOfNeighbors.length; j++) {
+                var currentName = namesOfNeighbors[j];
+                neighborhoodReputations[namesOfNeighbors[j]] = oldReputations[currentName];
+            }
+
+            ReputationsCollection.upsert({userId: userId}, {$set: {neighborhoodReputations: neighborhoodReputations, updateReputation: false}});          
+        }
+    },
+
+    resetNeighborhoodReputations: function() {
+        for(var i = 0; i < Participants.participants.length; i++) {
+            var userId = Participants.participants[i];
+            var name = Participants.id_name[userId];
+            var namesOfNeighbors = getNamesOfNeighbors(userId);
+
+            var neighborhoodReputations = {};
+            for (var j = 0; j < namesOfNeighbors.length; j++) {
+                neighborhoodReputations[namesOfNeighbors[j]] = .5;
+            }
+
+            ReputationsCollection.upsert({userId: userId}, {$set: {neighborhoodReputations: neighborhoodReputations, updateReputation: false}});          
+        }
+    },
+
+    updateNeighborhoodReputations: function(newReputations) {
+        for (var i = 0; i < Participants.participants.length; i++) {
+            var userId = Participants.participants[i];
+            var name = Participants.id_name[userId];
+            var namesOfNeighbors = getNamesOfNeighbors(userId);
+
+            var neighborhoodReputations = {};
+            for (var j = 0; j < namesOfNeighbors.length; j++) {
+                var currentName = namesOfNeighbors[j];
+                var newRank = newReputations[currentName];
+                neighborhoodReputations[currentName] = newRank;
+            }
+
+            ReputationsCollection.upsert({userId: userId}, {$set: {neighborhoodReputations: neighborhoodReputations, updateReputation: true}}); 
+        }
+    },
+
     updateNeighborhoodColors: function(newColors) {
         for (var i = 0; i < Participants.participants.length; i++) {
             var userId = Participants.participants[i];
@@ -55,18 +108,13 @@ export var Neighborhoods = {
             for (var j = 0; j < namesOfNeighbors.length; j++) {
                 var currentName = namesOfNeighbors[j];
                 var color = newColors[currentName];
-                // console.log('newcolor');
-                // console.log(currentName);
-                // console.log(color);
                 var newColor = color;
                 if (newColor != 'white') {
                     newColor = ColorMagic.anonymizeColor(name, color);
                 }
-                // console.log(newColor);
                 neighborhoodColors[currentName] = newColor;
             }
 
-            console.log('updateNeighborhoodColors');
             NeighborhoodsInfo.upsert({userId: userId}, {$set: {neighborhoodColors: neighborhoodColors, updateColor: true}}); 
         }
     },

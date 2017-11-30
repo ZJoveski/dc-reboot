@@ -8,6 +8,7 @@ import { Neighborhoods } from './neighborhoods.js';
 import { ColorMagic } from './colors_mapping.js';
 import { Logger } from './logging.js';
 import { Messages } from './messages.js';
+import { Reputations } from './reputations.js';
 
 export const startGames = function(isProperGames, numberOfGames, numberOfBatches) {
     proper = isProperGames;
@@ -98,7 +99,10 @@ var initializeGame = function() {
 
     /* Log entry. */ Logger.recordSessionInitializationStart(Session.sessionNumber);
 
-    Session.setAdjMatrix(Parameters.getNextAdjMatrix(proper, Session.sessionNumber));
+    //TODO: currently each adj matrix is different, which causes reputations to glitch
+    if (Session.isNewBatch()) {
+        Session.setAdjMatrix(Parameters.getNextAdjMatrix(proper, Session.batchNumber));
+    }    
     /* Log entry. */ Logger.recordNetworkAdjacencyMatrix(Session.adjMatrix);
 
     Participants.participantsThreshold = Session.adjMatrix.length;
@@ -107,15 +111,14 @@ var initializeGame = function() {
     Participants.initializeGameParticipants(Session.isNewBatch());
     if (Session.isNewBatch()) {
         /* L */ Participants.assignIdsToNames();
-    }
-
-    /* L */ Neighborhoods.assignNeighborhoodsToClients();
-
-    if (Session.isNewBatch()) {
+        /* L */ Neighborhoods.assignNeighborhoodsToClients();
         if (Session.adversaryMode()) {
             Participants.assignAdversaries();
         }
+        Reputations.resetReputations();
     }
+
+    /* L */ Reputations.initializeReputations();
 
     /* Log entry. */ Logger.recordAdversaries();
 
@@ -125,8 +128,8 @@ var initializeGame = function() {
     // permutation to each node ("red" will be mapped to "red", "green" will be mapped to "green").
     /* L */ ColorMagic.initializeColorAnonymization();
 
-    Parameters.setSessionIncentivesConflictParameters(proper, Session.sessionNumber);
-    /* L */ Parameters.setSessionCommunicationParameters(proper, Session.sessionNumber);
+    Parameters.setSessionIncentivesConflictParameters(proper, Session.batchNumber);
+    /* L */ Parameters.setSessionCommunicationParameters(proper, Session.batchNumber);
     /* L */ Parameters.setIndividualCommunicationParameters();
 
     Payouts.initializeSessionPayoutInfo(Participants.participants);

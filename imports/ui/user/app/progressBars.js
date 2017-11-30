@@ -14,7 +14,6 @@ Template.progressBars.helpers({
         var countsArray = [];
         var colorCounts = SessionInfo.findOne({id: 'global'}).colorCounts;
         if (colorCounts) {
-            console.log(colorCounts);
             for (var color in colorCounts) {
                 if (colorCounts.hasOwnProperty(color)) {
                     countsArray.push(colorCounts[color]);
@@ -31,17 +30,6 @@ Template.progressBars.helpers({
         if (colorCounts != null && numNodes != null && numAdversaries != null) {
             var percentage = Math.round(100 * Math.max.apply(null, countsArray) / (numNodes - numAdversaries)) + '%';
         }
-
-        console.log('numNodes');
-        console.log(numNodes);
-        console.log('numAdversaries');
-        console.log(numAdversaries);
-        console.log('countsArray');
-        console.log(countsArray);
-
-        // if(gameProgressBar = $('#gameProgress')) {
-        //     gameProgressBar.css('width', percentageValue);
-        // }
 
         return percentage;
     },

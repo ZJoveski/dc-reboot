@@ -9,11 +9,16 @@ import { Neighborhoods } from '../neighborhoods.js';
 import { Messages } from '../messages.js';
 import { Logger } from '../logging.js';
 import { Payouts } from '../payouts.js';
+import { Reputations } from '../reputations.js';
 
 Meteor.methods({
     // Set (update) the color corresponding to the current user.
     updateColor: function(newColor) {
         Session.updateColor(Meteor.userId(), newColor);
+    },
+
+    updateReputation: function(targetNode, rank) {
+        Reputations.updateReputation(Meteor.userId(), targetNode, rank);
     },
 
     sendStructuredMessage: function() {
@@ -54,7 +59,6 @@ Meteor.methods({
 
                 Session.communicationUsageLevels[id] += messageCostInfo.relativeMessageCost;
 
-                console.log(message);
                 /* Log entry. */ Logger.recordMessageSent(id, true, message);
 
                 Payouts.updatePotentialPayoutsInfo(id);
@@ -117,7 +121,6 @@ Meteor.methods({
                 Session.communicationUsageLevels[id] += messageCostInfo.relativeMessageCost;
               
                 /* Log entry. */ Logger.recordMessageRequest(id, true, message);
-                // console.log(message);
                 /* Log entry. */ Logger.recordMessageSent(id, true, message);
               
                 Payouts.updatePotentialPayoutsInfo(id);

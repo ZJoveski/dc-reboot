@@ -132,3 +132,9 @@ Template.adminScreen.events({
         });
     }
 });
+
+function destroyClickedElement(event)
+{
+    // remove the link from the DOM
+    document.body.removeChild(event.target);
+}

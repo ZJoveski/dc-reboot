@@ -10,10 +10,11 @@ import { SessionInfo } from '../../../api/collections/game_collections.js';
 import { PayoutInfo } from '../../../api/collections/game_collections.js';
 import { NeighborhoodsInfo } from '../../../api/collections/game_collections.js';
 import { ParametersInfo } from '../../../api/collections/game_collections.js';
+import { ReputationsCollection } from '../../../api/collections/game_collections.js';
 
 import './../../../api/meteormethods/game_methods.js';
 
-import { Canvas } from './canvas.js'
+import { Canvas } from './canvas2.js'
 
 import './progressBars.js';
 import './buttons.js';
@@ -27,6 +28,7 @@ import { MessagesCollection } from '../../../api/collections/game_collections.js
 
 
 var gameCanvas;
+var gameCanvasInit;
 
 Template.experiment.onCreated(function() {
     // Beep at the players to get their attention
@@ -42,7 +44,9 @@ Template.experiment.onCreated(function() {
         }
     }, 1200);
 
-    gameCanvas = new Canvas();
+    gameCanvas = Canvas();
+    // gameCanvas("#canvas", {}, {});
+    gameCanvasInit = false;
 });
 
 // redraws the game nodes
@@ -59,18 +63,29 @@ Tracker.autorun(function() {
     if (sessionInProgress || postSessionInProgress) {
         console.log("redrawing update");
         var neighborsInfo = NeighborhoodsInfo.findOne({userId: Meteor.userId()});
-        if (neighborsInfo != null) {
+        var reputationsInfo = ReputationsCollection.findOne({userId: Meteor.userId()});
+        console.log(reputationsInfo);
+        console.log(ReputationsCollection);
+        console.log(ReputationsCollection.findOne({}));
+        if (neighborsInfo != null && reputationsInfo != null) {
             var namesOfNeighbors = neighborsInfo.namesOfNeighbors;
             var neighAdjMatrix = neighborsInfo.neighAdjMatrix;
             var neighborhoodColors = neighborsInfo.neighborhoodColors;
             var updateColor = neighborsInfo.updateColor;
+            var updateReputation = reputationsInfo.updateReputation;
+            var neighborhoodReputations = reputationsInfo.neighborhoodReputations;
 
-            //Session.set("clientName", namesOfNeighbors[0]);
+            console.log("neighborhoodReputations");
+            console.log(neighborhoodReputations);
+            console.log("updateReputation");
+            console.log(updateReputation);
+            console.log("neighborhoodreputation");
+            console.log(neighborhoodReputations);
 
-            if (gameCanvas) { 
+            if (gameCanvasInit) { 
                 console.log("redrawing canvas");
 
-                if (updateColor) {
+                if (updateColor || updateReputation) {
                     for (var name in neighborhoodColors) {
                         console.log("updating color");
                         if (neighborhoodColors.hasOwnProperty(name)) {
@@ -80,42 +95,53 @@ Tracker.autorun(function() {
                             gameCanvas.updateNodeColor(name, neighborhoodColors[name]);
                         }
                     }
+
+                    for (var name in neighborhoodReputations) {
+                        console.log("updating reputation");
+                        if (neighborhoodReputations.hasOwnProperty(name)) {
+                            console.log('neighborHoodReputation');
+                            console.log(name);
+                            console.log(neighborhoodReputations[name]);
+                            gameCanvas.updateNodeReputation(name, neighborhoodReputations[name]);
+                        }
+                    }
                 } else {
                     setTimeout(function() {
-                        gameCanvas.clear();  
-                        gameCanvas.draw(namesOfNeighbors,neighAdjMatrix); 
+                        // gameCanvas.clear();  
+                        // gameCanvas.draw(namesOfNeighbors,neighAdjMatrix);
+                        gameCanvas.updateData(namesOfNeighbors,neighAdjMatrix, neighborhoodReputations);
                     }, 200);
                 }
-            } 
+            } else {
+                // TODO: get rid of this if testing works
+                setTimeout(function() {
+                    console.log("intializing canvas");
+                    console.log(neighAdjMatrix);
+
+                    gameCanvas("#canvas", namesOfNeighbors, neighAdjMatrix, neighborhoodReputations);
+                    gameCanvasInit = true;
+                }, 200);
+                // console.log("intializing canvas");
+                // console.log(neighAdjMatrix);
+
+                // gameCanvas("#canvas", namesOfNeighbors, neighAdjMatrix);
+                // gameCanvasInit = true;
+            }
         }
     } else if (preSessionInProgress) {
-        if (gameCanvas) {  
-                gameCanvas.clear(); 
-        }
+        // if (gameCanvas) {  
+        //         gameCanvas.clear(); 
+        // }
         
         // ... and set the value of lastRequestedColor to 'white'
+        gameCanvasInit = false;
         Session.set('lastRequestedColor', "white");
     } else if (experimentInProgress) {
-        if(gameCanvas) {
-            gameCanvas.clear();
-        }
+        // if(gameCanvas) {
+        //     gameCanvas.clear();
+        // }
     }
 });
-
-// updates the colors of the game nodes
-// Tracker.autorun(function() {
-//     console.log('update color');
-//     if (gameCanvas) {
-//         console.log('there is a game canvas');
-//         var neighborhoodColors = NeighborhoodsInfo.findOne({userId: Meteor.userId()}).neighborhoodColors;
-//         for (var name in neighborhoodColors) {
-//             if (neighborhoodColors.hasOwnProperty(name)) {
-//                 gameCanvas.updateNodeColor(name, neighborhoodColors[name]);
-//             }
-//         } 
-//     }
-    
-// });
 
 Template.experiment.helpers({
     userIsParticipant: function() {
@@ -127,8 +153,6 @@ Template.experiment.helpers({
         var isParticipant = false;
         var progress = ProgressInfo.findOne({});
         var participantsInfo = ParticipantsInfo.findOne({});
-        console.log('participantsInfo');
-        console.log(participantsInfo);
         if(progress !== undefined) {
             inSession = progress.sessionInProgress;
             inPostSession = progress.postSessionInProgress;
@@ -137,11 +161,8 @@ Template.experiment.helpers({
         if (participantsInfo != null) {
             isParticipant = participantsInfo.isParticipant;
         }
-
-        console.log('in Session: ' + inSession);
-        console.log('in postSesion: ' + inPostSession);
-        console.log('isparticipant: ' + isParticipant);
         
+        // TODO: Take another look at the logic (see 444 in old gameScreen.js)
         if((inSession || inPostSession) && isParticipant) {
             return true;
         } else {
@@ -173,17 +194,19 @@ Template.experiment.helpers({
 
     waitForNextExperimentStatus: function() {
         var status = '';
-
-        // See if experiment is in progress
-        var experimentInProgress = false;
+    
+        // Check if in session or in post session
+        var inSession = false;
+        var inPostSession = false;
+        var inPreSession = false;
         var progress = ProgressInfo.findOne({});
         if(progress !== undefined) {
-            experimentInProgress = progress.experimentInProgress;
-        } 
+            inSession = progress.sessionInProgress;
+            inPostSession = progress.postSessionInProgress;
+            inPreSession = progress.preSessionInProgress;
+        }
 
-        if (!experimentInProgress) {
-            status = 'Please wait for the first game to begin.';
-        } else {
+        if (inSession || inPostSession || inPreSession) {
             status = 'You will not participate in the current batch. Please wait for the next batch. ' + 
                     'It will start soon and you will participate in it!';
             var sessionInProgress = ProgressInfo.findOne({}).sessionInProgress;
@@ -194,8 +217,25 @@ Template.experiment.helpers({
                     status += ' The current batch is on game ' + sessionNumber + '/' + batchSize + '.';
                 }
             }
-
+        } else {
+            status = 'Please wait for the first game to begin.';
         }
+
+        // if (!experimentInProgress) {
+        //     status = 'Please wait for the first game to begin.';
+        // } else {
+        //     status = 'You will not participate in the current batch. Please wait for the next batch. ' + 
+        //             'It will start soon and you will participate in it!';
+        //     var sessionInProgress = ProgressInfo.findOne({}).sessionInProgress;
+        //     if (sessionInProgress) {
+        //         var sessionNumber = SessionInfo.findOne({id: 'global'}).sessionNumber;
+        //         var batchSize = SessionInfo.findOne({id: 'global'}).batchSize;
+        //         if (sessionNumber != null && batchSize != null) {
+        //             status += ' The current batch is on game ' + sessionNumber + '/' + batchSize + '.';
+        //         }
+        //     }
+
+        // }
 
         return status;
     },

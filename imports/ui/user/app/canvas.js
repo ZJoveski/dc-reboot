@@ -1,6 +1,8 @@
 import { Session } from './../../../api/session.js';
 
-export var Canvas = function () {
+
+
+export var OldCanvas = function () {
   var self = this,                      // Reference to the canvas object itself.
       numNodes = 0,                     /* The number of nodes in the corresponding neighborhood.
                                            Until neighborhood is made known to the client, the
@@ -14,7 +16,7 @@ export var Canvas = function () {
   
   coordinates = {};
 
-  var viewBoxWidth = 1024,              // Specifying the internal coordinate system of the view  
+  var viewBoxWidth = 768,              // Specifying the internal coordinate system of the view  
       viewBoxHeight = 768;              // box.
   
 
@@ -52,7 +54,6 @@ export var Canvas = function () {
     svg = d3.select('#canvas').append('svg')
             .attr("viewBox", coordinateSystem)
             .classed("svg-content-responsive",true);
-    console.log(d3.select('#canvas'));
     console.log("svg created");
   };
   createSvg();
@@ -150,7 +151,6 @@ export var Canvas = function () {
   };
       
   self.drawCentralNode = function(nodeName) {
-      console.log("drawing central node");
       // Define a "g" SVG element that will be used for grouping the circle and the text together.
       name_node[nodeName] = svg.append("g")
                                .attr("transform", "translate(" + coordinates[nodeName].x + "," + coordinates[nodeName].y + ")");
@@ -165,7 +165,6 @@ export var Canvas = function () {
   
   self.updateNodeColor = function(nodeName, color) {
       if(name_circle.hasOwnProperty(nodeName)) {
-          console.log("update color successful");
           (name_circle[nodeName]).style("fill", color);
       }
   };

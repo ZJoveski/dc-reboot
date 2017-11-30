@@ -183,7 +183,6 @@ var assignDefaultModePayouts = function(players) {
         
         var id = unassigned[i];
         Payouts.potentialPayouts[id] = individualPayout;
-        //console.log("regular Payout: " + potentialSessionPayouts[id] + " id: " + id);
     }
 }
 
@@ -204,7 +203,6 @@ var assignAdversaryPayouts = function() {
 }
 
 var assignNoConsensusAdversaryPayouts = function(adversaries) {
-    console.log("adversary length: " + adversaries.length);
     for (var i = 0; i < adversaries.length; i++) {
         var id = adversaries[i];
         var individualPayout = assignPayout(0, true);

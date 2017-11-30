@@ -12,8 +12,6 @@ import { ColorMagic } from '../../../api/colors_mapping.js';
 import './chatBox.html';
 
 Template.chatBox.onCreated(function() {
-    console.log('ParametersInfo');
-    console.log(ParametersInfo.findOne({userId: Meteor.userId()}));
     var charactersLimit = ParametersInfo.findOne({userId: Meteor.userId()}).messageLengthBound;
     Session.set('charactersLimit', charactersLimit);
     Session.set('charactersRemaining', charactersLimit);
@@ -25,8 +23,6 @@ Template.chatBox.helpers({
         var messagesCursor;
         
         messagesCursor = MessagesCollection.find({}, {sort: {timestamp: 1}});
-        console.log('messages');
-        console.log(messagesCursor.fetch());
         var nameOfClient = '';
 
         var namesOfNeighbors = NeighborhoodsInfo.findOne({userId: Meteor.userId()}).namesOfNeighbors;
@@ -35,7 +31,6 @@ Template.chatBox.helpers({
         }
         
         messagesCursor.forEach(function(messageDocument) {
-            console.log(messageDocument);
             if((messageDocument.nameOfSender == nameOfClient)) {
                 messagesToBeReturned.push({nameOfSender: "Me [" + nameOfClient + "]", message: messageDocument.message});
             }
@@ -111,8 +106,6 @@ Template.chatBox.helpers({
 
     userCanSendMessages: function() {
         var response = false;
-        console.log('parametersInfo');
-        console.log(ParametersInfo.findOne({userId: Meteor.userId()}));
         var parametersInfo = ParametersInfo.findOne({userId: Meteor.userId()});
         if (parametersInfo != null) {
             response = parametersInfo.communication;
@@ -167,9 +160,6 @@ Template.chatBox.events({
                 message = message.slice(0, message.length - 1);
                 length = realMessageLength(message);
             }
-
-            console.log(message);
-            console.log(length);
 
             $('#chat-message').val(message);
 
